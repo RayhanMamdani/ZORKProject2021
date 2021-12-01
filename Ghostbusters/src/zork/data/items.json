@@ -1,0 +1,43 @@
+{
+
+    "items": [
+
+        {
+        "id": "Proton Pack",
+
+         "name": "Proton Pack",
+
+         "description": "A large energy back pack appears....... it seems to have been used before",
+
+        "weight": 10
+
+        },
+
+        {
+
+            "id": "Vaccum",
+
+            "name": "Vaccum",
+
+            "description": "It looks like a small vaccum............looks like it works"
+
+        },
+
+
+        {
+
+            "id": "Scissors",
+            
+            "name": "Scissors",
+
+            "description": "They are old rusty scissors"
+
+
+
+        }
+
+    ]
+
+
+
+}
