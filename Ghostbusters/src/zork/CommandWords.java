@@ -2,14 +2,8 @@ package zork;
 
 public class CommandWords {
   // a constant array that holds all valid command words
-  private static final String validCommands[] = { "go", "quit", "help", "eat" };
-
-  /**
-   * Constructor - initialise the command words.
-   */
-  public CommandWords() {
-    // nothing to do at the moment...
-  }
+  private static final String validCommands[] = { "north", "east", "south", "west", "quit", "look", "take", "open",
+      "close", "drop", "unlock", "cut", "down", "jump", "shoot", "use", "go" };
 
   /**
    * Check whether a given String is a valid command word. Return true if it is,
