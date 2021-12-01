@@ -19,8 +19,9 @@
 
             "name": "Vaccum",
 
-            "description": "It looks like a small vaccum............looks like it works"
+            "description": "It looks like a small vaccum............looks like it works",
 
+            "weight": 10
         },
 
 
@@ -30,11 +31,15 @@
             
             "name": "Scissors",
 
-            "description": "They are old rusty scissors"
+            "description": "They are old rusty scissors",
+
+            "weight": 2
 
 
 
         }
+
+        
 
     ]
 
