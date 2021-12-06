@@ -115,6 +115,15 @@
           "adjacentRoom": "Kitchen"
         }
       ]
+    },
+
+    {
+
+      "id": "Kitchen",
+      "name":"Kitchen",
+      "description": "You are in the kitchen"
+
+
     }
 
     
