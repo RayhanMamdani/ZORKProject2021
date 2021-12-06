@@ -1,0 +1,69 @@
+{
+    "items": [
+
+        {
+         "id": "Proton Pack",
+         "name": "Proton Pack",
+         "description": "",
+         "weight": 10,
+         "startingroom": "Office" 
+        },
+
+        {
+            "id": "Closet",
+            "name": "Closet",
+            "decription": "",
+            "weight": 101,
+            "startingroom": "Bedroom"
+        },
+
+        {
+
+            "id": "Vaccum",
+            "name": "Vaccum",
+            "description": "",
+            "weight": 10,
+            "startingitem": "Closet"
+        },
+
+        {
+            "id": "Scissors",
+            "name": "Scissors",
+            "description": "",
+            "weight": 2,
+            "startingroom": "OfficeKitchen"
+        },
+
+        {
+            "id": "Rope",
+            "name": "Rope",
+            "description": "",
+            "weight": 5,
+            "startingroom": "OfficeBasementEast"
+        },
+
+        {
+            "id": "Key1",
+            "name": "House Key",
+            "description": "",
+            "weight": 1,
+            "startingroom": "Bedroom"
+        },
+
+        {
+            "id": "Key2",
+            "name": "Office Key",
+            "description": "",
+            "weight": 1,
+            "startingroom": "OfficeBasementWest"
+        },
+
+        {
+            "id": "Key3",
+            "name": "Abandoned House Key",
+            "description": "",
+            "weight": 1,
+            "startingroom": "OfficeBasementEast"
+        }
+    ]
+}
