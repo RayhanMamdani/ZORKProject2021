@@ -1,42 +1,37 @@
 {
-
     "items": [
 
         {
-        "id": "Proton Pack",
-
+         "id": "Proton Pack",
          "name": "Proton Pack",
+         "description": "",
+         "weight": 10,
+         "startingroom": "Office" 
+        },
 
-         "description": "A large energy back pack appears....... it seems to have been used before",
-
-        "weight": 10
-
+        {
+            "id": "Closet",
+            "name": "Closet",
+            "decription": "",
+            "weight": 101,
+            "startingroom": "Bedroom"
         },
 
         {
 
             "id": "Vaccum",
-
             "name": "Vaccum",
-
-            "description": "It looks like a small vaccum............looks like it works",
-
-            "weight": 10
+            "description": "",
+            "weight": 10,
+            "startingitem": ""
         },
 
 
         {
-
             "id": "Scissors",
-            
             "name": "Scissors",
-
-            "description": "They are old rusty scissors",
-
+            "description": "",
             "weight": 2
-
-
-
         }
         
 
