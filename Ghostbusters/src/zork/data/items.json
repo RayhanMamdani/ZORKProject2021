@@ -23,21 +23,47 @@
             "name": "Vaccum",
             "description": "",
             "weight": 10,
-            "startingitem": ""
+            "startingitem": "Closet"
         },
-
 
         {
             "id": "Scissors",
             "name": "Scissors",
             "description": "",
-            "weight": 2
+            "weight": 2,
+            "startingroom": "OfficeKitchen"
+        },
+
+        {
+            "id": "Rope",
+            "name": "Rope",
+            "description": "",
+            "weight": 5,
+            "startingroom": "OfficeBasementEast"
+        },
+
+        {
+            "id": "Key1",
+            "name": "House Key",
+            "description": "",
+            "weight": 1,
+            "startingroom": "Bedroom"
+        },
+
+        {
+            "id": "Key2",
+            "name": "Office Key",
+            "description": "",
+            "weight": 1,
+            "startingroom": "OfficeBasementWest"
+        },
+
+        {
+            "id": "Key3",
+            "name": "Abandoned House Key",
+            "description": "",
+            "weight": 1,
+            "startingroom": "OfficeBasementEast"
         }
-
-        
-
     ]
-
-
-
 }
