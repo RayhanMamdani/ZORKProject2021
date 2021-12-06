@@ -3,7 +3,7 @@
     {
       "id": "Bathroom",
       "name": "Bathroom",
-      "description": "You are in a blue bathroom",
+      "description": "This is a small bathroom. Peeling wallpaper surounds the yellowing lavatories. Soaps lie in the bathtub and a toothbrush protrudes from the sink drawer.",
       "exits": [
         {
           "isLocked": false,
@@ -16,7 +16,7 @@
     {
       "id": "Bedroom",
       "name": "Bedroom",
-      "description": "You are in a large bedroom",
+      "description": "This is a large bedroom. An unmade bed occupies one corner, while a dresser, desk and drawer occupy the other.",
       "exits": [
         {
           "isLocked": false,
@@ -35,7 +35,7 @@
     {
       "id": "TopStair",
       "name": "TopStair",
-      "description": "You are in a long hallway. There are family pictures on all of the walls.",
+      "description": "This is a long hallway. Ancient family portraits line the walls, cobwebs hang from the ceiling.",
       "exits": [
         {
           "isLocked": false,
@@ -107,7 +107,7 @@
     {
       "id": "Garage",
       "name": "Garage",
-      "description": "You are in the closet. It is dark.",
+      "description": "This is a closet, various items of clothing lie within it.",
       "exits": [
         {
           "isLocked": false,
