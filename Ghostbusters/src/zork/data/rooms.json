@@ -1,23 +1,18 @@
 {
   "rooms": [
     {
-      "id": "Hallway",
-      "name": "Hallway",
-      "description": "You are in a long hallway. There are family pictures on all of the walls.",
+      "id": "Bathroom",
+      "name": "Bathroom",
+      "description": "You are in a blue bathroom",
       "exits": [
         {
           "isLocked": false,
-          "direction": "North",
-          "adjacentRoom": "Bedroom"
-        },
-        {
-          "isLocked": true,
           "direction": "East",
-          "adjacentRoom": "Bathroom",
-          "keyId": "1234"
+          "adjacentRoom": "Bedroom"
+          
         }
-      ]
-    },
+      ] 
+    }, 
     {
       "id": "Bedroom",
       "name": "Bedroom",
@@ -25,50 +20,105 @@
       "exits": [
         {
           "isLocked": false,
-          "direction": "South",
-          "adjacentRoom": "Hallway"
-        },
-        {
-          "isLocked": false,
-          "direction": "SouthEast",
+          "direction": "West",
           "adjacentRoom": "Bathroom"
         },
         {
           "isLocked": false,
           "direction": "East",
-          "adjacentRoom": "Closet"
+          "adjacentRoom": "TopStair"
         }
+      
       ]
     },
+
     {
-      "id": "Bathroom",
-      "name": "Bathroom",
-      "description": "You are in a blue bathroom",
+      "id": "TopStair",
+      "name": "TopStair",
+      "description": "You are in a long hallway. There are family pictures on all of the walls.",
       "exits": [
         {
-          "isLocked": true,
-          "direction": "West",
-          "adjacentRoom": "Hallway",
-          "keyId": "1234"
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "Bedroom"
         },
         {
           "isLocked": false,
-          "direction": "NorthWest",
-          "adjacentRoom": "Bedroom"
+          "direction": "Down",
+          "adjacentRoom": "BottomStair"
+          
+        }
+      ]
+    },
+
+
+    {
+      "id": "BottomStair",
+      "name": "BottomStair",
+      "description": "You are in the closet. It is dark.",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "Up",
+          "adjacentRoom": "TopStair"
+        },
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "LivingRoom"
         }
       ]
     },
     {
-      "id": "Closet",
-      "name": "Closet",
+      "id": "LivingRoom",
+      "name": "LivingRoom",
       "description": "You are in the closet. It is dark.",
       "exits": [
         {
           "isLocked": false,
           "direction": "West",
-          "adjacentRoom": "Bedroom"
+          "adjacentRoom": "BottomStair"
+        },
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "Kitchen"
+        }
+      ]
+    },
+    {
+      "id": "HouseKitchen",
+      "name": "Kitchen ",
+      "description": "You are in the closet. It is dark.",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "North",
+          "adjacentRoom": "Garage"
+        },
+        {
+          "isLocked": false,
+          "direction": "West",
+          "adjacentRoom": "LivingRoom"
+        }
+        
+      ]
+    },
+    {
+      "id": "Garage",
+      "name": "Garage",
+      "description": "You are in the closet. It is dark.",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "South",
+          "adjacentRoom": "Kitchen"
         }
       ]
     }
+
+    
+
+    
   ]
 }
