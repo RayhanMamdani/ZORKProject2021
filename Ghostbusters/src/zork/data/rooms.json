@@ -35,7 +35,7 @@
     {
       "id": "TopStair",
       "name": "TopStair",
-      "description": "This is a long hallway. Ancient family portraits line the walls, cobwebs hang from the ceiling.",
+      "description": "This is a long hallway. Various photos of family and friends line the walls.",
       "exits": [
         {
           "isLocked": false,
@@ -55,7 +55,7 @@
     {
       "id": "BottomStair",
       "name": "BottomStair",
-      "description": "You are in the closet. It is dark.",
+      "description": "",
       "exits": [
         {
           "isLocked": false,
@@ -72,7 +72,7 @@
     {
       "id": "LivingRoom",
       "name": "LivingRoom",
-      "description": "You are in the closet. It is dark.",
+      "description": "This is a ",
       "exits": [
         {
           "isLocked": false,
@@ -89,7 +89,7 @@
     {
       "id": "HouseKitchen",
       "name": "Kitchen ",
-      "description": "You are in the closet. It is dark.",
+      "description": "This is a small kitchen. There are cuboards and a stove in front of you with a microwave, fridge and sink adjacent to it.",
       "exits": [
         {
           "isLocked": false,
@@ -107,7 +107,7 @@
     {
       "id": "Garage",
       "name": "Garage",
-      "description": "This is a closet, various items of clothing lie within it.",
+      "description": "This is a garage. Your car is parked by the door and shelves messy with miscellaneous items line the three other sides.",
       "exits": [
         {
           "isLocked": false,
@@ -121,7 +121,7 @@
 
       "id": "Kitchen",
       "name":"Kitchen",
-      "description": "You are in the kitchen"
+      "description": "This is a kitchen. A microwave lies atop the counter and under the cuboards. A table and chair sits adjacent to the fridge."
 
 
     }
