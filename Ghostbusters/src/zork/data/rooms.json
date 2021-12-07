@@ -72,7 +72,7 @@
     {
       "id": "LivingRoom",
       "name": "LivingRoom",
-      "description": "This is a ",
+      "description": "This is a living room. a tv is mounted beside a book shelf and a couch lies in fron of it.",
       "exits": [
         {
           "isLocked": false,
