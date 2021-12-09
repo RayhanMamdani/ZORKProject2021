@@ -34,7 +34,7 @@
 
     {
       "id": "TopStair",
-      "name": "TopStair",
+      "name": "Top Stairs",
       "description": "You are in a long hallway. There are family pictures on all of the walls.",
       "exits": [
         {
@@ -54,7 +54,7 @@
 
     {
       "id": "BottomStair",
-      "name": "BottomStair",
+      "name": "Bottom Stairs",
       "description": "You are in the closet. It is dark.",
       "exits": [
         {
@@ -71,7 +71,7 @@
     },
     {
       "id": "LivingRoom",
-      "name": "LivingRoom",
+      "name": "Living Room",
       "description": "You are in the closet. It is dark.",
       "exits": [
         {
@@ -82,13 +82,13 @@
         {
           "isLocked": false,
           "direction": "East",
-          "adjacentRoom": "Kitchen"
+          "adjacentRoom": "HouseKitchen"
         }
       ]
     },
     {
       "id": "HouseKitchen",
-      "name": "Kitchen ",
+      "name": "Kitchen",
       "description": "You are in the closet. It is dark.",
       "exits": [
         {
@@ -112,16 +112,107 @@
         {
           "isLocked": false,
           "direction": "South",
-          "adjacentRoom": "Kitchen"
+          "adjacentRoom": "HouseKitchen"
         }
       ]
+    },
+    {
+
+      "id": "OfficeKitchen",
+      "name":"Kitchen",
+      "description": "You are in the kitchen",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "West",
+          "adjacentRoom": "Reception"
+        }
+
+      ]
+
+
     },
 
     {
 
-      "id": "Kitchen",
-      "name":"Kitchen",
-      "description": "You are in the kitchen"
+      "id": "Reception",
+      "name":"Reception",
+      "description": "You are in the kitchen",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "OfficeKitchen"
+        },
+        {
+          "isLocked": false,
+          "direction": "North",
+          "adjacentRoom": "OfficeStairUp"
+        }
+      ]
+
+
+    },
+    {
+
+      "id":"OfficeStairUp",
+      "name": "Top Office Stairs",
+      "description": "You are in the kitchen",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "South",
+          "adjacentRoom": "Reception"
+        },
+        {
+          "isLocked": false,
+          "direction": "Down",
+          "adjacentRoom": "OfficeStairDown"
+        }
+
+      ]
+
+
+    },
+    {
+
+      "id": "OfficeStairDown",
+      "name": "Bottom Office Stairs",
+      "description": "You are in the kitchen",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "South",
+          "adjacentRoom": "Basement"
+        },
+        {
+          "isLocked": false,
+          "direction": "Up",
+          "adjacentRoom": "OfficeStairUp"
+        }
+
+      ]
+
+
+    },
+    {
+
+      "id": "Basement",
+      "name":"Basement",
+      "description": "You are in the kitchen",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "North",
+          "adjacentRoom": "OfficeStairDown"
+        },
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "Office"
+        }
+
+      ]
 
 
     }
