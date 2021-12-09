@@ -17,7 +17,6 @@ public class CommandWords {
         // if we get here, the string was not found in the commands
         return false;
     }
-    // test
 
     /*
      * Print all valid commands to System.out.
