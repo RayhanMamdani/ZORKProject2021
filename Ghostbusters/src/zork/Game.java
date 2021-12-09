@@ -133,7 +133,7 @@ public class Game {
       if (canTeleport(command)){
         System.out.println("You can drive from the Garage, Reception, Lobby and Concierge");
 
-      }
+      }//
       return;
     }
     String direction = command.getSecondWord();
