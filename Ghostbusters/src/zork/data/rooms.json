@@ -82,7 +82,7 @@
         {
           "isLocked": false,
           "direction": "East",
-          "adjacentRoom": "Kitchen"
+          "adjacentRoom": "HouseKitchen"
         }
       ]
     },
@@ -112,16 +112,107 @@
         {
           "isLocked": false,
           "direction": "South",
-          "adjacentRoom": "Kitchen"
+          "adjacentRoom": "HouseKitchen"
         }
       ]
+    },
+    {
+
+      "id": "OfficeKitchen",
+      "name":"Kitchen",
+      "description": "You are in the kitchen",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "West",
+          "adjacentRoom": "Reception"
+        }
+
+      ]
+
+
     },
 
     {
 
-      "id": "Kitchen",
-      "name":"Kitchen",
-      "description": "This is a kitchen. A microwave lies atop the counter and under the cuboards. A table and chair sits adjacent to the fridge."
+      "id": "Reception",
+      "name":"Reception",
+      "description": "This is a kitchen. A microwave lies atop the counter and under the cuboards. A table and chair sits adjacent to the fridge.",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "OfficeKitchen"
+        },
+        {
+          "isLocked": false,
+          "direction": "North",
+          "adjacentRoom": "OfficeStairUp"
+        }
+      ]
+
+
+    },
+    {
+
+      "id":"OfficeStairUp",
+      "name": "Top Office Stairs",
+      "description": "You are in the kitchen",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "South",
+          "adjacentRoom": "Reception"
+        },
+        {
+          "isLocked": false,
+          "direction": "Down",
+          "adjacentRoom": "OfficeStairDown"
+        }
+
+      ]
+
+
+    },
+    {
+
+      "id": "OfficeStairDown",
+      "name": "Bottom Office Stairs",
+      "description": "You are in the kitchen",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "South",
+          "adjacentRoom": "Basement"
+        },
+        {
+          "isLocked": false,
+          "direction": "Up",
+          "adjacentRoom": "OfficeStairUp"
+        }
+
+      ]
+
+
+    },
+    {
+
+      "id": "Basement",
+      "name":"Basement",
+      "description": "You are in the kitchen",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "North",
+          "adjacentRoom": "OfficeStairDown"
+        },
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "Office"
+        }
+
+      ]
 
 
     }
