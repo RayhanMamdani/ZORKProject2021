@@ -109,7 +109,9 @@ public class Game {
       printHelp();
     else if (commandWord.equals("go"))
       goRoom(command);
-    else if (commandWord.equals("quit")) {
+      else if (commandWord.equals("drive")){
+        teleport(command);
+    }else if (commandWord.equals("quit")) {
       if (command.hasSecondWord())
         System.out.println("Quit what?");
       else
@@ -121,6 +123,38 @@ public class Game {
   }
 
   // implementations of user commands:
+
+  
+
+  private void teleport(Command command) {
+    if (!command.hasSecondWord()) {
+      // if there is no second word, we don't know where to drive...
+      System.out.println("Drive Where?");
+      if (canTeleport(command)){
+        System.out.println("You can drive from the Garage, Reception, Lobby and Concierge");
+
+      }
+      return;
+    }
+    String direction = command.getSecondWord();
+
+    if (canTeleport(command)){
+
+    currentRoom = roomMap.get(direction);
+
+    System.out.println(currentRoom.longDescription());
+
+  }else{
+
+    System.out.println("You Cannot Drive Anywhere From Here!");
+  }
+}
+
+private boolean canTeleport(Command command){
+  String direction = command.getSecondWord();
+    return (currentRoom.getRoomName().equals("Garage") || currentRoom.getRoomName().equals("Reception")|| currentRoom.getRoomName().equals("Lobby") || direction.equals("Concierge")) 
+    && (direction.equals("Garage") || direction.equals("Reception")|| direction.equals("Lobby") || direction.equals("Concierge"));
+}
 
   /**
    * Print out some help information. Here we print some stupid, cryptic message
