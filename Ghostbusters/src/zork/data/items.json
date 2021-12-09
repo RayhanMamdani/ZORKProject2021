@@ -47,7 +47,8 @@
             "name": "House Key",
             "description": "",
             "weight": 1,
-            "startingroom": "Bedroom"
+            "startingroom": "Bedroom",
+            "iskey": true
         },
 
         {
@@ -55,7 +56,8 @@
             "name": "Office Key",
             "description": "",
             "weight": 1,
-            "startingroom": "OfficeBasementWest"
+            "startingroom": "OfficeBasementWest",
+            "iskey": true
         },
 
         {
@@ -63,7 +65,8 @@
             "name": "Abandoned House Key",
             "description": "",
             "weight": 1,
-            "startingroom": "OfficeBasementEast"
+            "startingroom": "OfficeBasementEast",
+            "iskey": true
         }
     ]
 }

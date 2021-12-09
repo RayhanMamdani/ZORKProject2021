@@ -1,5 +1,6 @@
 package zork;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Parser {
@@ -13,7 +14,7 @@ public class Parser {
 
   public Command getCommand() throws java.io.IOException {
     String inputLine = "";
-    String[] words;
+    ArrayList<String> words = new ArrayList<String>();
 
     System.out.print("> "); // print prompt
 
