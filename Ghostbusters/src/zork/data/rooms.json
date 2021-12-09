@@ -35,11 +35,7 @@
     {
       "id": "TopStair",
       "name": "TopStair",
-<<<<<<< HEAD
       "description": "This is a long hallway. Various photos of family and friends line the walls.",
-=======
-      "description": "You are in a long hallway. There are family pictures on all of the walls.",
->>>>>>> refs/remotes/origin/main
       "exits": [
         {
           "isLocked": false,
@@ -111,11 +107,7 @@
     {
       "id": "Garage",
       "name": "Garage",
-<<<<<<< HEAD
       "description": "This is a garage. Your car is parked by the door and shelves messy with miscellaneous items line the three other sides.",
-=======
-      "description": "You are in the closet. It is dark.",
->>>>>>> refs/remotes/origin/main
       "exits": [
         {
           "isLocked": false,
