@@ -107,7 +107,7 @@
     {
       "id": "Garage",
       "name": "Garage",
-      "description": "This is a garage. Your car is parked by the door. Shelves messy with miscellaneous items line the three other sides.",
+      "description": "This is a garage. Your car is parked by the door and shelves messy with miscellaneous items line the three other sides.",
       "exits": [
         {
           "isLocked": false,
