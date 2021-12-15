@@ -23,6 +23,7 @@ public class Game {
   public Game() {
     try {
       initRooms("src\\zork\\data\\rooms.json");
+      initItems("src\\zork\\data\\items.json");
       currentRoom = roomMap.get("Bedroom");
     } catch (Exception e) {
       e.printStackTrace();
@@ -59,6 +60,32 @@ public class Game {
       }
       room.setExits(exits);
       roomMap.put(roomId, room);
+    }
+  }
+
+
+  private void initItems(String fileName) throws Exception {
+    Path path = Path.of(fileName);
+    String jsonString = Files.readString(path);
+    JSONParser parser = new JSONParser();
+    JSONObject json = (JSONObject) parser.parse(jsonString);
+
+    JSONArray jsonRooms = (JSONArray) json.get("items");
+
+    for (Object itemsObj : jsonRooms) {
+      
+      String itemName = (String) ((JSONObject) itemsObj).get("name");
+      String id = (String) ((JSONObject) itemsObj).get("id");
+      String roomDescription = (String) ((JSONObject) itemsObj).get("description");
+      String startingRoom = (String) ((JSONObject) itemsObj).get("startingroom");
+      String startingItem = (String) ((JSONObject) itemsObj).get("startingitem");
+      int weight = (int) ((JSONObject) itemsObj).get("weight");
+      boolean iskey = (boolean) ((JSONObject) itemsObj).get("iskey");
+      //Item item = new Item(weight, name, isOpenable)
+
+      Item item = new Item(weight, itemName,iskey,startingRoom, startingItem);
+    
+
     }
   }
 
