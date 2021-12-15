@@ -120,7 +120,7 @@
 
       "id": "OfficeKitchen",
       "name":"Kitchen",
-      "description": "This is the office kitchen. A fridge sits adjacent to a table and chairs. A sink, much cleaner than yours, is in the counter next to a mircowave.",
+      "description": "This is a kitchen. A fridge sits adjacent to a table and chairs. A microwave lies atop the counter and under the cuboards.",
       "exits": [
         {
           "isLocked": false,
@@ -137,7 +137,7 @@
 
       "id": "Reception",
       "name":"Reception",
-      "description": "This is a kitchen. A microwave lies atop the counter and under the cuboards. A table and chair sits adjacent to the fridge.",
+      "description": "This is a reception. An empty desk contains a mess of stationaries that have been not been organized in a long time. ",
       "exits": [
         {
           "isLocked": false,
