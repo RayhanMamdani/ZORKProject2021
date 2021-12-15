@@ -199,7 +199,7 @@
 
       "id": "Basement",
       "name":"Basement",
-      "description": "",
+      "description": "This is a basement. Boxes lie stacked in the corner, shadowed by the dark lighting.",
       "exits": [
         {
           "isLocked": false,
