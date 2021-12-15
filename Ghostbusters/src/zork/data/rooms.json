@@ -120,7 +120,7 @@
 
       "id": "OfficeKitchen",
       "name":"Kitchen",
-      "description": "You are in the kitchen",
+      "description": "This is the office kitchen. A fridge sits adjacent to a table and chairs. A sink, much cleaner than yours, is in the counter next to a mircowave.",
       "exits": [
         {
           "isLocked": false,
