@@ -11,7 +11,7 @@ public class CommandWords {
    **/
   public boolean isCommand(String aString) {
     for (String c : validCommands) {
-      if (c.equals(aString))
+      if (c.equalsIgnoreCase(aString))
         return true;
     }
     // if we get here, the string was not found in the commands

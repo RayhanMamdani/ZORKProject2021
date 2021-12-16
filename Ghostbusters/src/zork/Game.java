@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -13,9 +15,11 @@ import org.json.simple.parser.JSONParser;
 public class Game {
 
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
+  public static ArrayList <Item> itemsMap = new ArrayList<Item>();
 
   private Parser parser;
   private Room currentRoom;
+  private Item currentItem;
 
   /**
    * Create the game and initialise its internal map.
@@ -25,6 +29,8 @@ public class Game {
       initRooms("src\\zork\\data\\rooms.json");
       initItems("src\\zork\\data\\items.json");
       currentRoom = roomMap.get("Bedroom");
+      Inventory inventory = new Inventory(100);
+
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -70,24 +76,26 @@ public class Game {
     JSONParser parser = new JSONParser();
     JSONObject json = (JSONObject) parser.parse(jsonString);
 
-    JSONArray jsonRooms = (JSONArray) json.get("items");
+    JSONArray jsonItems = (JSONArray) json.get("items");
 
-    for (Object itemsObj : jsonRooms) {
+    for (Object itemsObj : jsonItems) {
       
       String itemName = (String) ((JSONObject) itemsObj).get("name");
       String id = (String) ((JSONObject) itemsObj).get("id");
-      String roomDescription = (String) ((JSONObject) itemsObj).get("description");
       String startingRoom = (String) ((JSONObject) itemsObj).get("startingroom");
       String startingItem = (String) ((JSONObject) itemsObj).get("startingitem");
-      int weight = (int) ((JSONObject) itemsObj).get("weight");
+      String description = (String) ((JSONObject) itemsObj).get("description");
+      int weight = (int) (long)((JSONObject) itemsObj).get("weight");
       boolean iskey = (boolean) ((JSONObject) itemsObj).get("iskey");
+      boolean isOpenable = (boolean) ((JSONObject) itemsObj).get("isOpenable");
       //Item item = new Item(weight, name, isOpenable)
 
-      Item item = new Item(weight, itemName,iskey,startingRoom, startingItem);
-    
-
+      Item item = new Item(weight, itemName,isOpenable,iskey,startingRoom, startingItem,description);
+      itemsMap.add(item);
+    // roomMap.get("Bedroom");
     }
   }
+
 
   /**
    * Main play routine. Loops until end of play.
@@ -119,6 +127,21 @@ public class Game {
     System.out.println("Type 'help' if you need help.");
     System.out.println();
     System.out.println(currentRoom.longDescription());
+ 
+
+    int numItems = numItems();
+    int i = 0;
+    ArrayList <Item> itemsMaptemp = new ArrayList <Item>();
+    formatList(itemsMaptemp);
+    while (i < numItems){
+
+        System.out.println(itemRoom(itemsMaptemp).getDescription());
+     
+        i++;
+    
+    }
+    
+    
   }
 
   /**
@@ -132,18 +155,21 @@ public class Game {
     }
 
     String commandWord = command.getCommandWord();
-    if (commandWord.equals("help"))
+    if (commandWord.equalsIgnoreCase("help"))
       printHelp();
-    else if (commandWord.equals("go"))
+    else if (commandWord.equalsIgnoreCase("go"))
       goRoom(command);
-      else if (commandWord.equals("drive")){
+      else if (commandWord.equalsIgnoreCase("drive")){
         teleport(command);
-    }else if (commandWord.equals("quit")) {
+    }else if (commandWord.equalsIgnoreCase("take")){ 
+      //takeObj(command);
+      
+    }if (commandWord.equalsIgnoreCase("quit")) {
       if (command.hasSecondWord())
         System.out.println("Quit what?");
       else
         return true; // signal that we want to quit
-    } else if (commandWord.equals("eat")) {
+    } else if (commandWord.equalsIgnoreCase("eat")) {
       System.out.println("Do you really think you should be eating at a time like this?");
     }
     return false;
@@ -153,21 +179,37 @@ public class Game {
 
   
 
+  private void takeObj(Command command) {
+
+    if (!command.hasSecondWord()) {
+      // if there is no second word, we don't know where to drive...
+      System.out.println("Take What?");
+      
+
+      
+      return;
+    }else if (command.getSecondWord().equalsIgnoreCase("all")){
+
+    }
+
+  }
+
   private void teleport(Command command) {
     if (!command.hasSecondWord()) {
       // if there is no second word, we don't know where to drive...
       System.out.println("Drive Where?");
-      if (canTeleport(command)){
+      
         System.out.println("You can drive from the Garage, Reception, Lobby and Concierge");
 
-      }//
+      
       return;
     }
     String direction = command.getSecondWord();
 
     if (canTeleport(command)){
 
-    currentRoom = roomMap.get(direction);
+    currentRoom = roomMap.get(format(direction));
+
 
     System.out.println(currentRoom.longDescription());
 
@@ -179,8 +221,8 @@ public class Game {
 
 private boolean canTeleport(Command command){
   String direction = command.getSecondWord();
-    return (currentRoom.getRoomName().equals("Garage") || currentRoom.getRoomName().equals("Reception")|| currentRoom.getRoomName().equals("Lobby") || direction.equals("Concierge")) 
-    && (direction.equals("Garage") || direction.equals("Reception")|| direction.equals("Lobby") || direction.equals("Concierge"));
+    return (currentRoom.getRoomName().equalsIgnoreCase("Garage") || currentRoom.getRoomName().equalsIgnoreCase("Reception")|| currentRoom.getRoomName().equalsIgnoreCase("Lobby") || direction.equalsIgnoreCase("Concierge")) 
+    && (direction.equalsIgnoreCase("Garage") || direction.equalsIgnoreCase("Reception")|| direction.equalsIgnoreCase("Lobby") || direction.equalsIgnoreCase("Concierge"));
 }
 
   /**
@@ -216,6 +258,70 @@ private boolean canTeleport(Command command){
     else {
       currentRoom = nextRoom;
       System.out.println(currentRoom.longDescription());
+
+     
+    int numItems = numItems();
+    int i = 0;
+    ArrayList <Item> itemsMaptemp = new ArrayList <Item>();
+    formatList(itemsMaptemp);
+    while (i < numItems){
+
+        System.out.println(itemRoom(itemsMaptemp).getDescription());
+     
+        i++;
+    
     }
   }
+  }
+
+
+  private void formatList(ArrayList<Item> itemsMaptemp) {
+    for (Item temp : itemsMap) {
+      itemsMaptemp.add(temp);
+    }
+  }
+
+  private Item itemRoom(ArrayList<Item> itemsMaptemp){
+int counter = 0;
+int indexocc = -1;
+    Item temp = new Item();
+  for (int i = 0; i < itemsMaptemp.size(); i++){
+     
+    if (itemsMaptemp.get(i).startingRoom() != null && itemsMaptemp.get(i).getDescription() != null && itemsMaptemp.get(i).startingRoom().equals(currentRoom.getRoomName())){
+
+      temp = itemsMaptemp.get(i);
+      indexocc = i;
+    }
+   }
+  if (indexocc == -1)
+  return temp;
+   return itemsMaptemp.remove(indexocc);
+
+  }
+
+  private int numItems(){
+    int counter = 0;
+        Item temp = new Item();
+      for (int i = 0; i < itemsMap.size(); i++){
+         
+        if (itemsMap.get(i).startingRoom() != null && itemsMap.get(i).startingRoom().equals(currentRoom.getRoomName())){
+    
+          //temp = itemsMap.get(i);
+          counter++;
+        }
+       }
+    
+       return counter;
+    
+      }
+
+  
+
+  private String format(String str){
+
+    return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+
+  }
+
+
 }

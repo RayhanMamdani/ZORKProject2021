@@ -6,15 +6,19 @@
          "name": "Proton Pack",
          "description": "This is a Proton pack. Despite all it's damage and use it's never let you down.",
          "weight": 10,
-         "startingroom": "Office" 
+         "startingroom": "Office", 
+         "iskey": false,
+         "isOpenable": false
         },
 
         {
             "id": "Closet",
             "name": "Closet",
-            "decription": "This is a closet. Within it lies several stationaries and cobwebs.",
+            "description": "This is a closet. Within it lies several stationaries and cobwebs.",
             "weight": 101,
-            "startingroom": "Bedroom"
+            "startingroom": "Bedroom",
+            "iskey": false,
+            "isOpenable": true
         },
 
         {
@@ -23,7 +27,9 @@
             "name": "Vaccum",
             "description": "This is old vaccum. It's loud and clunky, you should really buy a new one.",
             "weight": 10,
-            "startingitem": "Closet"
+            "startingitem": "Closet",
+            "iskey": false,
+            "isOpenable": false
         },
 
         {
@@ -31,7 +37,9 @@
             "name": "Scissors",
             "description": "This is a pair of scissors. What else did you expect?",
             "weight": 2,
-            "startingroom": "OfficeKitchen"
+            "startingroom": "OfficeKitchen",
+            "iskey": false,
+            "isOpenable": false
         },
 
         {
@@ -39,7 +47,9 @@
             "name": "Rope",
             "description": "This is a coarse bundle of rope. It's length is immeseruable and it seems to go on for infinity.",
             "weight": 5,
-            "startingroom": "OfficeBasementEast"
+            "startingroom": "OfficeBasementEast",
+            "iskey": false,
+            "isOpenable": false
         },
 
         {
@@ -48,7 +58,8 @@
             "description": "This is your housekey. A keychain with the logo of the hit blockbuster movie 'Spook Chasers' hangs off the end.",
             "weight": 1,
             "startingroom": "Bedroom",
-            "iskey": true
+            "iskey": true,
+            "isOpenable": false
         },
 
         {
@@ -57,7 +68,8 @@
             "description": "This is a key to your office. 'I <3 polymorphisim' is engraved on the side. ",
             "weight": 1,
             "startingroom": "OfficeBasementWest",
-            "iskey": true
+            "iskey": true,
+            "isOpenable": false
         },
 
         {
@@ -66,7 +78,8 @@
             "description": "This is an old key. It seems much older than any of your other ones and rust is starting to develop on the ends.",
             "weight": 1,
             "startingroom": "OfficeBasementEast",
-            "iskey": true
+            "iskey": true,
+            "isOpenable": false
         }
     ]
 }
