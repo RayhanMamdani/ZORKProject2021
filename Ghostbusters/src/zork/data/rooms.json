@@ -215,6 +215,32 @@
       ]
 
 
+    },
+    {
+
+      "id": "Lobby",
+      "name":"Lobby",
+      "description": "",
+      "exits": [
+        
+      
+
+      ]
+
+
+    },
+    {
+
+      "id": "Concierge",
+      "name":"Concierge",
+      "description": "",
+      "exits": [
+        
+      
+
+      ]
+
+
     }
 
     
