@@ -27,4 +27,8 @@ public class CommandWords {
     }
     System.out.println();
   }
+
+  public String[] getCommands() {
+    return validCommands;
+  }
 }
