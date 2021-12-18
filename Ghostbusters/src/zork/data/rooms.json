@@ -197,7 +197,7 @@
     },
     {
 
-      "id": "Basement",
+      "id": "OfficeBasement",
       "name":"Basement",
       "description": "",
       "exits": [
@@ -235,8 +235,122 @@
       "name":"Concierge",
       "description": "",
       "exits": [
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "MailRoom"
+        },
+        {
+          "isLocked": false,
+          "direction": "South",
+          "adjacentRoom": "HotelRooms"
+        }
+
         
   
+      ]
+
+
+    },
+    {
+
+      "id": "MailRoom",
+      "name":"Mail Room",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "West",
+          "adjacentRoom": "Concierge"
+        }
+
+        
+  
+      ]
+
+
+    }
+    ,
+    {
+
+      "id": "HotelRooms",
+      "name":"Hotel Rooms",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "South",
+          "adjacentRoom": "HotelRoom1"
+        },
+        {
+          "isLocked": false,
+          "direction": "North",
+          "adjacentRoom": "Concierge"
+        }
+
+        
+  
+      ]
+
+
+    },
+    {
+
+      "id": "HotelRoom1",
+      "name":"Room One",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "North",
+          "adjacentRoom": "HotelRooms"
+        },
+        {
+          "isLocked": false,
+          "direction": "West",
+          "adjacentRoom": "HotelBedRoom"
+        },
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "HotelWashRoom"
+        }
+
+
+        
+  
+      ]
+
+
+    },
+    {
+
+      "id": "HotelBedRoom",
+      "name":"Bedroom",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "HotelRoom1"
+        }
+      
+      ]
+
+
+    },
+    {
+
+      "id": "HotelWashRoom",
+      "name":"Washroom",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "West",
+          "adjacentRoom": "HotelRoom1"
+        }
+      
       ]
 
 
