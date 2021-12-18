@@ -48,6 +48,10 @@ public class Item extends OpenableObject {
   public void setWeight(int weight) {
     this.weight = weight;
   }
+  public void setStartingRoom(String str){
+
+    this.startingroom = str;
+  }
 
   public String getName() {
     return name;
