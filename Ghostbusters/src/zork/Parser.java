@@ -22,7 +22,7 @@ public class Parser {
     inputLine = in.nextLine();
     ArrayList<String> words = new ArrayList<String>(Arrays.asList(inputLine.split(" ")));
 
-    for (int i = words.size(); i >= 0; i++) {
+    for (int i = words.size()-1; i >= 0; i--) {
       if (commandIgnore.indexOf(words.get(i)) >= 0 && !(words.get(i).indexOf(",") >= 0))
         words.remove(i);
     }
