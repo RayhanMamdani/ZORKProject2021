@@ -6,7 +6,7 @@
          "name": "Proton Pack",
          "description": "This is a Proton pack. Despite all it's damage and use it's never let you down.",
          "weight": 10,
-         "startingroom": "Office", 
+         "startingroom": "Reception", 
          "iskey": false,
          "isOpenable": false
         },

@@ -166,7 +166,10 @@ public class Game {
     }else if (commandWord.equalsIgnoreCase("take")){ 
       takeObj(command);
       
-    }if (commandWord.equalsIgnoreCase("quit")) {
+    }else if (commandWord.equalsIgnoreCase("drop")){
+      dropObj(command);
+
+    } else if(commandWord.equalsIgnoreCase("quit")) {
       if (command.hasSecondWord())
         System.out.println("Quit what?");
       else
@@ -180,6 +183,62 @@ public class Game {
   // implementations of user commands:
 
   
+
+  private void dropObj(Command command) {
+    ArrayList<Item> currInventory = inventory.getInventory();
+    if (!command.hasSecondWord()) {
+      // if there is no second word, we don't know where to drive...
+      System.out.println("Drop What?");
+      
+      return;
+    }else if(currInventory.size() == 0){
+
+      System.out.println("There is nothing to drop!");
+    }else if (command.getSecondWord().equalsIgnoreCase("all")){
+     
+     removeallItems(currInventory);
+    }else if (command.hasSecondWord()){
+
+  String itemName = command.getSecondWord();
+      int index = getremoveObjIndex(itemName, currInventory);
+
+      if (index != -1){
+        Item temp = currInventory.remove(index);
+
+        temp.setStartingRoom(currentRoom.getRoomName());
+        itemsMap.add(temp);
+        System.out.println("You have dropped the "+temp.getName());
+
+      }else{
+
+        System.out.println("You don't have that object in your inventory!");
+      }
+
+    }
+  }
+
+  private int getremoveObjIndex(String itemName, ArrayList<Item> currInventory) {
+  
+    for (int i = 0; i < currInventory.size(); i++) {
+      if (currInventory.get(i).getName().toLowerCase().indexOf(itemName.toLowerCase()) >= 0){
+        return i;
+      }
+      i++;
+    }
+    return -1;
+  }
+
+  private void removeallItems(ArrayList<Item> currInventory) {
+    for (int i = 0; i < currInventory.size(); i++) {
+      
+      Item temp = currInventory.remove(i);
+
+      temp.setStartingRoom(currentRoom.getRoomName());
+      itemsMap.add(temp);
+      System.out.println("You have dropped the "+temp.getName());
+    }
+
+  }
 
   private void showInventory() {
 
@@ -208,11 +267,13 @@ public class Game {
       int i = 0;
       ArrayList <Item> itemsMaptemp = new ArrayList <Item>();
       formatList(itemsMaptemp);
+
+
       while (i < numItems){
         
           Item temp = itemRoom(itemsMaptemp);
           if (inventory.addItem(temp)){
-            System.out.println("Item added!");
+            System.out.println(temp.getName()+" "+"added!");
             itemsMap.remove(getremoveIndex(temp.getName()));
           }
 
@@ -279,7 +340,7 @@ public class Game {
 
 private boolean canTeleport(Command command){
   String direction = command.getSecondWord();
-    return (currentRoom.getRoomName().equalsIgnoreCase("Garage") || currentRoom.getRoomName().equalsIgnoreCase("Reception")|| currentRoom.getRoomName().equalsIgnoreCase("Lobby") || direction.equalsIgnoreCase("Concierge")) 
+    return (currentRoom.getRoomName().equalsIgnoreCase("Garage") || currentRoom.getRoomName().equalsIgnoreCase("Reception")|| currentRoom.getRoomName().equalsIgnoreCase("Lobby") || currentRoom.getRoomName().equalsIgnoreCase("Concierge")) 
     && (direction.equalsIgnoreCase("Garage") || direction.equalsIgnoreCase("Reception")|| direction.equalsIgnoreCase("Lobby") || direction.equalsIgnoreCase("Concierge"));
 }
 
