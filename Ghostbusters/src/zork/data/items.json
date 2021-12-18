@@ -77,7 +77,7 @@
             "name": "Abandoned House Key",
             "description": "This is an old key. It seems much older than any of your other ones and rust is starting to develop on the ends.",
             "weight": 1,
-            "startingroom": "OfficeBasementEast",
+            "startingroom": "OfficeBasement",
             "iskey": true,
             "isOpenable": false
         }
