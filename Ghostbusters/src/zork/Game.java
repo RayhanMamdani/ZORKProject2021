@@ -318,7 +318,7 @@ public class Game {
       // if there is no second word, we don't know where to drive...
       System.out.println("Drive Where?");
       
-        System.out.println("You can drive from the Garage, Reception, Lobby and Concierge");
+        System.out.println("You can drive from the Garage, Reception, Abandoned House Foyer and Concierge");
 
       
       return;
@@ -340,8 +340,8 @@ public class Game {
 
 private boolean canTeleport(Command command){
   String direction = command.getSecondWord();
-    return (currentRoom.getRoomName().equalsIgnoreCase("Garage") || currentRoom.getRoomName().equalsIgnoreCase("Reception")|| currentRoom.getRoomName().equalsIgnoreCase("Lobby") || currentRoom.getRoomName().equalsIgnoreCase("Concierge")) 
-    && (direction.equalsIgnoreCase("Garage") || direction.equalsIgnoreCase("Reception")|| direction.equalsIgnoreCase("Lobby") || direction.equalsIgnoreCase("Concierge"));
+    return (currentRoom.getRoomName().equalsIgnoreCase("Garage") || currentRoom.getRoomName().equalsIgnoreCase("Reception")|| currentRoom.getRoomName().equalsIgnoreCase("abandoned house") || currentRoom.getRoomName().equalsIgnoreCase("Concierge")) 
+    && (direction.equalsIgnoreCase("Garage") || direction.equalsIgnoreCase("Reception")|| direction.equalsIgnoreCase("abandoned house") || direction.equalsIgnoreCase("Concierge"));
 }
 
   /**
