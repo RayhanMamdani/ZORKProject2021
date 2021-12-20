@@ -17,7 +17,7 @@ public class Parser {
   public Command getCommand() throws java.io.IOException {
     String inputLine = "";
 
-    System.out.print(">");
+    System.out.print("> ");
 
     inputLine = in.nextLine();
     ArrayList<String> words = new ArrayList<String>(Arrays.asList(inputLine.split(" ")));
@@ -26,13 +26,24 @@ public class Parser {
       if (commandIgnore.indexOf(words.get(i)) >= 0 && !(words.get(i).indexOf(",") >= 0))
         words.remove(i);
     }
-
-    String secondWord = "";
+    String secondWord = null;
+      if (words.size()>1){
+         secondWord = "";
+      }
     for (int i = 1; i < words.size(); i++) {
       secondWord += words.get(i);
     }
 
+    if (words.size() != 0 && commands.isCommand(words.get(0)))
     return new Command(words.get(0), secondWord);
+    else if (words.size() == 0){
+    return new Command(null, null);
+    }else
+    return new Command(null, secondWord);
+
+
+
+    
   }
 
   public void showCommands() {
