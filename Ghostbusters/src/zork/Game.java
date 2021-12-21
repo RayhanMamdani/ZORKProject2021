@@ -88,11 +88,12 @@ public class Game {
       String startingItem = (String) ((JSONObject) itemsObj).get("startingitem");
       String description = (String) ((JSONObject) itemsObj).get("description");
       int weight = (int) (long)((JSONObject) itemsObj).get("weight");
+      int damage = (int) (long)((JSONObject) itemsObj).get("damage");
       boolean iskey = (boolean) ((JSONObject) itemsObj).get("iskey");
       boolean isOpenable = (boolean) ((JSONObject) itemsObj).get("isOpenable");
       //Item item = new Item(weight, name, isOpenable)
 
-      Item item = new Item(weight, itemName,isOpenable,iskey,startingRoom, startingItem,description);
+      Item item = new Item(weight, itemName,isOpenable,iskey,startingRoom, startingItem,description,damage);
       itemsMap.add(item);
     // roomMap.get("Bedroom");
     }
@@ -215,7 +216,7 @@ public class Game {
     }else if (commandWord.equalsIgnoreCase("drop")){
       dropObj(command);
 
-    } else if(commandWord.equalsIgnoreCase("quit")) {
+    }else if(commandWord.equalsIgnoreCase("quit")) {
       if (command.hasSecondWord())
         System.out.println("Quit what?");
       else
