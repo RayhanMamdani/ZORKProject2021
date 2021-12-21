@@ -204,6 +204,11 @@ public class Game {
         teleport(command);
     }else if ((commandWord.equalsIgnoreCase("inventory"))){
     showInventory();
+
+    }else if (commandWord.equalsIgnoreCase("open")){
+      openItem(command);
+
+
     }else if (commandWord.equalsIgnoreCase("take")){ 
       takeObj(command);
       
@@ -224,6 +229,39 @@ public class Game {
   // implementations of user commands:
 
   
+
+  private void openItem(Command command) {
+    ArrayList<Item> currInventory = inventory.getInventory();
+    if (!command.hasSecondWord()){
+      System.out.println("Open What?");
+      return;
+    }
+    String currRoomName = currentRoom.getRoomName();
+    String secondWord = command.getSecondWord().toLowerCase();
+    Item itemToOpen = null;
+    for (Item item : itemsMap){ //could make more efficient with a for loop (or using break (but i hate using break))
+      if (item.startingRoom()!=null && item.startingRoom().equals(currRoomName) && secondWord.equals((item.getName().toLowerCase()))){
+        itemToOpen = item;
+      }
+    }
+    if (!itemToOpen.isOpenable()){
+      System.out.println(itemToOpen.getName()+" is not openable.");
+      return;
+    }
+    if (!itemToOpen.isLocked()){
+      itemToOpen.setOpen(true);
+      System.out.println(itemToOpen.getName()+" is open.");
+      return;
+    }
+    //IMPLEMENT IF THE ITEM IS LOCKED (CHECK IS THEY HAVE THE RIGHT KEY IN THEIR INVENTORY)
+    // for (Item item : currInventory){
+    //   if (item.isKey()){
+        
+    //   }
+    // }
+    
+
+  }
 
   private void dropObj(Command command) {
     ArrayList<Item> currInventory = inventory.getInventory();
