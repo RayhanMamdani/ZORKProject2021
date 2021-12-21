@@ -27,6 +27,7 @@
             "name": "Vaccum",
             "description": "This is old vaccum. It's loud and clunky, you should really buy a new one.",
             "weight": 10,
+            "startingroom": "",
             "startingitem": "Closet",
             "iskey": false,
             "isOpenable": false

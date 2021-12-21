@@ -14,6 +14,11 @@ public class Character {
         this.startingroom=startingroom;
         this.difficultylevel=difficultylevel;
     }
+
+    public Character (){
+
+        
+    }
     public String getId(){
         return id;
     }

@@ -16,6 +16,7 @@ public class Game {
 
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
   public static ArrayList <Item> itemsMap = new ArrayList<Item>();
+  public static ArrayList <Character> charactersList = new ArrayList<Character>();
   private Inventory inventory = new Inventory(100);
   private Parser parser;
   private Room currentRoom;
@@ -28,6 +29,7 @@ public class Game {
     try {
       initRooms("src\\zork\\data\\rooms.json");
       initItems("src\\zork\\data\\items.json");
+      initCharacters("src\\zork\\data\\characters.json");
       currentRoom = roomMap.get("Bedroom");
       
 
@@ -97,6 +99,31 @@ public class Game {
   }
 
 
+  
+
+  private void initCharacters(String fileName) throws Exception {
+    Path path = Path.of(fileName);
+    String jsonString = Files.readString(path);
+    JSONParser parser = new JSONParser();
+    JSONObject json = (JSONObject) parser.parse(jsonString);
+
+    JSONArray jsonItems = (JSONArray) json.get("characters");
+
+    for (Object itemsObj : jsonItems) {
+      
+      String name = (String) ((JSONObject) itemsObj).get("name");
+      String id = (String) ((JSONObject) itemsObj).get("id");
+      String startingRoom = (String) ((JSONObject) itemsObj).get("startingroom");
+      String description = (String) ((JSONObject) itemsObj).get("description");
+      int difficultyLevel = (int) (long)((JSONObject) itemsObj).get("difficultylevel");
+      //Item item = new Item(weight, name, isOpenable)
+
+     Character character = new Character(id, name, description, startingRoom, difficultyLevel);
+    // roomMap.get("Bedroom");
+    charactersList.add(character);
+    }
+  }
+
   /**
    * Main play routine. Loops until end of play.
    */
@@ -140,9 +167,23 @@ public class Game {
         i++;
     
     }
+
+    int numCharacters = numCharacters();
+    int j = 0;
+    ArrayList <Character> charactersListtemp = new ArrayList <Character>();
+    formatListCharacters(charactersListtemp);
+    while (j < numCharacters){
+
+        System.out.println(characterRoom(charactersListtemp).getDescription());
+     
+        j++;
+    
+    }
     
     
   }
+
+ 
 
   /**
    * Given a command, process (that is: execute) the command. If this command ends
@@ -320,6 +361,11 @@ public class Game {
          
       
       }
+
+      if (numItems == 0){
+
+        System.out.println("There are no items to take!");
+      }
     }else if (command.hasSecondWord()){
 
       String itemName = command.getSecondWord();
@@ -356,7 +402,7 @@ public class Game {
       // if there is no second word, we don't know where to drive...
       System.out.println("Drive Where?");
       
-        System.out.println("You can drive from the Garage, Reception, Lobby and Concierge");
+        System.out.println("You can drive from the Garage, Reception, Abandoned House Foyer and Concierge");
 
       
       return;
@@ -369,6 +415,29 @@ public class Game {
 
 
     System.out.println(currentRoom.longDescription());
+    
+    int numItems = numItems();
+    int i = 0;
+    ArrayList <Item> itemsMaptemp = new ArrayList <Item>();
+    formatList(itemsMaptemp);
+    while (i < numItems){
+
+        System.out.println(itemRoom(itemsMaptemp).getDescription());
+     
+        i++;
+    
+    }
+    int numCharacters = numCharacters();
+    int j = 0;
+    ArrayList <Character> charactersListtemp = new ArrayList <Character>();
+    formatListCharacters(charactersListtemp);
+    while (j < numCharacters){
+
+        System.out.println(characterRoom(charactersListtemp).getDescription());
+     
+        j++;
+    
+    }
 
   }else{
 
@@ -378,8 +447,8 @@ public class Game {
 
 private boolean canTeleport(Command command){
   String direction = command.getSecondWord();
-    return (currentRoom.getRoomName().equalsIgnoreCase("Garage") || currentRoom.getRoomName().equalsIgnoreCase("Reception")|| currentRoom.getRoomName().equalsIgnoreCase("Lobby") || currentRoom.getRoomName().equalsIgnoreCase("Concierge")) 
-    && (direction.equalsIgnoreCase("Garage") || direction.equalsIgnoreCase("Reception")|| direction.equalsIgnoreCase("Lobby") || direction.equalsIgnoreCase("Concierge"));
+    return (currentRoom.getRoomName().equalsIgnoreCase("Garage") || currentRoom.getRoomName().equalsIgnoreCase("Reception")|| currentRoom.getRoomName().equalsIgnoreCase("abandoned house") || currentRoom.getRoomName().equalsIgnoreCase("Concierge")) 
+    && (direction.equalsIgnoreCase("Garage") || direction.equalsIgnoreCase("Reception")|| direction.equalsIgnoreCase("abandoned house") || direction.equalsIgnoreCase("Concierge"));
 }
 
   /**
@@ -428,6 +497,17 @@ private boolean canTeleport(Command command){
         i++;
     
     }
+    int numCharacters = numCharacters();
+    int j = 0;
+    ArrayList <Character> charactersListtemp = new ArrayList <Character>();
+    formatListCharacters(charactersListtemp);
+    while (j < numCharacters){
+
+        System.out.println(characterRoom(charactersListtemp).getDescription());
+     
+        j++;
+    
+    }
   }
   }
 
@@ -435,6 +515,12 @@ private boolean canTeleport(Command command){
   private void formatList(ArrayList<Item> itemsMaptemp) {
     for (Item temp : itemsMap) {
       itemsMaptemp.add(temp);
+    }
+  }
+
+  private void formatListCharacters(ArrayList<Character> charactersList2) {
+    for (Character temp : charactersList) {
+      charactersList2.add(temp);
     }
   }
 
@@ -457,6 +543,24 @@ int indexocc = -1;
 
   }
 
+  private Character characterRoom(ArrayList<Character> characterListTemp){
+    int counter = 0;
+    int indexocc = -1;
+        Character temp = new Character();
+      for (int i = 0; i < characterListTemp.size(); i++){
+         
+        if (characterListTemp.get(i).getStartingroom() != null && characterListTemp.get(i).getDescription() != null && characterListTemp.get(i).getStartingroom().equals(currentRoom.getRoomName())){
+    
+          temp = characterListTemp.get(i);
+          indexocc = i;
+        }
+       }
+      if (indexocc == -1)
+      return temp;
+       return characterListTemp.remove(indexocc);
+    
+      }
+
   private int numItems(){
     int counter = 0;
         Item temp = new Item();
@@ -472,6 +576,22 @@ int indexocc = -1;
        return counter;
     
       }
+
+      private int numCharacters(){
+        int counter = 0;
+            Item temp = new Item();
+          for (int i = 0; i < charactersList.size(); i++){
+             
+            if (charactersList.get(i).getStartingroom() != null && charactersList.get(i).getStartingroom().equals(currentRoom.getRoomName())){
+        
+              //temp = itemsMap.get(i);
+              counter++;
+            }
+           }
+        
+           return counter;
+        
+          }
 
   
 
