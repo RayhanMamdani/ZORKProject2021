@@ -2,12 +2,14 @@ package zork;
 
 public class Item extends OpenableObject {
   private int weight;
+  private int damage;
   private String name;
   private String startingroom;
   private String startingitem;
   private String description;
   private boolean isOpenable;
   private boolean isKey;
+
 
   public Item(int weight, String name, boolean isOpenable) {
     this.weight = weight;
@@ -20,7 +22,7 @@ public class Item extends OpenableObject {
   }
 
   
-  public Item(int weight, String name, boolean isOpenable, boolean isKey, String startingroom, String startingitem, String description) {
+  public Item(int weight, String name, boolean isOpenable, boolean isKey, String startingroom, String startingitem, String description, int damage) {
     this.weight = weight;
     this.name = name;
     this.isOpenable = isOpenable;
@@ -28,6 +30,7 @@ public class Item extends OpenableObject {
     this.startingitem = startingitem;
     this.isKey = isKey;
     this.description = description;
+    this.damage = damage;
   }
 
   public void open() {

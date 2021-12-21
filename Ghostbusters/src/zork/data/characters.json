@@ -22,7 +22,7 @@
     "id": "Blue Ghost",
     "name":"Blue Ghost",
     "description": "A blue ghost approaches.....",
-    "startingroom": "Reception",
+    "startingroom": "Bathroom",
     "difficultylevel": 25
 },
 
