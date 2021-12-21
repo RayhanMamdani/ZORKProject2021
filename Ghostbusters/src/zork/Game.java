@@ -20,7 +20,8 @@ public class Game {
   private Inventory inventory = new Inventory(100);
   private Parser parser;
   private Room currentRoom;
-  private Item currentItem;
+  private int characterHealth = 100;
+  private boolean isFinished = false;
 
   /**
    * Create the game and initialise its internal map.
@@ -117,9 +118,10 @@ public class Game {
       String startingRoom = (String) ((JSONObject) itemsObj).get("startingroom");
       String description = (String) ((JSONObject) itemsObj).get("description");
       int difficultyLevel = (int) (long)((JSONObject) itemsObj).get("difficultylevel");
+      int damage = (int) (long)((JSONObject) itemsObj).get("damage");
       //Item item = new Item(weight, name, isOpenable)
 
-     Character character = new Character(id, name, description, startingRoom, difficultyLevel);
+     Character character = new Character(id, name, description, startingRoom, difficultyLevel, damage);
     // roomMap.get("Bedroom");
     charactersList.add(character);
     }
@@ -132,7 +134,7 @@ public class Game {
     printWelcome();
 
     boolean finished = false;
-    while (!finished) {
+    while (!isFinished) {
       Command command;
       try {
         command = parser.getCommand();
@@ -196,7 +198,13 @@ public class Game {
       return false;
     }
 
+    
+
     String commandWord = command.getCommandWord();
+    if (currentRoom.getRoomName().equals("Bathroom") && charactersList.get(1).getisDead() == false && !commandWord.equalsIgnoreCase("fight")){
+      System.out.println("You have to fight the "+charactersList.get(1).getName());
+      return false;
+    }
     if (commandWord.equalsIgnoreCase("help"))
       printHelp();
     else if (commandWord.equalsIgnoreCase("go"))
@@ -208,6 +216,10 @@ public class Game {
 
     }else if (commandWord.equalsIgnoreCase("open")){
       openItem(command);
+
+
+    }else if (commandWord.equalsIgnoreCase("fight")){
+      fight(command);
 
 
     }else if (commandWord.equalsIgnoreCase("take")){ 
@@ -230,6 +242,81 @@ public class Game {
   // implementations of user commands:
 
   
+
+  private void fight(Command command) {
+    String itemName = command.getSecondWord();
+    if (!command.hasSecondWord()){
+      System.out.println("Fight With What?");
+      System.out.println("You can fight with: ");
+      printArr(inventory.getInventory());
+      System.out.print("Your Hands");
+      System.out.println();
+      return;
+    }
+
+/** 
+   
+    }
+    */
+        if (itemName.equalsIgnoreCase("hands")){     
+          ArrayList <Character> charactersListtemp = new ArrayList <Character>();
+          formatListCharacters(charactersListtemp);
+          Character currEnemy = characterRoom(charactersListtemp);
+      int enemyHealth = currEnemy.getDifficultylevel()-5; // change the amount of health the enemy has
+      currEnemy.setDifficultyLevel(enemyHealth);
+      System.out.println("You hit the "+currEnemy.getName()+"!");
+      if (currEnemy.getDifficultylevel() <= 0){
+        currEnemy.setisDead();
+        System.out.println("You killed the "+currEnemy.getName()+"!");
+      }else{
+        System.out.println("It's current health is "+currEnemy.getDifficultylevel());
+      }
+      if (currEnemy.getisDead() == false){
+        characterHealth-=currEnemy.getDamage();
+        if (characterHealth <= 0){
+          System.out.println("The "+currEnemy.getName()+" delt "+currEnemy.getDamage()+" damage to you. "+"You have died! Game Over!");
+          isFinished = true;
+        }else{
+        System.out.println("The "+currEnemy.getName()+" delt "+currEnemy.getDamage()+" damage to you, you now have "+characterHealth+" health");
+        }
+      }
+    
+    }else{
+    ArrayList<Item> currInventory = inventory.getInventory();
+    int index = getremoveObjIndex(itemName, currInventory);
+    if (index == -1 && !itemName.equalsIgnoreCase("Hands")){
+  
+      System.out.println("You don't have that item in your inventory!");
+return;
+    }
+    Item currWeapon = currInventory.get(index);
+
+    ArrayList <Character> charactersListtemp = new ArrayList <Character>();
+    formatListCharacters(charactersListtemp);
+    Character currEnemy = characterRoom(charactersListtemp);
+
+    int damage = currEnemy.getDifficultylevel()-currWeapon.getDamage(); // change the amount of health the enemy has
+    currEnemy.setDifficultyLevel(damage);
+    System.out.println("You hit the "+currEnemy.getName()+"!");
+    if (currEnemy.getDifficultylevel() <= 0){
+      currEnemy.setisDead();
+      System.out.println("You killed the "+currEnemy.getName()+"!");
+    }else{
+      System.out.println("It's current health is "+currEnemy.getDifficultylevel());
+    }
+    if (currEnemy.getisDead() == false){
+      characterHealth-=currEnemy.getDamage();
+      if (characterHealth <= 0){
+        System.out.println("The "+currEnemy.getName()+" delt "+currEnemy.getDamage()+" damage to you. "+"You have died! Game Over!");
+        isFinished = true;
+      }else{
+      System.out.println("The "+currEnemy.getName()+" delt "+currEnemy.getDamage()+" damage to you, you now have "+characterHealth+" health");
+      }
+    }
+
+    }
+
+  }
 
   private void openItem(Command command) {
     ArrayList<Item> currInventory = inventory.getInventory();
@@ -263,6 +350,8 @@ public class Game {
     
 
   }
+
+  
 
   private void dropObj(Command command) {
     ArrayList<Item> currInventory = inventory.getInventory();
@@ -362,6 +451,7 @@ public class Game {
          
       
       }
+     
 
       if (numItems == 0){
 

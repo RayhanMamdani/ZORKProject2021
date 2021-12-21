@@ -8,8 +8,9 @@
     "id": "Stay Puffy",
     "name": "Stay Puffy",
     "description": "A large white monster approaches. It's round and fluffy shape resembles a child made of marshamllow. It's hat reads 'Stay Puffy.'",
-    "startingroom": "Bedroom",
-    "difficultylevel": 100
+    "startingroom": "",
+    "difficultylevel": 100,
+    "damage": 50
 
 
   
@@ -23,7 +24,8 @@
     "name":"Blue Ghost",
     "description": "A blue ghost approaches.....",
     "startingroom": "Bathroom",
-    "difficultylevel": 25
+    "difficultylevel": 25,
+    "damage": 100
 },
 
 {
@@ -31,7 +33,8 @@
     "name":"Green Ghost",
     "description": "A Green ghost approaches.....",
     "startingroom": "",
-    "difficultylevel": 50
+    "difficultylevel": 50,
+    "damage": 5
 },
 
 {
@@ -39,7 +42,8 @@
     "name":"Red Ghost",
     "description": "A red ghost approaches.....",
     "startingroom": "",
-    "difficultylevel": 75
+    "difficultylevel": 75,
+    "damage": 5
 }
 
 

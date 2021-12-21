@@ -77,4 +77,8 @@ public class Item extends OpenableObject {
     this.isOpenable = isOpenable;
   }
 
+  public int getDamage(){
+    return damage;
+  }
+
 }
