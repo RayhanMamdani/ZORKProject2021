@@ -42,6 +42,6 @@ public class Command {
    * Return true if the command has a second word.
    */
   public boolean hasSecondWord() {
-    return (secondWord != null);
+    return (secondWord != null && !secondWord.equals(""));
   }
 }
