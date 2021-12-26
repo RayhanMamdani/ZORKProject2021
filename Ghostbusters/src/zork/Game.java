@@ -6,7 +6,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
-
+//line 304 might cause errors
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -16,11 +16,11 @@ public class Game {
 
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
   public static ArrayList <Item> itemsMap = new ArrayList<Item>();
-  public static ArrayList <Character> charactersList = new ArrayList<Character>();
+  public static ArrayList <Enemy> EnemysList = new ArrayList<Enemy>();
   private Inventory inventory = new Inventory(100);
   private Parser parser;
   private Room currentRoom;
-  private int characterHealth = 100;
+  private int yourHealth = 100;
   private boolean isFinished = false;
 
   /**
@@ -30,7 +30,7 @@ public class Game {
     try {
       initRooms("src\\zork\\data\\rooms.json");
       initItems("src\\zork\\data\\items.json");
-      initCharacters("src\\zork\\data\\characters.json");
+      initEnemys("src\\zork\\data\\enemies.json");
       currentRoom = roomMap.get("Bedroom");
       
 
@@ -103,7 +103,7 @@ public class Game {
 
   
 
-  private void initCharacters(String fileName) throws Exception {
+  private void initEnemys(String fileName) throws Exception {
     Path path = Path.of(fileName);
     String jsonString = Files.readString(path);
     JSONParser parser = new JSONParser();
@@ -121,9 +121,9 @@ public class Game {
       int damage = (int) (long)((JSONObject) itemsObj).get("damage");
       //Item item = new Item(weight, name, isOpenable)
 
-     Character character = new Character(id, name, description, startingRoom, difficultyLevel, damage);
+     Enemy Enemy = new Enemy(id, name, description, startingRoom, difficultyLevel, damage);
     // roomMap.get("Bedroom");
-    charactersList.add(character);
+    EnemysList.add(Enemy);
     }
   }
 
@@ -171,13 +171,13 @@ public class Game {
     
     }
 
-    int numCharacters = numCharacters();
+    int numEnemys = numEnemys();
     int j = 0;
-    ArrayList <Character> charactersListtemp = new ArrayList <Character>();
-    formatListCharacters(charactersListtemp);
-    while (j < numCharacters){
+    ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
+    formatListEnemys(EnemysListtemp);
+    while (j < numEnemys){
 
-        System.out.println(characterRoom(charactersListtemp).getDescription());
+        System.out.println(EnemyRoom(EnemysListtemp).getDescription());
      
         j++;
     
@@ -201,10 +201,10 @@ public class Game {
     
 
     String commandWord = command.getCommandWord();
-    if (currentRoom.getRoomName().equals("Bathroom") && charactersList.get(1).getisDead() == false && !commandWord.equalsIgnoreCase("fight")){
-      System.out.println("You have to fight the "+charactersList.get(1).getName());
+    if (hastoFight(command) == false){
       return false;
     }
+  
     if (commandWord.equalsIgnoreCase("help"))
       printHelp();
     else if (commandWord.equalsIgnoreCase("go"))
@@ -232,7 +232,7 @@ public class Game {
       if (command.hasSecondWord())
         System.out.println("Quit what?");
       else
-        return true; // signal that we want to quit
+        isFinished = true; // signal that we want to quit
     } else if (commandWord.equalsIgnoreCase("eat")) {
       System.out.println("Do you really think you should be eating at a time like this?");
     }
@@ -241,6 +241,19 @@ public class Game {
 
   // implementations of user commands:
 
+  private boolean hastoFight(Command command){
+    String commandWord = command.getCommandWord();
+
+    for(Enemy temp: EnemysList){
+      if (currentRoom.getRoomName().equals(temp.getStartingroom()) && !commandWord.equalsIgnoreCase("fight")){
+        System.out.println("You have to fight the "+temp.getName());
+        return false;
+      }
+
+    }
+    return true;
+    }
+  
   
 
   private void fight(Command command) {
@@ -259,25 +272,26 @@ public class Game {
     }
     */
         if (itemName.equalsIgnoreCase("hands")){     
-          ArrayList <Character> charactersListtemp = new ArrayList <Character>();
-          formatListCharacters(charactersListtemp);
-          Character currEnemy = characterRoom(charactersListtemp);
+          ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
+          formatListEnemys(EnemysListtemp);
+          Enemy currEnemy = EnemyRoom(EnemysListtemp);
       int enemyHealth = currEnemy.getDifficultylevel()-5; // change the amount of health the enemy has
       currEnemy.setDifficultyLevel(enemyHealth);
       System.out.println("You hit the "+currEnemy.getName()+"!");
       if (currEnemy.getDifficultylevel() <= 0){
         currEnemy.setisDead();
+        EnemysList = EnemysListtemp;
         System.out.println("You killed the "+currEnemy.getName()+"!");
       }else{
         System.out.println("It's current health is "+currEnemy.getDifficultylevel());
       }
       if (currEnemy.getisDead() == false){
-        characterHealth-=currEnemy.getDamage();
-        if (characterHealth <= 0){
+        yourHealth-=currEnemy.getDamage();
+        if (yourHealth <= 0){
           System.out.println("The "+currEnemy.getName()+" delt "+currEnemy.getDamage()+" damage to you. "+"You have died! Game Over!");
           isFinished = true;
         }else{
-        System.out.println("The "+currEnemy.getName()+" delt "+currEnemy.getDamage()+" damage to you, you now have "+characterHealth+" health");
+        System.out.println("The "+currEnemy.getName()+" delt "+currEnemy.getDamage()+" damage to you, you now have "+yourHealth+" health");
         }
       }
     
@@ -291,9 +305,9 @@ return;
     }
     Item currWeapon = currInventory.get(index);
 
-    ArrayList <Character> charactersListtemp = new ArrayList <Character>();
-    formatListCharacters(charactersListtemp);
-    Character currEnemy = characterRoom(charactersListtemp);
+    ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
+    formatListEnemys(EnemysListtemp);
+    Enemy currEnemy = EnemyRoom(EnemysListtemp);
 
     int damage = currEnemy.getDifficultylevel()-currWeapon.getDamage(); // change the amount of health the enemy has
     currEnemy.setDifficultyLevel(damage);
@@ -301,16 +315,17 @@ return;
     if (currEnemy.getDifficultylevel() <= 0){
       currEnemy.setisDead();
       System.out.println("You killed the "+currEnemy.getName()+"!");
+      EnemysList = EnemysListtemp; // might be an error
     }else{
       System.out.println("It's current health is "+currEnemy.getDifficultylevel());
     }
     if (currEnemy.getisDead() == false){
-      characterHealth-=currEnemy.getDamage();
-      if (characterHealth <= 0){
+      yourHealth-=currEnemy.getDamage();
+      if (yourHealth <= 0){
         System.out.println("The "+currEnemy.getName()+" delt "+currEnemy.getDamage()+" damage to you. "+"You have died! Game Over!");
         isFinished = true;
       }else{
-      System.out.println("The "+currEnemy.getName()+" delt "+currEnemy.getDamage()+" damage to you, you now have "+characterHealth+" health");
+      System.out.println("The "+currEnemy.getName()+" delt "+currEnemy.getDamage()+" damage to you, you now have "+yourHealth+" health");
       }
     }
 
@@ -518,13 +533,13 @@ return;
         i++;
     
     }
-    int numCharacters = numCharacters();
+    int numEnemys = numEnemys();
     int j = 0;
-    ArrayList <Character> charactersListtemp = new ArrayList <Character>();
-    formatListCharacters(charactersListtemp);
-    while (j < numCharacters){
+    ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
+    formatListEnemys(EnemysListtemp);
+    while (j < numEnemys){
 
-        System.out.println(characterRoom(charactersListtemp).getDescription());
+        System.out.println(EnemyRoom(EnemysListtemp).getDescription());
      
         j++;
     
@@ -588,13 +603,13 @@ private boolean canTeleport(Command command){
         i++;
     
     }
-    int numCharacters = numCharacters();
+    int numEnemys = numEnemys();
     int j = 0;
-    ArrayList <Character> charactersListtemp = new ArrayList <Character>();
-    formatListCharacters(charactersListtemp);
-    while (j < numCharacters){
+    ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
+    formatListEnemys(EnemysListtemp);
+    while (j < numEnemys){
 
-        System.out.println(characterRoom(charactersListtemp).getDescription());
+        System.out.println(EnemyRoom(EnemysListtemp).getDescription());
      
         j++;
     
@@ -609,9 +624,9 @@ private boolean canTeleport(Command command){
     }
   }
 
-  private void formatListCharacters(ArrayList<Character> charactersList2) {
-    for (Character temp : charactersList) {
-      charactersList2.add(temp);
+  private void formatListEnemys(ArrayList<Enemy> EnemysList2) {
+    for (Enemy temp : EnemysList) {
+      EnemysList2.add(temp);
     }
   }
 
@@ -634,21 +649,21 @@ int indexocc = -1;
 
   }
 
-  private Character characterRoom(ArrayList<Character> characterListTemp){
+  private Enemy EnemyRoom(ArrayList<Enemy> EnemyListTemp){
     int counter = 0;
     int indexocc = -1;
-        Character temp = new Character();
-      for (int i = 0; i < characterListTemp.size(); i++){
+        Enemy temp = new Enemy();
+      for (int i = 0; i < EnemyListTemp.size(); i++){
          
-        if (characterListTemp.get(i).getStartingroom() != null && characterListTemp.get(i).getDescription() != null && characterListTemp.get(i).getStartingroom().equals(currentRoom.getRoomName())){
+        if (EnemyListTemp.get(i).getStartingroom() != null && EnemyListTemp.get(i).getDescription() != null && EnemyListTemp.get(i).getStartingroom().equals(currentRoom.getRoomName())){
     
-          temp = characterListTemp.get(i);
+          temp = EnemyListTemp.get(i);
           indexocc = i;
         }
        }
       if (indexocc == -1)
       return temp;
-       return characterListTemp.remove(indexocc);
+       return EnemyListTemp.remove(indexocc);
     
       }
 
@@ -668,12 +683,12 @@ int indexocc = -1;
     
       }
 
-      private int numCharacters(){
+      private int numEnemys(){
         int counter = 0;
             Item temp = new Item();
-          for (int i = 0; i < charactersList.size(); i++){
+          for (int i = 0; i < EnemysList.size(); i++){
              
-            if (charactersList.get(i).getStartingroom() != null && charactersList.get(i).getStartingroom().equals(currentRoom.getRoomName())){
+            if (EnemysList.get(i).getStartingroom() != null && EnemysList.get(i).getStartingroom().equals(currentRoom.getRoomName())){
         
               //temp = itemsMap.get(i);
               counter++;

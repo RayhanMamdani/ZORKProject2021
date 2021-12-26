@@ -1,0 +1,58 @@
+{
+
+"characters": [
+
+
+{
+
+    "id": "Stay Puffy",
+    "name": "Stay Puffy",
+    "description": "A large white monster approaches. It's round and fluffy shape resembles a child made of marshamllow. It's hat reads 'Stay Puffy.'",
+    "startingroom": "",
+    "difficultylevel": 100,
+    "damage": 50
+
+
+  
+
+
+
+},
+
+{
+    "id": "Blue Ghost",
+    "name":"Blue Ghost",
+    "description": "A blue ghost approaches.....",
+    "startingroom": "Bathroom",
+    "difficultylevel": 25,
+    "damage": 5
+},
+
+{
+    "id": "Green Ghost",
+    "name":"Green Ghost",
+    "description": "A Green ghost approaches.....",
+    "startingroom": "TopStair",
+    "difficultylevel": 50,
+    "damage": 5
+},
+
+{
+    "id": "Red Ghost",
+    "name":"Red Ghost",
+    "description": "A red ghost approaches.....",
+    "startingroom": "",
+    "difficultylevel": 75,
+    "damage": 5
+}
+
+
+
+
+]
+
+
+
+
+
+}
