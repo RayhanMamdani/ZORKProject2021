@@ -533,6 +533,7 @@ return;
         i++;
     
     }
+   
     int numEnemys = numEnemys();
     int j = 0;
     ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
@@ -664,7 +665,7 @@ int indexocc = -1;
       if (indexocc == -1)
       return temp;
        return EnemyListTemp.remove(indexocc);
-    
+  
       }
 
   private int numItems(){
