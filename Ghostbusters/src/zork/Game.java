@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
+//line 304 might cause errors
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -13,9 +15,13 @@ import org.json.simple.parser.JSONParser;
 public class Game {
 
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
-
+  public static ArrayList <Item> itemsMap = new ArrayList<Item>();
+  public static ArrayList <Enemy> EnemysList = new ArrayList<Enemy>();
+  private Inventory inventory = new Inventory(100);
   private Parser parser;
   private Room currentRoom;
+  private int yourHealth = 100;
+  private boolean isFinished = false;
 
   /**
    * Create the game and initialise its internal map.
@@ -23,7 +29,11 @@ public class Game {
   public Game() {
     try {
       initRooms("src\\zork\\data\\rooms.json");
+      initItems("src\\zork\\data\\items.json");
+      initEnemys("src\\zork\\data\\enemies.json");
       currentRoom = roomMap.get("Bedroom");
+      
+
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -62,6 +72,61 @@ public class Game {
     }
   }
 
+
+  private void initItems(String fileName) throws Exception {
+    Path path = Path.of(fileName);
+    String jsonString = Files.readString(path);
+    JSONParser parser = new JSONParser();
+    JSONObject json = (JSONObject) parser.parse(jsonString);
+
+    JSONArray jsonItems = (JSONArray) json.get("items");
+
+    for (Object itemsObj : jsonItems) {
+      
+      String itemName = (String) ((JSONObject) itemsObj).get("name");
+      String id = (String) ((JSONObject) itemsObj).get("id");
+      String startingRoom = (String) ((JSONObject) itemsObj).get("startingroom");
+      String startingItem = (String) ((JSONObject) itemsObj).get("startingitem");
+      String description = (String) ((JSONObject) itemsObj).get("description");
+      int weight = (int) (long)((JSONObject) itemsObj).get("weight");
+      int damage = (int) (long)((JSONObject) itemsObj).get("damage");
+      boolean iskey = (boolean) ((JSONObject) itemsObj).get("iskey");
+      boolean isOpenable = (boolean) ((JSONObject) itemsObj).get("isOpenable");
+      //Item item = new Item(weight, name, isOpenable)
+
+      Item item = new Item(weight, itemName,isOpenable,iskey,startingRoom, startingItem,description,damage);
+      itemsMap.add(item);
+    // roomMap.get("Bedroom");
+    }
+  }
+
+
+  
+
+  private void initEnemys(String fileName) throws Exception {
+    Path path = Path.of(fileName);
+    String jsonString = Files.readString(path);
+    JSONParser parser = new JSONParser();
+    JSONObject json = (JSONObject) parser.parse(jsonString);
+
+    JSONArray jsonItems = (JSONArray) json.get("characters");
+
+    for (Object itemsObj : jsonItems) {
+      
+      String name = (String) ((JSONObject) itemsObj).get("name");
+      String id = (String) ((JSONObject) itemsObj).get("id");
+      String startingRoom = (String) ((JSONObject) itemsObj).get("startingroom");
+      String description = (String) ((JSONObject) itemsObj).get("description");
+      int difficultyLevel = (int) (long)((JSONObject) itemsObj).get("difficultylevel");
+      int damage = (int) (long)((JSONObject) itemsObj).get("damage");
+      //Item item = new Item(weight, name, isOpenable)
+
+     Enemy Enemy = new Enemy(id, name, description, startingRoom, difficultyLevel, damage);
+    // roomMap.get("Bedroom");
+    EnemysList.add(Enemy);
+    }
+  }
+
   /**
    * Main play routine. Loops until end of play.
    */
@@ -69,7 +134,7 @@ public class Game {
     printWelcome();
 
     boolean finished = false;
-    while (!finished) {
+    while (!isFinished) {
       Command command;
       try {
         command = parser.getCommand();
@@ -92,7 +157,36 @@ public class Game {
     System.out.println("Type 'help' if you need help.");
     System.out.println();
     System.out.println(currentRoom.longDescription());
+ 
+
+    int numItems = numItems();
+    int i = 0;
+    ArrayList <Item> itemsMaptemp = new ArrayList <Item>();
+    formatList(itemsMaptemp);
+    while (i < numItems){
+
+        System.out.println(itemRoom(itemsMaptemp).getDescription());
+     
+        i++;
+    
+    }
+
+    int numEnemys = numEnemys();
+    int j = 0;
+    ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
+    formatListEnemys(EnemysListtemp);
+    while (j < numEnemys){
+
+        System.out.println(EnemyRoom(EnemysListtemp).getDescription());
+     
+        j++;
+    
+    }
+    
+    
   }
+
+ 
 
   /**
    * Given a command, process (that is: execute) the command. If this command ends
@@ -104,19 +198,42 @@ public class Game {
       return false;
     }
 
+    
+
     String commandWord = command.getCommandWord();
-    if (commandWord.equals("help"))
+    if (hastoFight(command) == false){
+      return false;
+    }
+  
+    if (commandWord.equalsIgnoreCase("help"))
       printHelp();
-    else if (commandWord.equals("go"))
+    else if (commandWord.equalsIgnoreCase("go"))
       goRoom(command);
-      else if (commandWord.equals("drive")){
+      else if (commandWord.equalsIgnoreCase("drive")){
         teleport(command);
-    }else if (commandWord.equals("quit")) {
+    }else if ((commandWord.equalsIgnoreCase("inventory"))){
+    showInventory();
+
+    }else if (commandWord.equalsIgnoreCase("open")){
+      openItem(command);
+
+
+    }else if (commandWord.equalsIgnoreCase("fight")){
+      fight(command);
+
+
+    }else if (commandWord.equalsIgnoreCase("take")){ 
+      takeObj(command);
+      
+    }else if (commandWord.equalsIgnoreCase("drop")){
+      dropObj(command);
+
+    }else if(commandWord.equalsIgnoreCase("quit")) {
       if (command.hasSecondWord())
         System.out.println("Quit what?");
       else
-        return true; // signal that we want to quit
-    } else if (commandWord.equals("eat")) {
+        isFinished = true; // signal that we want to quit
+    } else if (commandWord.equalsIgnoreCase("eat")) {
       System.out.println("Do you really think you should be eating at a time like this?");
     }
     return false;
@@ -124,25 +241,309 @@ public class Game {
 
   // implementations of user commands:
 
+  private boolean hastoFight(Command command){
+    String commandWord = command.getCommandWord();
+
+    for(Enemy temp: EnemysList){
+      if (currentRoom.getRoomName().equals(temp.getStartingroom()) && !commandWord.equalsIgnoreCase("fight")){
+        System.out.println("You have to fight the "+temp.getName());
+        return false;
+      }
+
+    }
+    return true;
+    }
+  
   
 
+  private void fight(Command command) {
+    String itemName = command.getSecondWord();
+    if (!command.hasSecondWord()){
+      System.out.println("Fight With What?");
+      System.out.println("You can fight with: ");
+      printArr(inventory.getInventory());
+      System.out.print("Your Hands");
+      System.out.println();
+      return;
+    }
+
+/** 
+   
+    }
+    */
+        if (itemName.equalsIgnoreCase("hands")){     
+          ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
+          formatListEnemys(EnemysListtemp);
+          Enemy currEnemy = EnemyRoom(EnemysListtemp);
+      int enemyHealth = currEnemy.getDifficultylevel()-5; // change the amount of health the enemy has
+      currEnemy.setDifficultyLevel(enemyHealth);
+      System.out.println("You hit the "+currEnemy.getName()+"!");
+      if (currEnemy.getDifficultylevel() <= 0){
+        currEnemy.setisDead();
+        EnemysList = EnemysListtemp;
+        System.out.println("You killed the "+currEnemy.getName()+"!");
+      }else{
+        System.out.println("It's current health is "+currEnemy.getDifficultylevel());
+      }
+      if (currEnemy.getisDead() == false){
+        yourHealth-=currEnemy.getDamage();
+        if (yourHealth <= 0){
+          System.out.println("The "+currEnemy.getName()+" delt "+currEnemy.getDamage()+" damage to you. "+"You have died! Game Over!");
+          isFinished = true;
+        }else{
+        System.out.println("The "+currEnemy.getName()+" delt "+currEnemy.getDamage()+" damage to you, you now have "+yourHealth+" health");
+        }
+      }
+    
+    }else{
+    ArrayList<Item> currInventory = inventory.getInventory();
+    int index = getremoveObjIndex(itemName, currInventory);
+    if (index == -1 && !itemName.equalsIgnoreCase("Hands")){
+  
+      System.out.println("You don't have that item in your inventory!");
+return;
+    }
+    Item currWeapon = currInventory.get(index);
+
+    ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
+    formatListEnemys(EnemysListtemp);
+    Enemy currEnemy = EnemyRoom(EnemysListtemp);
+
+    int damage = currEnemy.getDifficultylevel()-currWeapon.getDamage(); // change the amount of health the enemy has
+    currEnemy.setDifficultyLevel(damage);
+    System.out.println("You hit the "+currEnemy.getName()+"!");
+    if (currEnemy.getDifficultylevel() <= 0){
+      currEnemy.setisDead();
+      System.out.println("You killed the "+currEnemy.getName()+"!");
+      EnemysList = EnemysListtemp; // might be an error
+    }else{
+      System.out.println("It's current health is "+currEnemy.getDifficultylevel());
+    }
+    if (currEnemy.getisDead() == false){
+      yourHealth-=currEnemy.getDamage();
+      if (yourHealth <= 0){
+        System.out.println("The "+currEnemy.getName()+" delt "+currEnemy.getDamage()+" damage to you. "+"You have died! Game Over!");
+        isFinished = true;
+      }else{
+      System.out.println("The "+currEnemy.getName()+" delt "+currEnemy.getDamage()+" damage to you, you now have "+yourHealth+" health");
+      }
+    }
+
+    }
+
+  }
+
+  private void openItem(Command command) {
+    ArrayList<Item> currInventory = inventory.getInventory();
+    if (!command.hasSecondWord()){
+      System.out.println("Open What?");
+      return;
+    }
+    String currRoomName = currentRoom.getRoomName();
+    String secondWord = command.getSecondWord().toLowerCase();
+    Item itemToOpen = null;
+    for (Item item : itemsMap){ //could make more efficient with a for loop (or using break (but i hate using break))
+      if (item.startingRoom()!=null && item.startingRoom().equals(currRoomName) && secondWord.equals((item.getName().toLowerCase()))){
+        itemToOpen = item;
+      }
+    }
+    if (!itemToOpen.isOpenable()){
+      System.out.println(itemToOpen.getName()+" is not openable.");
+      return;
+    }
+    if (!itemToOpen.isLocked()){
+      itemToOpen.setOpen(true);
+      System.out.println(itemToOpen.getName()+" is open.");
+      return;
+    }
+    //IMPLEMENT IF THE ITEM IS LOCKED (CHECK IS THEY HAVE THE RIGHT KEY IN THEIR INVENTORY)
+    // for (Item item : currInventory){
+    //   if (item.isKey()){
+        
+    //   }
+    // }
+    
+
+  }
+
+  
+
+  private void dropObj(Command command) {
+    ArrayList<Item> currInventory = inventory.getInventory();
+    if (!command.hasSecondWord()) {
+      // if there is no second word, we don't know where to drive...
+      System.out.println("Drop What?");
+      
+      return;
+    }else if(currInventory.size() == 0){
+
+      System.out.println("There is nothing to drop!");
+    }else if (command.getSecondWord().equalsIgnoreCase("all")){
+     
+     removeallItems(currInventory);
+    }else if (command.hasSecondWord()){
+
+  String itemName = command.getSecondWord();
+      int index = getremoveObjIndex(itemName, currInventory);
+
+      if (index != -1){
+        Item temp = currInventory.remove(index);
+
+        temp.setStartingRoom(currentRoom.getRoomName());
+        itemsMap.add(temp);
+        System.out.println("You have dropped the "+temp.getName());
+
+      }else{
+
+        System.out.println("You don't have that object in your inventory!");
+      }
+
+    }
+  }
+
+  private int getremoveObjIndex(String itemName, ArrayList<Item> currInventory) {
+  
+    for (int i = 0; i < currInventory.size(); i++) {
+      if (currInventory.get(i).getName().toLowerCase().indexOf(itemName.toLowerCase()) >= 0){
+        return i;
+      }
+      i++;
+    }
+    return -1;
+  }
+
+  private void removeallItems(ArrayList<Item> currInventory) {
+    for (int i = 0; i < currInventory.size(); i++) {
+      
+      Item temp = currInventory.remove(i);
+
+      temp.setStartingRoom(currentRoom.getRoomName());
+      itemsMap.add(temp);
+      System.out.println("You have dropped the "+temp.getName());
+    }
+
+  }
+
+  private void showInventory() {
+
+    printArr(inventory.getInventory());
+  }
+
+  private void printArr(ArrayList<Item> arrayList){
+   for (Item i : arrayList){
+    System.out.println(i.getName());
+
+   }
+
+  }
+
+  private void takeObj(Command command) {
+
+    if (!command.hasSecondWord()) {
+      // if there is no second word, we don't know where to drive...
+      System.out.println("Take What?");
+      
+
+      
+      return;
+    }else if (command.getSecondWord().equalsIgnoreCase("all")){
+      int numItems = numItems();
+      int i = 0;
+      ArrayList <Item> itemsMaptemp = new ArrayList <Item>();
+      formatList(itemsMaptemp);
+
+
+      while (i < numItems){
+        
+          Item temp = itemRoom(itemsMaptemp);
+          if (inventory.addItem(temp)){
+            System.out.println(temp.getName()+" "+"added!");
+            itemsMap.remove(getremoveIndex(temp.getName()));
+          }
+
+          i++;
+       
+         
+      
+      }
+     
+
+      if (numItems == 0){
+
+        System.out.println("There are no items to take!");
+      }
+    }else if (command.hasSecondWord()){
+
+      String itemName = command.getSecondWord();
+      int index = getremoveIndex(itemName);
+
+     if (index != -1 && inventory.addItem(itemsMap.get(index))){
+            System.out.println("Item added!");
+            itemsMap.remove(index);
+          }else{
+
+            System.out.println("You cannot add that item!");
+          }
+    }
+
+  }
+
+  private int getremoveIndex(String temp){
+  int index = -1;
+    for (int i = 0; i < itemsMap.size(); i++) {
+      
+      if (itemsMap.get(i).getName().toLowerCase().indexOf(temp.toLowerCase()) >= 0 && itemsMap.get(i).startingRoom().equals(currentRoom.getRoomName())){
+
+     index = i;
+
+      }
+
+
+  }
+
+  return index;
+  }
   private void teleport(Command command) {
     if (!command.hasSecondWord()) {
       // if there is no second word, we don't know where to drive...
       System.out.println("Drive Where?");
-      if (canTeleport(command)){
-        System.out.println("You can drive from the Garage, Reception, Lobby and Concierge");
+      
+        System.out.println("You can drive from the Garage, Reception, Abandoned House Foyer and Concierge");
 
-      }//
+      
       return;
     }
     String direction = command.getSecondWord();
 
     if (canTeleport(command)){
 
-    currentRoom = roomMap.get(direction);
+    currentRoom = roomMap.get(format(direction));
+
 
     System.out.println(currentRoom.longDescription());
+    
+    int numItems = numItems();
+    int i = 0;
+    ArrayList <Item> itemsMaptemp = new ArrayList <Item>();
+    formatList(itemsMaptemp);
+    while (i < numItems){
+
+        System.out.println(itemRoom(itemsMaptemp).getDescription());
+     
+        i++;
+    
+    }
+    int numEnemys = numEnemys();
+    int j = 0;
+    ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
+    formatListEnemys(EnemysListtemp);
+    while (j < numEnemys){
+
+        System.out.println(EnemyRoom(EnemysListtemp).getDescription());
+     
+        j++;
+    
+    }
 
   }else{
 
@@ -152,8 +553,8 @@ public class Game {
 
 private boolean canTeleport(Command command){
   String direction = command.getSecondWord();
-    return (currentRoom.getRoomName().equals("Garage") || currentRoom.getRoomName().equals("Reception")|| currentRoom.getRoomName().equals("Lobby") || direction.equals("Concierge")) 
-    && (direction.equals("Garage") || direction.equals("Reception")|| direction.equals("Lobby") || direction.equals("Concierge"));
+    return (currentRoom.getRoomName().equalsIgnoreCase("Garage") || currentRoom.getRoomName().equalsIgnoreCase("Reception")|| currentRoom.getRoomName().equalsIgnoreCase("abandoned house") || currentRoom.getRoomName().equalsIgnoreCase("Concierge")) 
+    && (direction.equalsIgnoreCase("Garage") || direction.equalsIgnoreCase("Reception")|| direction.equalsIgnoreCase("abandoned house") || direction.equalsIgnoreCase("Concierge"));
 }
 
   /**
@@ -189,6 +590,122 @@ private boolean canTeleport(Command command){
     else {
       currentRoom = nextRoom;
       System.out.println(currentRoom.longDescription());
+
+     
+    int numItems = numItems();
+    int i = 0;
+    ArrayList <Item> itemsMaptemp = new ArrayList <Item>();
+    formatList(itemsMaptemp);
+    while (i < numItems){
+
+        System.out.println(itemRoom(itemsMaptemp).getDescription());
+     
+        i++;
+    
+    }
+    int numEnemys = numEnemys();
+    int j = 0;
+    ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
+    formatListEnemys(EnemysListtemp);
+    while (j < numEnemys){
+
+        System.out.println(EnemyRoom(EnemysListtemp).getDescription());
+     
+        j++;
+    
     }
   }
+  }
+
+
+  private void formatList(ArrayList<Item> itemsMaptemp) {
+    for (Item temp : itemsMap) {
+      itemsMaptemp.add(temp);
+    }
+  }
+
+  private void formatListEnemys(ArrayList<Enemy> EnemysList2) {
+    for (Enemy temp : EnemysList) {
+      EnemysList2.add(temp);
+    }
+  }
+
+  
+  private Item itemRoom(ArrayList<Item> itemsMaptemp){
+int counter = 0;
+int indexocc = -1;
+    Item temp = new Item();
+  for (int i = 0; i < itemsMaptemp.size(); i++){
+     
+    if (itemsMaptemp.get(i).startingRoom() != null && itemsMaptemp.get(i).getDescription() != null && itemsMaptemp.get(i).startingRoom().equals(currentRoom.getRoomName())){
+
+      temp = itemsMaptemp.get(i);
+      indexocc = i;
+    }
+   }
+  if (indexocc == -1)
+  return temp;
+   return itemsMaptemp.remove(indexocc);
+
+  }
+
+  private Enemy EnemyRoom(ArrayList<Enemy> EnemyListTemp){
+    int counter = 0;
+    int indexocc = -1;
+        Enemy temp = new Enemy();
+      for (int i = 0; i < EnemyListTemp.size(); i++){
+         
+        if (EnemyListTemp.get(i).getStartingroom() != null && EnemyListTemp.get(i).getDescription() != null && EnemyListTemp.get(i).getStartingroom().equals(currentRoom.getRoomName())){
+    
+          temp = EnemyListTemp.get(i);
+          indexocc = i;
+        }
+       }
+      if (indexocc == -1)
+      return temp;
+       return EnemyListTemp.remove(indexocc);
+    
+      }
+
+  private int numItems(){
+    int counter = 0;
+        Item temp = new Item();
+      for (int i = 0; i < itemsMap.size(); i++){
+         
+        if (itemsMap.get(i).startingRoom() != null && itemsMap.get(i).startingRoom().equals(currentRoom.getRoomName())){
+    
+          //temp = itemsMap.get(i);
+          counter++;
+        }
+       }
+    
+       return counter;
+    
+      }
+
+      private int numEnemys(){
+        int counter = 0;
+            Item temp = new Item();
+          for (int i = 0; i < EnemysList.size(); i++){
+             
+            if (EnemysList.get(i).getStartingroom() != null && EnemysList.get(i).getStartingroom().equals(currentRoom.getRoomName())){
+        
+              //temp = itemsMap.get(i);
+              counter++;
+            }
+           }
+        
+           return counter;
+        
+          }
+
+  
+
+  private String format(String str){
+
+    return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+
+  }
+
+
 }

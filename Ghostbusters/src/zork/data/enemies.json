@@ -25,14 +25,14 @@
     "description": "A blue ghost approaches.....",
     "startingroom": "Bathroom",
     "difficultylevel": 25,
-    "damage": 100
+    "damage": 5
 },
 
 {
     "id": "Green Ghost",
     "name":"Green Ghost",
     "description": "A Green ghost approaches.....",
-    "startingroom": "",
+    "startingroom": "TopStair",
     "difficultylevel": 50,
     "damage": 5
 },

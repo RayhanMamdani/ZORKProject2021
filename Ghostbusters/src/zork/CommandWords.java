@@ -3,7 +3,7 @@ package zork;
 public class CommandWords {
   // a constant array that holds all valid command words
   private static final String validCommands[] = { "north", "east", "south", "west", "quit", "look", "take", "open",
-      "close", "drop", "unlock", "cut", "down", "jump", "shoot", "use", "go","drive"};
+      "close", "drop", "unlock", "cut", "down", "jump", "shoot", "use", "go","drive","inventory","fight"};
 
   /**
    * Check whether a given String is a valid command word. Return true if it is,
@@ -11,7 +11,7 @@ public class CommandWords {
    **/
   public boolean isCommand(String aString) {
     for (String c : validCommands) {
-      if (c.equals(aString))
+      if (c.equalsIgnoreCase(aString))
         return true;
     }
     // if we get here, the string was not found in the commands
@@ -26,5 +26,9 @@ public class CommandWords {
       System.out.print(c + "  ");
     }
     System.out.println();
+  }
+
+  public String[] getCommands() {
+    return validCommands;
   }
 }
