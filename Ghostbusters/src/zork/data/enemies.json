@@ -23,7 +23,7 @@
 {
     "id": "Blue Ghost",
     "name":"Blue Ghost",
-    "description": "A blue ghost approaches.....",
+    "description": "A ghost approaches. It's blue hue highlights strange features.",
     "startingroom": "Bathroom",
     "difficultylevel": 25,
     "damage": 5
@@ -32,7 +32,7 @@
 {
     "id": "Green Ghost",
     "name":"Green Ghost",
-    "description": "A Green ghost approaches.....",
+    "description": "A ghost approaches. It's green skin stands out brightly from the dull room.",
     "startingroom": "TopStair",
     "difficultylevel": 50,
     "damage": 5
@@ -41,7 +41,7 @@
 {
     "id": "Red Ghost",
     "name":"Red Ghost",
-    "description": "A red ghost approaches.....",
+    "description": "A ghost approaches. It's red glow seems just as angry as it's monstrous face.",
     "startingroom": "",
     "difficultylevel": 75,
     "damage": 5
