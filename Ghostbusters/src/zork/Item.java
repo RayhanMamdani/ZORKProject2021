@@ -11,6 +11,7 @@ public class Item extends OpenableObject {
   private boolean isKey;
 
 
+
   public Item(int weight, String name, boolean isOpenable) {
     this.weight = weight;
     this.name = name;
@@ -31,6 +32,7 @@ public class Item extends OpenableObject {
     this.isKey = isKey;
     this.description = description;
     this.damage = damage;
+    
   }
 
   public void open() {
@@ -80,5 +82,10 @@ public class Item extends OpenableObject {
   public int getDamage(){
     return damage;
   }
+  public String getStartingItem(){
+    return startingitem;
+  }
+
+  
 
 }
