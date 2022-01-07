@@ -258,6 +258,7 @@ public class Game {
 
   private void fight(Command command) {
     String itemName = command.getSecondWord();
+   
     if (!command.hasSecondWord()){
       System.out.println("Fight With What?");
       System.out.println("You can fight with: ");
@@ -275,6 +276,11 @@ public class Game {
           ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
           formatListEnemys(EnemysListtemp);
           Enemy currEnemy = EnemyRoom(EnemysListtemp);
+          if (currEnemy.getName() == null){
+            System.out.print("There are no enemies to fight!");
+            System.out.println();
+            return;
+          }
       int enemyHealth = currEnemy.getDifficultylevel()-5; // change the amount of health the enemy has
       currEnemy.setDifficultyLevel(enemyHealth);
       System.out.println("You hit the "+currEnemy.getName()+"!");
@@ -308,7 +314,11 @@ return;
     ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
     formatListEnemys(EnemysListtemp);
     Enemy currEnemy = EnemyRoom(EnemysListtemp);
-
+    if (currEnemy.getName() == null){
+      System.out.print("There are no enemies to fight!");
+      System.out.println();
+      return;
+    }
     int damage = currEnemy.getDifficultylevel()-currWeapon.getDamage(); // change the amount of health the enemy has
     currEnemy.setDifficultyLevel(damage);
     System.out.println("You hit the "+currEnemy.getName()+"!");
