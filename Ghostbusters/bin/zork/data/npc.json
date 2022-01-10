@@ -1,0 +1,34 @@
+{
+
+
+"npc": [
+
+
+{
+
+    "id": "Winston",
+    "name": "Winston",
+    "description": "",
+    "startingroom": "OfficeBasement",
+    "dialogue": ""
+
+},
+
+{
+    "id": "Louis",
+    "name":"Louis",
+    "description": "",
+    "startingroom": "OfficeBasement",
+    "dialogue": ""
+}
+
+
+
+
+]
+
+
+
+
+
+}
