@@ -17,16 +17,20 @@ import org.json.simple.parser.JSONParser;
 import java.io.Serializable;
 
 
-public class Game {
+public class Game implements Serializable{
 
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
   public static ArrayList <Item> itemsMap = new ArrayList<Item>();
-  public static ArrayList <Enemy> EnemysList = new ArrayList<Enemy>();
+  public static ArrayList <Enemy> EnemiesList = new ArrayList<Enemy>();
   private Inventory inventory = new Inventory(100);
   private Parser parser;
   private Room currentRoom;
   private int yourHealth = 100;
   private boolean isFinished = false;
+  
+  for (int i = 0; i<8; i++){
+
+  }
 
   /**
    * Create the game and initialise its internal map.
@@ -35,7 +39,7 @@ public class Game {
     try {
       initRooms("src\\zork\\data\\rooms.json");
       initItems("src\\zork\\data\\items.json");
-      initEnemys("src\\zork\\data\\enemies.json");
+      initEnemies("src\\zork\\data\\enemies.json");
       currentRoom = roomMap.get("Bedroom");
       
 
@@ -108,7 +112,7 @@ public class Game {
 
   
 
-  private void initEnemys(String fileName) throws Exception {
+  private void initEnemies(String fileName) throws Exception {
     Path path = Path.of(fileName);
     String jsonString = Files.readString(path);
     JSONParser parser = new JSONParser();
@@ -128,7 +132,7 @@ public class Game {
 
      Enemy Enemy = new Enemy(id, name, description, startingRoom, difficultyLevel, damage);
     // roomMap.get("Bedroom");
-    EnemysList.add(Enemy);
+    EnemiesList.add(Enemy);
     }
   }
 
@@ -178,11 +182,11 @@ public class Game {
 
     int numEnemies = numEnemies();
     int j = 0;
-    ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
-    formatListEnemys(EnemysListtemp);
+    ArrayList <Enemy> EnemiesListtemp = new ArrayList <Enemy>();
+    formatListEnemies(EnemiesListtemp);
     while (j < numEnemies){
 
-        System.out.println(EnemyRoom(EnemysListtemp).getDescription());
+        System.out.println(EnemyRoom(EnemiesListtemp).getDescription());
      
         j++;
     
@@ -249,7 +253,7 @@ public class Game {
   private boolean hastoFight(Command command){
     String commandWord = command.getCommandWord();
 
-    for(Enemy temp: EnemysList){
+    for(Enemy temp: EnemiesList){
       if (currentRoom.getRoomName().equals(temp.getStartingroom()) && !commandWord.equalsIgnoreCase("fight")){
         System.out.println("You have to fight the "+temp.getName());
         return false;
@@ -278,9 +282,9 @@ public class Game {
     }
     */
         if (itemName.equalsIgnoreCase("hands")){     
-          ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
-          formatListEnemys(EnemysListtemp);
-          Enemy currEnemy = EnemyRoom(EnemysListtemp);
+          ArrayList <Enemy> EnemiesListtemp = new ArrayList <Enemy>();
+          formatListEnemies(EnemiesListtemp);
+          Enemy currEnemy = EnemyRoom(EnemiesListtemp);
           if (currEnemy.getName() == null){
             System.out.print("There are no enemies to fight!");
             System.out.println();
@@ -291,7 +295,7 @@ public class Game {
       System.out.println("You hit the "+currEnemy.getName()+"!");
       if (currEnemy.getDifficultylevel() <= 0){
         currEnemy.setisDead();
-        EnemysList = EnemysListtemp;
+        EnemiesList = EnemiesListtemp;
         System.out.println("You killed the "+currEnemy.getName()+"!");
       }else{
         System.out.println("It's current health is "+currEnemy.getDifficultylevel());
@@ -316,9 +320,9 @@ return;
     }
     Item currWeapon = currInventory.get(index);
 
-    ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
-    formatListEnemys(EnemysListtemp);
-    Enemy currEnemy = EnemyRoom(EnemysListtemp);
+    ArrayList <Enemy> EnemiesListtemp = new ArrayList <Enemy>();
+    formatListEnemies(EnemiesListtemp);
+    Enemy currEnemy = EnemyRoom(EnemiesListtemp);
     if (currEnemy.getName() == null){
       System.out.print("There are no enemies to fight!");
       System.out.println();
@@ -330,7 +334,7 @@ return;
     if (currEnemy.getDifficultylevel() <= 0){
       currEnemy.setisDead();
       System.out.println("You killed the "+currEnemy.getName()+"!");
-      EnemysList = EnemysListtemp; // might be an error
+      EnemiesList = EnemiesListtemp; // might be an error
     }else{
       System.out.println("It's current health is "+currEnemy.getDifficultylevel());
     }
@@ -587,11 +591,11 @@ return;
    
     int numEnemies = numEnemies();
     int j = 0;
-    ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
-    formatListEnemys(EnemysListtemp);
+    ArrayList <Enemy> EnemiesListtemp = new ArrayList <Enemy>();
+    formatListEnemies(EnemiesListtemp);
     while (j < numEnemies){
 
-        System.out.println(EnemyRoom(EnemysListtemp).getDescription());
+        System.out.println(EnemyRoom(EnemiesListtemp).getDescription());
      
         j++;
     
@@ -657,11 +661,11 @@ private boolean canTeleport(Command command){
     }
     int numEnemies = numEnemies();
     int j = 0;
-    ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
-    formatListEnemys(EnemysListtemp);
+    ArrayList <Enemy> EnemiesListtemp = new ArrayList <Enemy>();
+    formatListEnemies(EnemiesListtemp);
     while (j < numEnemies){
 
-        System.out.println(EnemyRoom(EnemysListtemp).getDescription());
+        System.out.println(EnemyRoom(EnemiesListtemp).getDescription());
      
         j++;
     
@@ -676,9 +680,9 @@ private boolean canTeleport(Command command){
     }
   }
 
-  private void formatListEnemys(ArrayList<Enemy> EnemysList2) {
-    for (Enemy temp : EnemysList) {
-      EnemysList2.add(temp);
+  private void formatListEnemies(ArrayList<Enemy> EnemiesList2) {
+    for (Enemy temp : EnemiesList) {
+      EnemiesList2.add(temp);
     }
   }
 
@@ -738,9 +742,9 @@ int indexocc = -1;
       private int numEnemies(){
         int counter = 0;
             Item temp = new Item();
-          for (int i = 0; i < EnemysList.size(); i++){
+          for (int i = 0; i < EnemiesList.size(); i++){
              
-            if (EnemysList.get(i).getStartingroom() != null && EnemysList.get(i).getStartingroom().equals(currentRoom.getRoomName())){
+            if (EnemiesList.get(i).getStartingroom() != null && EnemiesList.get(i).getStartingroom().equals(currentRoom.getRoomName())){
         
               //temp = itemsMap.get(i);
               counter++;
@@ -787,6 +791,22 @@ int indexocc = -1;
       c.printStackTrace();
       return;
     }
+    roomMap = (HashMap)open.get(0);
+    itemsMap = (ArrayList<Item>)open.get(1);
+    EnemiesList = (ArrayList<Enemy>)open.get(2);
+    inventory = (Inventory)open.get(3);
+    parser = (Parser)open.get(4);
+    currentRoom = (Room)open.get(5);
+
+    }
+    /*public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
+    public static ArrayList <Item> itemsMap = new ArrayList<Item>();
+    public static ArrayList <Enemy> EnemiesList = new ArrayList<Enemy>();
+    private Inventory inventory = new Inventory(100);
+    private Parser parser;
+    private Room currentRoom;
+    private int yourHealth = 100;
+    private boolean isFinished = false;*/
     //obj name = (objcast)open.get(num);
   }
 
