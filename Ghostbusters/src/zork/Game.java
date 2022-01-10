@@ -258,6 +258,7 @@ public class Game {
 
   private void fight(Command command) {
     String itemName = command.getSecondWord();
+   
     if (!command.hasSecondWord()){
       System.out.println("Fight With What?");
       System.out.println("You can fight with: ");
@@ -275,6 +276,11 @@ public class Game {
           ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
           formatListEnemys(EnemysListtemp);
           Enemy currEnemy = EnemyRoom(EnemysListtemp);
+          if (currEnemy.getName() == null){
+            System.out.print("There are no enemies to fight!");
+            System.out.println();
+            return;
+          }
       int enemyHealth = currEnemy.getDifficultylevel()-5; // change the amount of health the enemy has
       currEnemy.setDifficultyLevel(enemyHealth);
       System.out.println("You hit the "+currEnemy.getName()+"!");
@@ -308,7 +314,11 @@ return;
     ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
     formatListEnemys(EnemysListtemp);
     Enemy currEnemy = EnemyRoom(EnemysListtemp);
-
+    if (currEnemy.getName() == null){
+      System.out.print("There are no enemies to fight!");
+      System.out.println();
+      return;
+    }
     int damage = currEnemy.getDifficultylevel()-currWeapon.getDamage(); // change the amount of health the enemy has
     currEnemy.setDifficultyLevel(damage);
     System.out.println("You hit the "+currEnemy.getName()+"!");
@@ -334,7 +344,6 @@ return;
   }
 
   private void openItem(Command command) {
-    ArrayList<Item> currInventory = inventory.getInventory();
     if (!command.hasSecondWord()){
       System.out.println("Open What?");
       return;
@@ -346,6 +355,10 @@ return;
       if (item.startingRoom()!=null && item.startingRoom().equals(currRoomName) && secondWord.equals((item.getName().toLowerCase()))){
         itemToOpen = item;
       }
+    }
+    if (itemToOpen == null){
+      System.out.println("You cannot open " + secondWord);
+      return;
     }
     if (!itemToOpen.isOpenable()){
       System.out.println(itemToOpen.getName()+" is not openable.");
@@ -447,6 +460,26 @@ return;
       
       return;
     }else if (command.getSecondWord().equalsIgnoreCase("all")){
+
+      boolean noOpenableObjects = true;
+      
+      for (int i = 0; i<itemsMap.size(); i++){
+        Item item = itemsMap.get(i);
+        
+        if (item.getStartingItem() != null && parentIsValid(item,currentRoom)){
+          if (inventory.addItem(item)){
+            noOpenableObjects=false;
+            
+            System.out.println(item.getName()+ " added!");  
+
+            itemsMap.remove(item); //could add arraylist to support multiple openables
+   
+          }
+          
+        }
+        
+      }
+
       int numItems = numItems();
       int i = 0;
       ArrayList <Item> itemsMaptemp = new ArrayList <Item>();
@@ -468,13 +501,16 @@ return;
       }
      
 
-      if (numItems == 0){
+      if (numItems == 0 && noOpenableObjects){
 
         System.out.println("There are no items to take!");
       }
+
     }else if (command.hasSecondWord()){
 
       String itemName = command.getSecondWord();
+
+
       int index = getremoveIndex(itemName);
 
      if (index != -1 && inventory.addItem(itemsMap.get(index))){
@@ -488,11 +524,21 @@ return;
 
   }
 
+  private boolean parentIsValid(Item childItem,Room room) {
+    String itemName = childItem.getStartingItem().toLowerCase();
+    for (Item item : itemsMap) {
+      if(itemName.equals((item.getName().toLowerCase()))&&room.getRoomName().toLowerCase().equals(item.startingRoom().toLowerCase())){
+        return item.isOpen();
+      }
+    }
+    return false;
+  }
+
   private int getremoveIndex(String temp){
   int index = -1;
     for (int i = 0; i < itemsMap.size(); i++) {
       
-      if (itemsMap.get(i).getName().toLowerCase().indexOf(temp.toLowerCase()) >= 0 && itemsMap.get(i).startingRoom().equals(currentRoom.getRoomName())){
+      if (itemsMap.get(i).getName().toLowerCase().indexOf(temp.toLowerCase()) >= 0 && (itemsMap.get(i).startingRoom().equals(currentRoom.getRoomName()) || (itemsMap.get(i).getStartingItem()!=null&&parentIsValid(itemsMap.get(i), currentRoom)) )){
 
      index = i;
 
@@ -673,7 +719,7 @@ int indexocc = -1;
         Item temp = new Item();
       for (int i = 0; i < itemsMap.size(); i++){
          
-        if (itemsMap.get(i).startingRoom() != null && itemsMap.get(i).startingRoom().equals(currentRoom.getRoomName())){
+        if (itemsMap.get(i).startingRoom() != null && itemsMap.get(i).startingRoom().equals(currentRoom.getRoomName())&&!itemsMap.get(i).isOpenable()){
     
           //temp = itemsMap.get(i);
           counter++;
