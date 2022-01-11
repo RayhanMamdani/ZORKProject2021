@@ -10,7 +10,7 @@
           "direction": "East",
           "adjacentRoom": "Bedroom"
           
-        }
+        } 
       ] 
     }, 
     {
@@ -120,7 +120,7 @@
 
       "id": "OfficeKitchen",
       "name":"Kitchen",
-      "description": "You are in the kitchen",
+      "description": "This is a kitchen. A fridge sits adjacent to a table and chairs. A microwave lies atop the counter and under the cuboards.",
       "exits": [
         {
           "isLocked": false,
@@ -137,7 +137,7 @@
 
       "id": "Reception",
       "name":"Reception",
-      "description": "This is a kitchen. A microwave lies atop the counter and under the cuboards. A table and chair sits adjacent to the fridge.",
+      "description": "This is a reception. An empty desk contains a mess of stationaries that have been not been organized in a long time. ",
       "exits": [
         {
           "isLocked": false,
@@ -197,9 +197,9 @@
     },
     {
 
-      "id": "Basement",
+      "id": "OfficeBasement",
       "name":"Basement",
-      "description": "",
+      "description": "This is a basement. Boxes lie stacked in the corner, shadowed by the dark lighting.",
       "exits": [
         {
           "isLocked": false,
@@ -215,7 +215,135 @@
       ]
 
 
+    },
+    {
+
+      "id": "Concierge",
+      "name":"Concierge",
+      "description": "This is a hotel lobby. Several concierges sit behind a desk checking in various guests.",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "MailRoom"
+        },
+        {
+          "isLocked": false,
+          "direction": "South",
+          "adjacentRoom": "HotelRooms"
+        }
+
+        
+  
+      ]
+
+
+    },
+    {
+
+      "id": "MailRoom",
+      "name":"Mail Room",
+      "description": "This is a mail room. Stacks of unorgaized packages are scattered around.",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "West",
+          "adjacentRoom": "Concierge"
+        }
+
+        
+  
+      ]
+
+
     }
+    ,
+    {
+
+      "id": "HotelRooms",
+      "name":"Hotel Rooms",
+      "description": "This is a hallway. Doors to each room line the walls.",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "South",
+          "adjacentRoom": "HotelRoom1"
+        },
+        {
+          "isLocked": false,
+          "direction": "North",
+          "adjacentRoom": "Concierge"
+        }
+
+        
+  
+      ]
+
+
+    },
+    {
+
+      "id": "HotelRoom1",
+      "name":"Room One",
+      "description": "This is a hotel room. A couch sits before a tv on the wall. A table sits near the entrance and doors lie on each adjacent wall.",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "North",
+          "adjacentRoom": "HotelRooms"
+        },
+        {
+          "isLocked": false,
+          "direction": "West",
+          "adjacentRoom": "HotelBedRoom"
+        },
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "HotelWashRoom"
+        }
+
+
+        
+  
+      ]
+
+
+    },
+    {
+
+      "id": "HotelBedRoom",
+      "name":"Bedroom",
+      "description": "This is a bedroom. A bed and several furnishings fill the room and a large window replaces the outer wall.",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "HotelRoom1"
+        }
+      
+      ]
+
+
+    },
+    {
+
+      "id": "HotelWashRoom",
+      "name":"Washroom",
+      "description": "This is a washroom. A sink, shower, and mirror occupy the room. Various toiletries are on a rack below the sink.",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "West",
+          "adjacentRoom": "HotelRoom1"
+        }
+      
+      ]
+
+
+    }
+
+
 
     
 
