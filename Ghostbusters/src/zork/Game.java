@@ -3,6 +3,7 @@ package zork;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InvalidClassException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
@@ -771,7 +772,7 @@ int indexocc = -1;
       out.writeObject(data);
       out.close();
       fileOut.close();
-      System.out.println("Data saved in data.ser");
+      System.out.println("Data saved in data.ser")
     }catch(IOException i){
       i.printStackTrace();
     }
@@ -785,6 +786,8 @@ int indexocc = -1;
       open = (ArrayList<Object>)in.readObject();
       in.close();
       fileIn.close();
+    }catch(InvalidClassException e){
+      e.printStackTrace();
     }catch(IOException i){
       i.printStackTrace();
     }catch(ClassNotFoundException c){
