@@ -41,11 +41,10 @@ public class Game {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    parser = new Parser();
+    parser = new Parser(); 
   }
 
   private void initNpcs(String filePath) throws IOException, ParseException {
-    ArrayList <Character> npcList = new ArrayList<>();
     Path path = Path.of(filePath);
     String jsonString = Files.readString(path);
     JSONParser parser = new JSONParser();
