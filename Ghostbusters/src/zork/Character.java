@@ -5,17 +5,17 @@ public class Character {
     private String name;
     private String description;
     private String startingroom;
-    private int difficultylevel;
-    private int damage;
-    private boolean isDead = false;
 
-    public Character(String id, String name, String description, String startingroom, int difficultylevel, int damage){
+    private boolean isDead = false;
+    private String dialogue;
+
+    public Character(String id, String name, String description, String startingroom, String dialogue){
         this.id = id;
         this.name = name;
         this.description=description;
         this.startingroom=startingroom;
-        this.difficultylevel=difficultylevel;
-        this.damage = damage;
+        this.dialogue=dialogue;
+
     }
 
     public Character (){
@@ -25,9 +25,7 @@ public class Character {
     public String getId(){
         return id;
     }
-    public int getDamage(){
-        return damage;
-    }
+
     public void setisDead(){
 
         isDead = true;
@@ -46,11 +44,8 @@ public class Character {
     public String getStartingroom(){
         return startingroom;
     }
-    public int getDifficultylevel(){
-        return difficultylevel;
+    public String getDialogue(){
+        return dialogue;
     }
-    public void setDifficultyLevel(int level){
-        difficultylevel = level;
-    }
-    
+
 }

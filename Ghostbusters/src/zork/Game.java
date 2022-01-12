@@ -1,6 +1,10 @@
 package zork;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -10,6 +14,8 @@ import java.util.Objects;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+import java.io.Serializable;
 
 
 public class Game {
@@ -29,17 +35,43 @@ public class Game {
   public Game() {
     try {
       initRooms("src\\zork\\data\\rooms.json");
+      initNpcs("src\\zork\\data\\npc.json");
       initItems("src\\zork\\data\\items.json");
       initEnemys("src\\zork\\data\\enemies.json");
+      
       currentRoom = roomMap.get("Bedroom");
+      
       
 
     } catch (Exception e) {
       e.printStackTrace();
     }
-    parser = new Parser();
+    parser = new Parser(); 
   }
 
+  private void initNpcs(String filePath) throws IOException, ParseException {
+    Path path = Path.of(filePath);
+    String jsonString = Files.readString(path);
+    JSONParser parser = new JSONParser();
+    JSONObject json = (JSONObject) parser.parse(jsonString);
+
+    JSONArray jsonRooms = (JSONArray) json.get("npc");
+    for (Object roomObj : jsonRooms) {
+      String id = (String) ((JSONObject) roomObj).get("id");
+      String name = (String) ((JSONObject) roomObj).get("name");
+      String description = (String) ((JSONObject) roomObj).get("description");
+      String startingRoom = (String) ((JSONObject) roomObj).get("startingroom");
+      String dialogue = (String) ((JSONObject) roomObj).get("dialogue");
+
+      roomMap.get(startingRoom).setCharacter(new Character(id, name, description, startingRoom, dialogue));
+    }
+
+    
+
+
+  }
+
+ 
   private void initRooms(String fileName) throws Exception {
     Path path = Path.of(fileName);
     String jsonString = Files.readString(path);
@@ -71,6 +103,8 @@ public class Game {
       roomMap.put(roomId, room);
     }
   }
+
+
 
 
   private void initItems(String fileName) throws Exception {
@@ -134,6 +168,10 @@ public class Game {
     printWelcome();
 
     boolean finished = false;
+    if (currentRoom.hasNpc()){
+      System.out.println(currentRoom.getNpc().getDialogue());
+    }
+    
     while (!isFinished) {
       Command command;
       try {
@@ -171,11 +209,11 @@ public class Game {
     
     }
 
-    int numEnemys = numEnemys();
+    int numEnemies = numEnemies();
     int j = 0;
     ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
     formatListEnemys(EnemysListtemp);
-    while (j < numEnemys){
+    while (j < numEnemies){
 
         System.out.println(EnemyRoom(EnemysListtemp).getDescription());
      
@@ -209,8 +247,8 @@ public class Game {
       printHelp();
     else if (commandWord.equalsIgnoreCase("go"))
       goRoom(command);
-      else if (commandWord.equalsIgnoreCase("drive")){
-        teleport(command);
+    else if (commandWord.equalsIgnoreCase("drive")){
+      teleport(command);
     }else if ((commandWord.equalsIgnoreCase("inventory"))){
     showInventory();
 
@@ -567,6 +605,10 @@ return;
 
 
     System.out.println(currentRoom.longDescription());
+
+    if (currentRoom.hasNpc()){ 
+      System.out.println(currentRoom.getNpc().getDialogue()); // if there is a character print their dialog
+    }
     
     int numItems = numItems();
     int i = 0;
@@ -580,11 +622,11 @@ return;
     
     }
    
-    int numEnemys = numEnemys();
+    int numEnemies = numEnemies();
     int j = 0;
     ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
     formatListEnemys(EnemysListtemp);
-    while (j < numEnemys){
+    while (j < numEnemies){
 
         System.out.println(EnemyRoom(EnemysListtemp).getDescription());
      
@@ -637,6 +679,9 @@ private boolean canTeleport(Command command){
     else {
       currentRoom = nextRoom;
       System.out.println(currentRoom.longDescription());
+      if (currentRoom.hasNpc()){
+        System.out.println(currentRoom.getNpc().getDialogue());
+      }
 
      
     int numItems = numItems();
@@ -650,11 +695,11 @@ private boolean canTeleport(Command command){
         i++;
     
     }
-    int numEnemys = numEnemys();
+    int numEnemies = numEnemies();
     int j = 0;
     ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
     formatListEnemys(EnemysListtemp);
-    while (j < numEnemys){
+    while (j < numEnemies){
 
         System.out.println(EnemyRoom(EnemysListtemp).getDescription());
      
@@ -730,7 +775,7 @@ int indexocc = -1;
     
       }
 
-      private int numEnemys(){
+      private int numEnemies(){
         int counter = 0;
             Item temp = new Item();
           for (int i = 0; i < EnemysList.size(); i++){
@@ -753,6 +798,36 @@ int indexocc = -1;
     return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
 
   }
+  public void save(){
+    ArrayList<Object> data = new ArrayList<Object>();
+    
+    try{
+      FileOutputStream fileOut = new FileOutputStream("data.ser");
+      ObjectOutputStream out = new ObjectOutputStream(fileOut);
+      out.writeObject(data);
+      out.close();
+      fileOut.close();
+      System.out.println("Data saved in data.ser");
+    }catch(IOException i){
+      i.printStackTrace();
+    }
+  }
 
+  public void load(){
+    ArrayList<Object> open = new ArrayList<Object>();
+    try{
+      FileInputStream fileIn = new FileInputStream("data.ser");
+      ObjectInputStream in = new ObjectInputStream(fileIn);
+      open = (ArrayList<Object>)in.readObject();
+      in.close();
+      fileIn.close();
+    }catch(IOException i){
+      i.printStackTrace();
+    }catch(ClassNotFoundException c){
+      c.printStackTrace();
+      return;
+    }
+    //obj name = (objcast)open.get(num);
+  }
 
 }
