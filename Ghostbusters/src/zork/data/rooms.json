@@ -199,7 +199,7 @@
 
       "id": "OfficeBasement",
       "name":"Basement",
-      "description": "",
+      "description": "This is a basement. Boxes lie stacked in the corner, shadowed by the dark lighting.",
       "exits": [
         {
           "isLocked": false,
@@ -220,7 +220,7 @@
 
       "id": "Concierge",
       "name":"Concierge",
-      "description": "",
+      "description": "This is a hotel lobby. Several concierges sit behind a desk checking in various guests.",
       "exits": [
         {
           "isLocked": false,
@@ -243,7 +243,7 @@
 
       "id": "MailRoom",
       "name":"Mail Room",
-      "description": "",
+      "description": "This is a mail room. Stacks of unorgaized packages are scattered around.",
       "exits": [
         {
           "isLocked": false,
@@ -262,7 +262,7 @@
 
       "id": "HotelRooms",
       "name":"Hotel Rooms",
-      "description": "",
+      "description": "This is a hallway. Doors to each room line the walls.",
       "exits": [
         {
           "isLocked": false,
@@ -285,7 +285,7 @@
 
       "id": "HotelRoom1",
       "name":"Room One",
-      "description": "",
+      "description": "This is a hotel room. A couch sits before a tv on the wall. A table sits near the entrance and doors lie on each adjacent wall.",
       "exits": [
         {
           "isLocked": false,
@@ -314,7 +314,7 @@
 
       "id": "HotelBedRoom",
       "name":"Bedroom",
-      "description": "",
+      "description": "This is a bedroom. A bed and several furnishings fill the room and a large window replaces the outer wall.",
       "exits": [
         {
           "isLocked": false,
@@ -330,7 +330,7 @@
 
       "id": "HotelWashRoom",
       "name":"Washroom",
-      "description": "",
+      "description": "This is a washroom. A sink, shower, and mirror occupy the room. Various toiletries are on a rack below the sink.",
       "exits": [
         {
           "isLocked": false,
@@ -341,11 +341,345 @@
       ]
 
 
+    },
+    {
+
+      "id": "Lobby",
+      "name":"Abandoned House Lobby",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "North",
+          "adjacentRoom": "Foyer"
+        }
+      
+      ]
+
+
+    },
+    {
+
+      "id": "Foyer",
+      "name":"Foyer",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "North",
+          "adjacentRoom": "Lounge"
+        },
+        {
+          "isLocked": false,
+          "direction": "West",
+          "adjacentRoom": "AHKitchen"
+        },
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "AHBottomStairs"
+        },
+        {
+          "isLocked": false,
+          "direction": "South",
+          "adjacentRoom": "Lobby"
+        }
+
+
+        
+  
+      ]
+
+
+    },
+    {
+
+      "id": "AHKitchen",
+      "name":"Kitchen",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "North",
+          "adjacentRoom": "DiningRoomWest"
+        },
+        {
+          "isLocked": false,
+          "direction": "West",
+          "adjacentRoom": "Foyer"
+        }
+        
+  
+      ]
+
+
+    },
+    {
+
+      "id": "DiningRoomWest",
+      "name":"Dining Room",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "DiningRoomEast"
+        },
+        {
+          "isLocked": false,
+          "direction": "South",
+          "adjacentRoom": "AHKitchen"
+        }
+
+
+        
+  
+      ]
+
+
+    },
+    {
+
+      "id": "DiningRoomEast",
+      "name": "Dining Room",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "AHBathroom"
+        },
+        {
+          "isLocked": false,
+          "direction": "West",
+          "adjacentRoom": "DiningRoomWest"
+        },
+        {
+          "isLocked": false,
+          "direction": "South",
+          "adjacentRoom": "Foyer"
+        }
+
+
+        
+  
+      ]
+
+
+    },
+    {
+
+      "id": "AHBathroom",
+      "name": "Bathroom",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "Lounge"
+        }
+        
+        
+  
+      ]
+
+
+    },
+    {
+
+      "id": "AHBottomStairs",
+      "name":"Stairs",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "AHBottomStairs"
+        },
+        {
+          "isLocked": false,
+          "direction": "Up",
+          "adjacentRoom": "AHTopStairs"
+        }
+
+
+        
+  
+      ]
+
+
+    },
+    {
+
+      "id": "AHTopStairs",
+      "name":"Stairs",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "West",
+          "adjacentRoom": "AHHallway"
+        },
+        {
+          "isLocked": false,
+          "direction": "Down",
+          "adjacentRoom": "AHBottomStairs"
+        }
+
+        
+  
+      ]
+
+
+    },
+    {
+
+      "id": "AHHallway",
+      "name":"Hallway",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "North",
+          "adjacentRoom": "Study"
+        },
+        {
+          "isLocked": false,
+          "direction": "West",
+          "adjacentRoom": "AHBedroom"
+        },
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "AHTopStairs"
+        }
+
+
+        
+  
+      ]
+
+
+    },
+    {
+
+      "id": "AHBedroom",
+      "name":"Bedroom",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "North",
+          "adjacentRoom": "AHBathroom2"
+        },
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "AHHallway"
+        }
+
+
+        
+  
+      ]
+
+
+    },
+    {
+
+      "id": "AHBathroom2",
+      "name":"Bathroom",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "Study"
+        },
+        {
+          "isLocked": false,
+          "direction": "South",
+          "adjacentRoom": "AHBedroom"
+        }
+
+
+        
+  
+      ]
+
+
+    },
+    {
+
+      "id": "Study",
+      "name":"Study",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "West",
+          "adjacentRoom": "AHBottomLadder"
+        },
+        {
+          "isLocked": false,
+          "direction": "East",
+          "adjacentRoom": "AHBathroom2"
+        },
+        {
+          "isLocked": false,
+          "direction": "South",
+          "adjacentRoom": "AHHallway"
+        }
+
+
+        
+  
+      ]
+
+
+    },
+    {
+
+      "id": "AHBottomLadder",
+      "name": "Storage Room",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "West",
+          "adjacentRoom": "Study"
+        },
+        {
+          "isLocked": false,
+          "direction": "Up",
+          "adjacentRoom": "AHTopLadder"
+        }
+
+
+        
+  
+      ]
+
+
+    },
+    {
+      "id": "AHTopLadder",
+      "name": "Attic",
+      "description": "",
+      "exits": [
+        {
+          "isLocked": false,
+          "direction": "Down",
+          "adjacentRoom": "AHBottomLadder"
+        }
+
+
+        
+  
+      ]
+
+
     }
-
-
-
-    
 
     
   ]

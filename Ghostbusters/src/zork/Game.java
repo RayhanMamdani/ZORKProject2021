@@ -1,6 +1,10 @@
 package zork;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -11,6 +15,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import java.io.Serializable;
 
 
 public class Game {
@@ -204,11 +209,11 @@ public class Game {
     
     }
 
-    int numEnemys = numEnemys();
+    int numEnemies = numEnemies();
     int j = 0;
     ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
     formatListEnemys(EnemysListtemp);
-    while (j < numEnemys){
+    while (j < numEnemies){
 
         System.out.println(EnemyRoom(EnemysListtemp).getDescription());
      
@@ -617,11 +622,11 @@ return;
     
     }
    
-    int numEnemys = numEnemys();
+    int numEnemies = numEnemies();
     int j = 0;
     ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
     formatListEnemys(EnemysListtemp);
-    while (j < numEnemys){
+    while (j < numEnemies){
 
         System.out.println(EnemyRoom(EnemysListtemp).getDescription());
      
@@ -690,11 +695,11 @@ private boolean canTeleport(Command command){
         i++;
     
     }
-    int numEnemys = numEnemys();
+    int numEnemies = numEnemies();
     int j = 0;
     ArrayList <Enemy> EnemysListtemp = new ArrayList <Enemy>();
     formatListEnemys(EnemysListtemp);
-    while (j < numEnemys){
+    while (j < numEnemies){
 
         System.out.println(EnemyRoom(EnemysListtemp).getDescription());
      
@@ -770,7 +775,7 @@ int indexocc = -1;
     
       }
 
-      private int numEnemys(){
+      private int numEnemies(){
         int counter = 0;
             Item temp = new Item();
           for (int i = 0; i < EnemysList.size(); i++){
@@ -793,6 +798,36 @@ int indexocc = -1;
     return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
 
   }
+  public void save(){
+    ArrayList<Object> data = new ArrayList<Object>();
+    
+    try{
+      FileOutputStream fileOut = new FileOutputStream("data.ser");
+      ObjectOutputStream out = new ObjectOutputStream(fileOut);
+      out.writeObject(data);
+      out.close();
+      fileOut.close();
+      System.out.println("Data saved in data.ser");
+    }catch(IOException i){
+      i.printStackTrace();
+    }
+  }
 
+  public void load(){
+    ArrayList<Object> open = new ArrayList<Object>();
+    try{
+      FileInputStream fileIn = new FileInputStream("data.ser");
+      ObjectInputStream in = new ObjectInputStream(fileIn);
+      open = (ArrayList<Object>)in.readObject();
+      in.close();
+      fileIn.close();
+    }catch(IOException i){
+      i.printStackTrace();
+    }catch(ClassNotFoundException c){
+      c.printStackTrace();
+      return;
+    }
+    //obj name = (objcast)open.get(num);
+  }
 
 }
