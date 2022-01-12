@@ -183,7 +183,7 @@
         {
           "isLocked": false,
           "direction": "South",
-          "adjacentRoom": "Basement"
+          "adjacentRoom": "OfficeBasement"
         },
         {
           "isLocked": false,

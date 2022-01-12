@@ -7,6 +7,7 @@ public class Room {
   private String roomName;
   private String description;
   private ArrayList<Exit> exits;
+  private Character npc;
 
   public ArrayList<Exit> getExits() {
     return exits;
@@ -14,6 +15,17 @@ public class Room {
 
   public void setExits(ArrayList<Exit> exits) {
     this.exits = exits;
+  }
+  public Character getNpc(){
+    return npc;
+
+  }
+  public void setCharacter(Character character){
+    npc = character;
+  }
+  public boolean hasNpc(){
+    return npc!=null;
+
   }
 
   /**

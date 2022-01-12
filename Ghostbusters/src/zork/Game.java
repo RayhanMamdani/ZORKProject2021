@@ -10,6 +10,7 @@ import java.util.Objects;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 
 public class Game {
@@ -29,9 +30,12 @@ public class Game {
   public Game() {
     try {
       initRooms("src\\zork\\data\\rooms.json");
+      initNpcs("src\\zork\\data\\npc.json");
       initItems("src\\zork\\data\\items.json");
       initEnemys("src\\zork\\data\\enemies.json");
+      
       currentRoom = roomMap.get("Bedroom");
+      
       
 
     } catch (Exception e) {
@@ -40,6 +44,30 @@ public class Game {
     parser = new Parser();
   }
 
+  private void initNpcs(String filePath) throws IOException, ParseException {
+    ArrayList <Character> npcList = new ArrayList<>();
+    Path path = Path.of(filePath);
+    String jsonString = Files.readString(path);
+    JSONParser parser = new JSONParser();
+    JSONObject json = (JSONObject) parser.parse(jsonString);
+
+    JSONArray jsonRooms = (JSONArray) json.get("npc");
+    for (Object roomObj : jsonRooms) {
+      String id = (String) ((JSONObject) roomObj).get("id");
+      String name = (String) ((JSONObject) roomObj).get("name");
+      String description = (String) ((JSONObject) roomObj).get("description");
+      String startingRoom = (String) ((JSONObject) roomObj).get("startingroom");
+      String dialogue = (String) ((JSONObject) roomObj).get("dialogue");
+
+      roomMap.get(startingRoom).setCharacter(new Character(id, name, description, startingRoom, dialogue));
+    }
+
+    
+
+
+  }
+
+ 
   private void initRooms(String fileName) throws Exception {
     Path path = Path.of(fileName);
     String jsonString = Files.readString(path);
@@ -71,6 +99,8 @@ public class Game {
       roomMap.put(roomId, room);
     }
   }
+
+
 
 
   private void initItems(String fileName) throws Exception {
@@ -134,6 +164,10 @@ public class Game {
     printWelcome();
 
     boolean finished = false;
+    if (currentRoom.hasNpc()){
+      System.out.println(currentRoom.getNpc().getDialogue());
+    }
+    
     while (!isFinished) {
       Command command;
       try {
@@ -209,8 +243,8 @@ public class Game {
       printHelp();
     else if (commandWord.equalsIgnoreCase("go"))
       goRoom(command);
-      else if (commandWord.equalsIgnoreCase("drive")){
-        teleport(command);
+    else if (commandWord.equalsIgnoreCase("drive")){
+      teleport(command);
     }else if ((commandWord.equalsIgnoreCase("inventory"))){
     showInventory();
 
@@ -567,6 +601,10 @@ return;
 
 
     System.out.println(currentRoom.longDescription());
+
+    if (currentRoom.hasNpc()){ 
+      System.out.println(currentRoom.getNpc().getDialogue()); // if there is a character print their dialog
+    }
     
     int numItems = numItems();
     int i = 0;
@@ -637,6 +675,9 @@ private boolean canTeleport(Command command){
     else {
       currentRoom = nextRoom;
       System.out.println(currentRoom.longDescription());
+      if (currentRoom.hasNpc()){
+        System.out.println(currentRoom.getNpc().getDialogue());
+      }
 
      
     int numItems = numItems();
