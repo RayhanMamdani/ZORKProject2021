@@ -18,4 +18,28 @@ public class save implements Serializable{
         health = Health;
         finish = finished;
     }
+    public HashMap<String, Room> getRmap(){
+        return rMap;
+    }
+    public ArrayList<Item> getImap(){
+        return iMap;
+    }
+    public ArrayList<Enemy> getElist(){
+        return eList;
+    }
+    public Inventory getInv(){
+        return inv;
+    }
+    public Parser getPar(){
+        return par;
+    }
+    public Room getCuRoom(){
+        return curRoom;
+    }
+    public int getHealth(){
+        return health;
+    }
+    public boolean getFin() {
+        return finish;
+    }
 }

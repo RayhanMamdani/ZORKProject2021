@@ -804,7 +804,7 @@ int indexocc = -1;
 
   }
   public void save(){
-    ArrayList<Object> data = new ArrayList<Object>();
+    save data = new save(roomMap, itemsMap, EnemiesList, inventory, parser, currentRoom, yourHealth, isFinished);
     
     try{
       FileOutputStream fileOut = new FileOutputStream("data.ser");
@@ -834,23 +834,17 @@ int indexocc = -1;
       c.printStackTrace();
       return;
     }
-    roomMap = (HashMap)open.get(0);
-    itemsMap = (ArrayList<Item>)open.get(1);
-    EnemiesList = (ArrayList<Enemy>)open.get(2);
-    inventory = (Inventory)open.get(3);
-    parser = (Parser)open.get(4);
-    currentRoom = (Room)open.get(5);
+    roomMap = save.getRmap;
+    itemsMap = save.getImap;
+    EnemiesList = save.getElist;
+    inventory = save.getInv;
+    parser = save.getPar;
+    currentRoom = save.getCuRoom;
+    yourHealth = save.getHealth;
+    isFinished = save.getFin;
 
     }
-    /*public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
-    public static ArrayList <Item> itemsMap = new ArrayList<Item>();
-    public static ArrayList <Enemy> EnemiesList = new ArrayList<Enemy>();
-    private Inventory inventory = new Inventory(100);
-    private Parser parser;
-    private Room currentRoom;
-    private int yourHealth = 100;
-    private boolean isFinished = false;*/
-    //obj name = (objcast)open.get(num);
+
   }
 
 }
