@@ -27,7 +27,7 @@
 
             "id": "Vaccum",
             "name": "Vaccum",
-            "description": "This is old vaccum. It's loud and clunky, you should really buy a new one.",
+            "description": "This is an old vacuum. It's loud and clunky, you should really buy a new one.",
             "weight": 10,
             "damage": 25,
             "startingroom": "",
@@ -50,7 +50,7 @@
         {
             "id": "Rope",
             "name": "Rope",
-            "description": "This is a coarse bundle of rope. It's length is immeseruable and it seems to go on for infinity.",
+            "description": "This is a coarse bundle of rope. It's length is immeseruable and seems to go on for infinity.",
             "weight": 5,
             "damage": 30,
             "startingroom": "OfficeBasementEast",
@@ -72,7 +72,7 @@
         {
             "id": "Key2",
             "name": "Office Key",
-            "description": "This is a key to your office. 'I <3 polymorphisim' is engraved on the side. ",
+            "description": "This is a key to your office. 'I <3 polymorphism' is engraved on the side. ",
             "weight": 1,
             "damage": 0,
             "startingroom": "OfficeBasementWest",
@@ -83,7 +83,7 @@
         {
             "id": "Key3",
             "name": "Abandoned House Key",
-            "description": "This is an old key. It seems much older than any of your other ones and rust is starting to develop on the ends.",
+            "description": "This is an old key. It seems much old and has rust on the edges.",
             "weight": 1,
             "damage": 0,
             "startingroom": "OfficeBasement",

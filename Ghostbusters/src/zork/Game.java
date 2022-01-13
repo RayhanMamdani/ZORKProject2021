@@ -42,7 +42,7 @@ public class Game implements Serializable{
       initRooms("src\\zork\\data\\rooms.json");
       initNpcs("src\\zork\\data\\npc.json");
       initItems("src\\zork\\data\\items.json");
-      initEnemys("src\\zork\\data\\enemies.json");
+      initEnemies("src\\zork\\data\\enemies.json");
       
       currentRoom = roomMap.get("Bedroom");
       
