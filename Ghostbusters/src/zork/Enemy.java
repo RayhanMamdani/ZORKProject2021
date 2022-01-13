@@ -1,4 +1,5 @@
 package zork;
+import java.io.Serializable;
 
 public class Enemy {
     private String id;

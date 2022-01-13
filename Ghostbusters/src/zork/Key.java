@@ -1,5 +1,6 @@
 package zork;
 
+import java.io.Serializable;
 public class Key extends Item {
   private String keyId;
 

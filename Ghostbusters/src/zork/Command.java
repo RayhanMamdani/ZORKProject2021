@@ -1,5 +1,5 @@
 package zork;
-
+import java.io.Serializable;
 public class Command {
   private String commandWord;
   private String secondWord;

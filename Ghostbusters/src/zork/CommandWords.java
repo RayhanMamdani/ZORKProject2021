@@ -1,5 +1,5 @@
 package zork;
-
+import java.io.Serializable;
 public class CommandWords {
   // a constant array that holds all valid command words
   private static final String validCommands[] = { "north", "east", "south", "west", "quit", "look", "take", "open",

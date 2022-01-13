@@ -3,6 +3,7 @@ package zork;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.io.Serializable;
 
 public class Parser {
   private CommandWords commands; // holds all valid command words

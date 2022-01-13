@@ -1,6 +1,7 @@
 package zork;
 
 import java.util.ArrayList;
+import java.io.Serializable;
 
 public class Inventory {
   private ArrayList<Item> items;

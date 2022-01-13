@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.Serializable;
 
 public class Zork {
   public static void main(String[] args) {

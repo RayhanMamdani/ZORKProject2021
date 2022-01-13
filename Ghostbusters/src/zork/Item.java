@@ -1,5 +1,6 @@
 package zork;
 
+import java.io.Serializable;
 public class Item extends OpenableObject {
   private int weight;
   private int damage;

@@ -1,5 +1,5 @@
 package zork;
-
+import java.io.Serializable;
 public class Character {
     private String id;
     private String name;
