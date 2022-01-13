@@ -642,7 +642,7 @@
 
       "id": "AHBottomLadder",
       "name": "Storage Room",
-      "description": "",
+      "description": "This is a ladder. It's old and weathered but sturdy enough to use.",
       "exits": [
         {
           "isLocked": false,
@@ -665,7 +665,7 @@
     {
       "id": "AHTopLadder",
       "name": "Attic",
-      "description": "",
+      "description": "This is an attic. There are a few boxes and other miscellaneous items. The amount of dirt and dust makes it hard to breathe.",
       "exits": [
         {
           "isLocked": false,
