@@ -1,5 +1,6 @@
 package zork;
 
+import java.io.Serializable;
 /**
  * Exit
  */

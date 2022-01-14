@@ -10,14 +10,14 @@
     "name": "Winston",
     "description": "",
     "startingroom": "OfficeBasement",
-    "dialogue": ""
+    "dialogue": "Hey thanks for freeing us, I can't believe that we actually got caught. There's still ghosts around so you better find a weapon. Maybe you'll find something in the hotel? I know theres a key to it somewhere around here."
 
 },
 
 {
     "id": "Louis",
     "name":"Louis",
-    "description": "",
+    "description": "Thanks for the rescue! You better stay alert though, we've had sightings of Stay Puft by the abandoned house down the road. We'd go with you but we're too beat up after that capture. Good luck!",
     "startingroom": "OfficeBasement",
     "dialogue": ""
 }

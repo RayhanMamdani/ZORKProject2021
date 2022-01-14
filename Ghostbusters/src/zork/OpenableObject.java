@@ -1,5 +1,6 @@
 package zork;
 
+import java.io.Serializable;
 public class OpenableObject {
   private Boolean isLocked;
   private String keyId;

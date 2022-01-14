@@ -346,7 +346,7 @@
 
       "id": "Lobby",
       "name":"Abandoned House Lobby",
-      "description": "",
+      "description": "This is the entrance of a house. Various shoes are scattered around. A collapsed shoe rack lies over a small bench.",
       "exits": [
         {
           "isLocked": false,
@@ -362,7 +362,7 @@
 
       "id": "Foyer",
       "name":"Foyer",
-      "description": "",
+      "description": "This is a foyer. Several decorations have fallen from their place and hanged photos have been incased in dust.",
       "exits": [
         {
           "isLocked": false,
@@ -396,7 +396,7 @@
 
       "id": "AHKitchen",
       "name":"Kitchen",
-      "description": "",
+      "description": "This is a kitchen. The counter has been covered in dirt and unused plates. The other appliances are all in a similar state of disarray.",
       "exits": [
         {
           "isLocked": false,
@@ -418,7 +418,7 @@
 
       "id": "DiningRoomWest",
       "name":"Dining Room",
-      "description": "",
+      "description": "This is a dining room. The table and chairs have clearly not used in a long time.",
       "exits": [
         {
           "isLocked": false,
@@ -442,7 +442,7 @@
 
       "id": "DiningRoomEast",
       "name": "Dining Room",
-      "description": "",
+      "description": "This is a dining room. The wallpaper has degraded and decorations on the table have been cloaked in dust. ",
       "exits": [
         {
           "isLocked": false,
@@ -471,7 +471,7 @@
 
       "id": "AHBathroom",
       "name": "Bathroom",
-      "description": "",
+      "description": "This is a bathroom. The wood of the drawers has begun to decay, the mirror is so dusty that it's no longer usable.",
       "exits": [
         {
           "isLocked": false,
@@ -489,7 +489,7 @@
 
       "id": "AHBottomStairs",
       "name":"Stairs",
-      "description": "",
+      "description": "This is the bottom of the stairs. No where to go but up.",
       "exits": [
         {
           "isLocked": false,
@@ -513,7 +513,7 @@
 
       "id": "AHTopStairs",
       "name":"Stairs",
-      "description": "",
+      "description": "This is the top of the stairs. Your feet have left obvious marks in the carpet of dust.",
       "exits": [
         {
           "isLocked": false,
@@ -536,7 +536,7 @@
 
       "id": "AHHallway",
       "name":"Hallway",
-      "description": "",
+      "description": "This is a hallway. Vague photos of a family furnish the walls.",
       "exits": [
         {
           "isLocked": false,
@@ -565,7 +565,7 @@
 
       "id": "AHBedroom",
       "name":"Bedroom",
-      "description": "",
+      "description": "This is a bedroom. A large bed sits at the back of the room. Light from the window reveals several furnishings set around the room.",
       "exits": [
         {
           "isLocked": false,
@@ -589,7 +589,7 @@
 
       "id": "AHBathroom2",
       "name":"Bathroom",
-      "description": "",
+      "description": "This is a bathroom. The bathtub and sink have stained and several webs decorate the room.",
       "exits": [
         {
           "isLocked": false,
@@ -613,7 +613,7 @@
 
       "id": "Study",
       "name":"Study",
-      "description": "",
+      "description": "This is a study. Papers lie scattered on a desk. Small amounts of colour stickout from the many books on the shelves.",
       "exits": [
         {
           "isLocked": false,
@@ -642,7 +642,7 @@
 
       "id": "AHBottomLadder",
       "name": "Storage Room",
-      "description": "",
+      "description": "This is a ladder. It's old and weathered but sturdy enough to use.",
       "exits": [
         {
           "isLocked": false,
@@ -665,7 +665,7 @@
     {
       "id": "AHTopLadder",
       "name": "Attic",
-      "description": "",
+      "description": "This is an attic. There are a few boxes and other miscellaneous items. The amount of dirt and dust makes it hard to breathe.",
       "exits": [
         {
           "isLocked": false,
