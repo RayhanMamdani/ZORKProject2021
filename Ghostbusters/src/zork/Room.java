@@ -3,7 +3,7 @@ package zork;
 import java.util.ArrayList;
 import java.io.Serializable;
 
-public class Room {
+public class Room implements Serializable{
 
   private String roomName;
   private String description;

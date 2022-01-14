@@ -19,20 +19,19 @@ import org.json.simple.parser.ParseException;
 
 
 
-public class Game implements Serializable{
+public class Game {
 
+  private static final String SAVE_FILE = "src\\zork\\data\\data1.ser";
   public static HashMap<String, Room> roomMap = new HashMap<String, Room>();
   public static ArrayList <Item> itemsMap = new ArrayList<Item>();
   public static ArrayList <Enemy> EnemiesList = new ArrayList<Enemy>();
   private Inventory inventory = new Inventory(100);
   private Parser parser;
   private Room currentRoom;
-  private int yourHealth = 100;
+  private Integer yourHealth = 100;
   private boolean isFinished = false;
   
-  for (int i = 0; i<8; i++){
 
-  }
 
   /**
    * Create the game and initialise its internal map.
@@ -274,6 +273,12 @@ public class Game implements Serializable{
     }else if (commandWord.equalsIgnoreCase("drop")){
       dropObj(command);
 
+    }else if (commandWord.equalsIgnoreCase("save")){
+      save();
+
+    }else if (commandWord.equalsIgnoreCase("load")){
+
+      load();
     }else if (commandWord.equalsIgnoreCase("look")){
 
       int numItems = numItems();
@@ -826,26 +831,26 @@ int indexocc = -1;
 
   }
   public void save(){
-    save data = new save(roomMap, itemsMap, EnemiesList, inventory, parser, currentRoom, yourHealth, isFinished);
+    Save data = new Save(roomMap, itemsMap, EnemiesList, inventory,currentRoom, yourHealth);
     
     try{
-      FileOutputStream fileOut = new FileOutputStream("data.ser");
+      FileOutputStream fileOut = new FileOutputStream(SAVE_FILE);
       ObjectOutputStream out = new ObjectOutputStream(fileOut);
       out.writeObject(data);
       out.close();
       fileOut.close();
-      System.out.println("Data saved in data.ser")
+      System.out.println("Data saved in data.ser");
     }catch(IOException i){
       i.printStackTrace();
     }
   }
 
   public void load(){
-    ArrayList<Object> open = new ArrayList<Object>();
+  Save save = null;
     try{
-      FileInputStream fileIn = new FileInputStream("data.ser");
+      FileInputStream fileIn = new FileInputStream(SAVE_FILE);
       ObjectInputStream in = new ObjectInputStream(fileIn);
-      open = (ArrayList<Object>)in.readObject();
+      save = (Save)in.readObject();
       in.close();
       fileIn.close();
     }catch(InvalidClassException e){
@@ -856,17 +861,15 @@ int indexocc = -1;
       c.printStackTrace();
       return;
     }
-    roomMap = save.getRmap;
-    itemsMap = save.getImap;
-    EnemiesList = save.getElist;
-    inventory = save.getInv;
-    parser = save.getPar;
-    currentRoom = save.getCuRoom;
-    yourHealth = save.getHealth;
-    isFinished = save.getFin;
-
+    roomMap = save.getRmap();
+    itemsMap = save.getImap();
+    EnemiesList = save.getElist();
+    inventory = save.getInv();
+    currentRoom = save.getCuRoom();
+    yourHealth = save.getHealth();
+    System.out.println("Game has succesfully loaded");
+    System.out.println(currentRoom.longDescription());
     }
 
   }
 
-}

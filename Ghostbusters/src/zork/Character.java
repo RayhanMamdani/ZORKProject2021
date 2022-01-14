@@ -1,6 +1,6 @@
 package zork;
 import java.io.Serializable;
-public class Character {
+public class Character implements Serializable {
     private String id;
     private String name;
     private String description;

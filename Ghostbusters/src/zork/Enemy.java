@@ -1,7 +1,7 @@
 package zork;
 import java.io.Serializable;
 
-public class Enemy {
+public class Enemy implements Serializable {
     private String id;
     private String name;
     private String description;

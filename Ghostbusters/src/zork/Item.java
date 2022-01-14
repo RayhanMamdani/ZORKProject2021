@@ -1,7 +1,7 @@
 package zork;
 
 import java.io.Serializable;
-public class Item extends OpenableObject {
+public class Item extends OpenableObject implements Serializable {
   private int weight;
   private int damage;
   private String name;
