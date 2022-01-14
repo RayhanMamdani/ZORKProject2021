@@ -247,6 +247,9 @@ public class Game {
       printHelp();
     else if (commandWord.equalsIgnoreCase("go"))
       goRoom(command);
+      else if (commandWord.equalsIgnoreCase("west") || commandWord.equalsIgnoreCase("east") || commandWord.equalsIgnoreCase("south") || commandWord.equalsIgnoreCase("north") || commandWord.equals("down") || commandWord.equals("up")){
+        goRoom(command);
+      }
     else if (commandWord.equalsIgnoreCase("drive")){
       teleport(command);
     }else if ((commandWord.equalsIgnoreCase("inventory"))){
@@ -266,6 +269,19 @@ public class Game {
     }else if (commandWord.equalsIgnoreCase("drop")){
       dropObj(command);
 
+    }else if (commandWord.equalsIgnoreCase("look")){
+
+      int numItems = numItems();
+    int i = 0;
+    ArrayList <Item> itemsMaptemp = new ArrayList <Item>();
+    formatList(itemsMaptemp);
+    while (i < numItems){
+
+        System.out.println(itemRoom(itemsMaptemp).getDescription());
+     
+        i++;
+    
+    }
     }else if(commandWord.equalsIgnoreCase("quit")) {
       if (command.hasSecondWord())
         System.out.println("Quit what?");
@@ -455,10 +471,10 @@ return;
   private int getremoveObjIndex(String itemName, ArrayList<Item> currInventory) {
   
     for (int i = 0; i < currInventory.size(); i++) {
-      if (currInventory.get(i).getName().toLowerCase().indexOf(itemName.toLowerCase()) >= 0){
+      if (currInventory.get(i).getName().toLowerCase().replaceAll("\\s+","").indexOf(itemName.toLowerCase()) >= 0){
         return i;
       }
-      i++;
+ 
     }
     return -1;
   }
@@ -592,7 +608,7 @@ return;
       // if there is no second word, we don't know where to drive...
       System.out.println("Drive Where?");
       
-        System.out.println("You can drive from the Garage, Reception, Abandoned House Foyer and Concierge");
+        System.out.println("You can drive from the Garage, Reception, Lobby and Concierge");
 
       
       return;
@@ -642,8 +658,8 @@ return;
 
 private boolean canTeleport(Command command){
   String direction = command.getSecondWord();
-    return (currentRoom.getRoomName().equalsIgnoreCase("Garage") || currentRoom.getRoomName().equalsIgnoreCase("Reception")|| currentRoom.getRoomName().equalsIgnoreCase("abandoned house") || currentRoom.getRoomName().equalsIgnoreCase("Concierge")) 
-    && (direction.equalsIgnoreCase("Garage") || direction.equalsIgnoreCase("Reception")|| direction.equalsIgnoreCase("abandoned house") || direction.equalsIgnoreCase("Concierge"));
+    return (currentRoom.getRoomName().equalsIgnoreCase("Garage") || currentRoom.getRoomName().equalsIgnoreCase("Reception")|| currentRoom.getRoomName().equalsIgnoreCase("Abandoned House Lobby") || currentRoom.getRoomName().equalsIgnoreCase("Concierge")) 
+    && (direction.equalsIgnoreCase("Garage") || direction.equalsIgnoreCase("Reception")|| direction.equalsIgnoreCase("Lobby") || direction.equalsIgnoreCase("Concierge"));
 }
 
   /**
@@ -663,13 +679,19 @@ private boolean canTeleport(Command command){
    * otherwise print an error message.
    */
   private void goRoom(Command command) {
-    if (!command.hasSecondWord()) {
+    String commandWord = command.getCommandWord();
+    String direction = command.getSecondWord();
+    if (!command.hasSecondWord() && !(commandWord.equalsIgnoreCase("west") || commandWord.equalsIgnoreCase("east") || commandWord.equalsIgnoreCase("south") || commandWord.equalsIgnoreCase("north") || commandWord.equals("down") || commandWord.equals("up"))) {
       // if there is no second word, we don't know where to go...
       System.out.println("Go where?");
       return;
     }
 
-    String direction = command.getSecondWord();
+    if (commandWord.equalsIgnoreCase("west") || commandWord.equalsIgnoreCase("east") || commandWord.equalsIgnoreCase("south") || commandWord.equalsIgnoreCase("north") || commandWord.equals("down") || commandWord.equals("up")){
+      direction = commandWord;
+    }
+
+ 
 
     // Try to leave current room.
     Room nextRoom = currentRoom.nextRoom(direction);

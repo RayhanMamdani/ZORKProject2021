@@ -423,7 +423,7 @@
         {
           "isLocked": false,
           "direction": "East",
-          "adjacentRoom": "DiningRoomEast"
+          "adjacentRoom": "Lounge"
         },
         {
           "isLocked": false,
@@ -440,7 +440,7 @@
     },
     {
 
-      "id": "DiningRoomEast",
+      "id": "Lounge",
       "name": "Dining Room",
       "description": "",
       "exits": [
