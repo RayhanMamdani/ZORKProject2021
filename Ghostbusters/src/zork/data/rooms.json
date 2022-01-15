@@ -125,7 +125,7 @@
       "description": "This is a kitchen. A fridge sits adjacent to a table and chairs. A microwave lies atop the counter and under the cuboards.",
       "exits": [
         {
-          "isLocked": true,
+          "isLocked": false,
           "keyId": "2",
           "direction": "West",
           "adjacentRoom": "Reception"
@@ -143,12 +143,12 @@
       "description": "This is a reception. An empty desk contains a mess of stationaries that have been not been organized in a long time. ",
       "exits": [
         {
-          "isLocked": false,
+          "isLocked": true,
           "direction": "East",
           "adjacentRoom": "OfficeKitchen"
         },
         {
-          "isLocked": false,
+          "isLocked": true,
           "direction": "North",
           "adjacentRoom": "OfficeStairUp"
         }
@@ -160,7 +160,7 @@
 
       "id":"OfficeStairUp",
       "name": "Top Office Stairs",
-      "description": "This is the top of the stairs. Be careful not to fall down.",
+      "description": "This is the top of the stairs. Be careful not to fall down. There is a backpack, it's old and big it looks like something is inside....",
       "exits": [
         {
           "isLocked": false,
@@ -469,7 +469,7 @@
     {
 
       "id": "AHBathroom",
-      "name": "Bathroom",
+      "name": "Abandoned House Bathroom",
       "description": "This is a bathroom. The wood of the drawers has begun to decay, the mirror is so dusty that it's no longer usable.",
       "exits": [
         {
@@ -487,7 +487,7 @@
     {
 
       "id": "AHBottomStairs",
-      "name":"Abandoned House Stairs",
+      "name":"Abandoned House Bottom Stairs",
       "description": "This is the bottom of the stairs. No where to go but up.",
       "exits": [
         {
@@ -511,7 +511,7 @@
     {
 
       "id": "AHTopStairs",
-      "name":"Stairs",
+      "name":"Abandoned House Top Stairs",
       "description": "This is the top of the stairs. Your feet have left obvious marks in the carpet of dust.",
       "exits": [
         {
@@ -534,7 +534,7 @@
     {
 
       "id": "AHHallway",
-      "name":"Hallway",
+      "name":"Abandoned House Hallway",
       "description": "This is a hallway. Vague photos of a family furnish the walls.",
       "exits": [
         {
