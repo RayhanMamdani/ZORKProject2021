@@ -1,9 +1,11 @@
 package zork;
 
 import java.io.Serializable;
+
 public class Item extends OpenableObject implements Serializable {
   private int weight;
   private int damage;
+  private String id;
   private String name;
   private String startingroom;
   private String startingitem;
@@ -11,20 +13,20 @@ public class Item extends OpenableObject implements Serializable {
   private boolean isOpenable;
   private boolean isKey;
 
-
-
   public Item(int weight, String name, boolean isOpenable) {
     this.weight = weight;
     this.name = name;
     this.isOpenable = isOpenable;
   }
 
-  public Item (){
-    
+  public Item() {
+
   }
 
-  
-  public Item(int weight, String name, boolean isOpenable, boolean isKey, String startingroom, String startingitem, String description, int damage) {
+  public Item(int weight, String id, String name, boolean isOpenable, boolean isKey, String startingroom,
+      String startingitem,
+      String description, int damage) {
+    this.id = id;
     this.weight = weight;
     this.name = name;
     this.isOpenable = isOpenable;
@@ -33,7 +35,7 @@ public class Item extends OpenableObject implements Serializable {
     this.isKey = isKey;
     this.description = description;
     this.damage = damage;
-    
+
   }
 
   public void open() {
@@ -42,11 +44,15 @@ public class Item extends OpenableObject implements Serializable {
 
   }
 
+  public String getId() {
+    return id;
+  }
+
   public int getWeight() {
     return weight;
   }
 
-  public String getDescription(){
+  public String getDescription() {
 
     return description;
   }
@@ -54,7 +60,8 @@ public class Item extends OpenableObject implements Serializable {
   public void setWeight(int weight) {
     this.weight = weight;
   }
-  public void setStartingRoom(String str){
+
+  public void setStartingRoom(String str) {
 
     this.startingroom = str;
   }
@@ -71,7 +78,7 @@ public class Item extends OpenableObject implements Serializable {
     return isOpenable;
   }
 
-  public String startingRoom(){
+  public String startingRoom() {
 
     return startingroom;
   }
@@ -80,13 +87,12 @@ public class Item extends OpenableObject implements Serializable {
     this.isOpenable = isOpenable;
   }
 
-  public int getDamage(){
+  public int getDamage() {
     return damage;
   }
-  public String getStartingItem(){
+
+  public String getStartingItem() {
     return startingitem;
   }
-
-  
 
 }

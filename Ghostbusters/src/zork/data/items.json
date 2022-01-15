@@ -64,7 +64,7 @@
             "description": "This is your housekey. A keychain with the logo of the hit blockbuster movie 'Spook Chasers' hangs off the end.",
             "weight": 1,
             "damage": 100,
-            "startingroom": "Bedroom",
+            "startingroom": "HouseKitchen",
             "iskey": true,
             "isOpenable": false
         },
