@@ -33,7 +33,7 @@
     "id": "Green Ghost",
     "name":"Green Ghost",
     "description": "A ghost approaches. It's green skin stands out brightly from the dull room.",
-    "startingroom": "TopStair",
+    "startingroom": "Bottom Office Stairs",
     "difficultylevel": 50,
     "damage": 5
 },

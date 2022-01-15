@@ -88,7 +88,7 @@
     },
     {
       "id": "HouseKitchen",
-      "name": "Kitchen ",
+      "name": "HouseKitchen ",
       "description": "This is a small kitchen. There are cuboards and a stove in front of you with a microwave, fridge and sink adjacent to it.",
       "exits": [
         {
@@ -119,7 +119,7 @@
     {
 
       "id": "OfficeKitchen",
-      "name":"Kitchen",
+      "name":"OfficeKitchen",
       "description": "This is a kitchen. A fridge sits adjacent to a table and chairs. A microwave lies atop the counter and under the cuboards.",
       "exits": [
         {
@@ -198,18 +198,13 @@
     {
 
       "id": "OfficeBasement",
-      "name":"Basement",
+      "name":"OfficeBasement",
       "description": "This is a basement. Boxes lie stacked in the corner, shadowed by the dark lighting.",
       "exits": [
         {
           "isLocked": false,
           "direction": "North",
           "adjacentRoom": "OfficeStairDown"
-        },
-        {
-          "isLocked": false,
-          "direction": "East",
-          "adjacentRoom": "Office"
         }
 
       ]
@@ -313,7 +308,7 @@
     {
 
       "id": "HotelBedRoom",
-      "name":"Bedroom",
+      "name":"Hotel Bedroom",
       "description": "This is a bedroom. A bed and several furnishings fill the room and a large window replaces the outer wall.",
       "exits": [
         {
@@ -329,7 +324,7 @@
     {
 
       "id": "HotelWashRoom",
-      "name":"Washroom",
+      "name":"Hotel Washroom",
       "description": "This is a washroom. A sink, shower, and mirror occupy the room. Various toiletries are on a rack below the sink.",
       "exits": [
         {
@@ -395,7 +390,7 @@
     {
 
       "id": "AHKitchen",
-      "name":"Kitchen",
+      "name":"Abandoned House Kitchen",
       "description": "This is a kitchen. The counter has been covered in dirt and unused plates. The other appliances are all in a similar state of disarray.",
       "exits": [
         {
@@ -405,7 +400,7 @@
         },
         {
           "isLocked": false,
-          "direction": "West",
+          "direction": "East",
           "adjacentRoom": "Foyer"
         }
         
@@ -475,7 +470,7 @@
       "exits": [
         {
           "isLocked": false,
-          "direction": "East",
+          "direction": "West",
           "adjacentRoom": "Lounge"
         }
         
@@ -488,13 +483,13 @@
     {
 
       "id": "AHBottomStairs",
-      "name":"Stairs",
+      "name":"Abandoned House Stairs",
       "description": "This is the bottom of the stairs. No where to go but up.",
       "exits": [
         {
           "isLocked": false,
-          "direction": "East",
-          "adjacentRoom": "AHBottomStairs"
+          "direction": "West",
+          "adjacentRoom": "Foyer"
         },
         {
           "isLocked": false,
@@ -564,7 +559,7 @@
     {
 
       "id": "AHBedroom",
-      "name":"Bedroom",
+      "name":"Abandoned House Bedroom",
       "description": "This is a bedroom. A large bed sits at the back of the room. Light from the window reveals several furnishings set around the room.",
       "exits": [
         {
@@ -617,12 +612,12 @@
       "exits": [
         {
           "isLocked": false,
-          "direction": "West",
+          "direction": "East",
           "adjacentRoom": "AHBottomLadder"
         },
         {
           "isLocked": false,
-          "direction": "East",
+          "direction": "West",
           "adjacentRoom": "AHBathroom2"
         },
         {
@@ -646,7 +641,7 @@
       "exits": [
         {
           "isLocked": false,
-          "direction": "West",
+          "direction": "East",
           "adjacentRoom": "Study"
         },
         {

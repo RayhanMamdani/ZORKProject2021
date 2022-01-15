@@ -83,7 +83,7 @@
         {
             "id": "Key3",
             "name": "Abandoned House Key",
-            "description": "This is an old key. It seems much old and has rust on the edges.",
+            "description": "This is an Abandoned House Key. It seems much old and has rust on the edges.",
             "weight": 1,
             "damage": 0,
             "startingroom": "OfficeBasement",

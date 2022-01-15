@@ -43,7 +43,7 @@ public class Game {
       initItems("src\\zork\\data\\items.json");
       initEnemies("src\\zork\\data\\enemies.json");
       
-      currentRoom = roomMap.get("Bedroom");
+      currentRoom = roomMap.get("Concierge");
       
       
 
@@ -173,6 +173,8 @@ public class Game {
 
     boolean finished = false;
     if (currentRoom.hasNpc()){
+      System.out.println();
+      System.out.println();
       System.out.println(currentRoom.getNpc().getDialogue());
     }
     
@@ -253,6 +255,8 @@ public class Game {
       goRoom(command);
       else if (commandWord.equalsIgnoreCase("west") || commandWord.equalsIgnoreCase("east") || commandWord.equalsIgnoreCase("south") || commandWord.equalsIgnoreCase("north") || commandWord.equals("down") || commandWord.equals("up")){
         goRoom(command);
+      }else if (commandWord.equalsIgnoreCase("sing")){
+        System.out.println("Your singing sucks.....");
       }
     else if (commandWord.equalsIgnoreCase("drive")){
       teleport(command);
@@ -620,7 +624,7 @@ return;
   int index = -1;
     for (int i = 0; i < itemsMap.size(); i++) {
       
-      if (itemsMap.get(i).getName().toLowerCase().indexOf(temp.toLowerCase()) >= 0 && (itemsMap.get(i).startingRoom().equals(currentRoom.getRoomName()) || (itemsMap.get(i).getStartingItem()!=null&&parentIsValid(itemsMap.get(i), currentRoom)) )){
+      if (itemsMap.get(i).getName().toLowerCase().replaceAll("\\s+","").indexOf(temp.toLowerCase()) >= 0 && (itemsMap.get(i).startingRoom().equals(currentRoom.getRoomName()) || (itemsMap.get(i).getStartingItem()!=null&&parentIsValid(itemsMap.get(i), currentRoom)) )){
 
      index = i;
 
