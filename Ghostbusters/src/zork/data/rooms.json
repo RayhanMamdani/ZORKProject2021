@@ -39,7 +39,7 @@
       "exits": [
         {
           "isLocked": false,
-          "direction": "East",
+          "direction": "West",
           "adjacentRoom": "Bedroom"
         },
         {

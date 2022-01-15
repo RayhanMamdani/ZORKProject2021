@@ -3,7 +3,7 @@ import java.io.Serializable;
 public class CommandWords {
   // a constant array that holds all valid command words
   private static final String validCommands[] = { "north", "east", "south", "west", "quit", "look", "take", "open",
-      "close", "drop", "unlock", "cut", "down", "jump", "shoot", "use", "go","drive","inventory","fight","load","save"};
+"drop", "down", "jump", "go","drive","inventory","fight","load","save","help","health","storage"};
 
   /**
    * Check whether a given String is a valid command word. Return true if it is,
@@ -11,6 +11,7 @@ public class CommandWords {
    **/
   public boolean isCommand(String aString) {
     for (String c : validCommands) {
+  
       if (c.equalsIgnoreCase(aString))
         return true;
     }

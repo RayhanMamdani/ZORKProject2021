@@ -267,6 +267,14 @@ public class Game {
       fight(command);
 
 
+    }else if (commandWord.equalsIgnoreCase("help")){
+    
+    printHelp();
+
+    }else if (commandWord.equalsIgnoreCase("storage")){
+      System.out.println("You are currently carrying "+inventory.getCurrentWeight()+"kg your backpack stores 100 kg.");
+    } else if (commandWord.equalsIgnoreCase("health")){
+System.out.println("Your health is "+yourHealth);
     }else if (commandWord.equalsIgnoreCase("take")){ 
       takeObj(command);
       
@@ -280,18 +288,21 @@ public class Game {
 
       load();
     }else if (commandWord.equalsIgnoreCase("look")){
+      System.out.println(currentRoom.longDescription());
+ 
 
       int numItems = numItems();
-    int i = 0;
-    ArrayList <Item> itemsMaptemp = new ArrayList <Item>();
-    formatList(itemsMaptemp);
-    while (i < numItems){
-
-        System.out.println(itemRoom(itemsMaptemp).getDescription());
-     
-        i++;
-    
-    }
+      int i = 0;
+      ArrayList <Item> itemsMaptemp = new ArrayList <Item>();
+      formatList(itemsMaptemp);
+      while (i < numItems){
+  
+          System.out.println(itemRoom(itemsMaptemp).getDescription());
+       
+          i++;
+      
+      }
+      
     }else if(commandWord.equalsIgnoreCase("quit")) {
       if (command.hasSecondWord())
         System.out.println("Quit what?");
@@ -467,6 +478,7 @@ return;
         Item temp = currInventory.remove(index);
 
         temp.setStartingRoom(currentRoom.getRoomName());
+        inventory.minusCurrentWeight(temp.getWeight());
         itemsMap.add(temp);
         System.out.println("You have dropped the "+temp.getName());
 
@@ -490,10 +502,10 @@ return;
   }
 
   private void removeallItems(ArrayList<Item> currInventory) {
-    for (int i = 0; i < currInventory.size(); i++) {
+    for (int i = currInventory.size()-1; i >= 0; i--) {
       
       Item temp = currInventory.remove(i);
-
+      inventory.minusCurrentWeight(temp.getWeight());
       temp.setStartingRoom(currentRoom.getRoomName());
       itemsMap.add(temp);
       System.out.println("You have dropped the "+temp.getName());
@@ -510,6 +522,10 @@ return;
    for (Item i : arrayList){
     System.out.println(i.getName());
 
+   }
+
+   if (arrayList.size() == 0){
+     System.out.println("You have no items in your inventory. ");
    }
 
   }
@@ -533,11 +549,11 @@ return;
         if (item.getStartingItem() != null && parentIsValid(item,currentRoom)){
           if (inventory.addItem(item)){
             noOpenableObjects=false;
-            
+            inventory.setCurrentWeight(itemsMap.get(i).getWeight());
             System.out.println(item.getName()+ " added!");  
 
-            itemsMap.remove(item); //could add arraylist to support multiple openables
-   
+            itemsMap.remove(i); //could add arraylist to support multiple openables
+      
           }
           
         }
@@ -545,20 +561,21 @@ return;
       }
 
       int numItems = numItems();
-      int i = 0;
+      int j = 0;
       ArrayList <Item> itemsMaptemp = new ArrayList <Item>();
       formatList(itemsMaptemp);
 
 
-      while (i < numItems){
+      while (j < numItems){
         
           Item temp = itemRoom(itemsMaptemp);
           if (inventory.addItem(temp)){
+              inventory.setCurrentWeight(temp.getWeight());
             System.out.println(temp.getName()+" "+"added!");
             itemsMap.remove(getremoveIndex(temp.getName()));
           }
 
-          i++;
+          j++;
        
          
       
@@ -579,6 +596,7 @@ return;
 
      if (index != -1 && inventory.addItem(itemsMap.get(index))){
             System.out.println("Item added!");
+          inventory.setCurrentWeight(itemsMap.get(index).getWeight());
             itemsMap.remove(index);
           }else{
 
@@ -868,7 +886,7 @@ int indexocc = -1;
     currentRoom = save.getCuRoom();
     yourHealth = save.getHealth();
     System.out.println("Game has succesfully loaded");
-    System.out.println(currentRoom.longDescription());
+    
     }
 
   }

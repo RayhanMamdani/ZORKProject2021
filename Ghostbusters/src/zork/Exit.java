@@ -4,7 +4,7 @@ import java.io.Serializable;
 /**
  * Exit
  */
-public class Exit extends OpenableObject implements Serializable {
+public class Exit extends OpenableObject {
   private String direction;
   private String adjacentRoom;
 

@@ -22,6 +22,18 @@ public class Inventory implements Serializable {
     return currentWeight;
   }
 
+  public void setCurrentWeight(int w){
+
+    currentWeight+=w;
+  }
+
+  
+  public void minusCurrentWeight(int w){
+
+    currentWeight-=w;
+  }
+
+
   public boolean addItem(Item item) {
     if (item.getWeight() + currentWeight <= maxWeight)
       return items.add(item);
