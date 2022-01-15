@@ -49,7 +49,7 @@
 {
     "id": "Zuul the Gatekeeper",
     "name":"Zuul the Gatekeeper",
-    "description": "A gatekeeper approaches",
+    "description": "A gatekeeper approaches, he seems to be guarding something...",
     "startingroom": "Storage Room",
     "difficultylevel": 100,
     "damage": 15

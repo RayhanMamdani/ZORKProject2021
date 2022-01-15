@@ -39,7 +39,7 @@ public class Game {
       initItems("src\\zork\\data\\items.json");
       initEnemies("src\\zork\\data\\enemies.json");
 
-      currentRoom = roomMap.get("AHBottomLadder");
+      currentRoom = roomMap.get("Bedroom");
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -306,7 +306,7 @@ public class Game {
     if (!command.hasSecondWord()) {
       System.out.println("Unlock with what?");
       return;
-    }else if (command.getSecondWord().equalsIgnoreCase("key")){
+    } else if (command.getSecondWord().equalsIgnoreCase("key")) {
 
       System.out.println("Unlock with what key?");
       return;
@@ -318,19 +318,18 @@ public class Game {
         System.out.println("You don't have that item in your inventory!");
         return;
       }
-   
+
       for (Exit exit : currentRoom.getExits()) {
         if (exit.getKeyId().equals(currInventory.get(index).getId())) {
           exit.setLocked(false);
           unlocked = true;
-          keyName =currInventory.get(index).getName();
+          keyName = currInventory.get(index).getName();
         }
       }
 
     }
     if (unlocked) {
-      System.out.println(
-          "You unlocked a room with your " + keyName + "!");
+      System.out.println("You unlocked a room with your " + keyName + "!");
     }
 
   }
@@ -753,7 +752,7 @@ public class Game {
     }
 
     if (chosenExit == null) {
-      System.out.println("You walked into a wall and lost 5 hp!");
+      System.out.println("You walked into a wall and lost 5 hp! You now have " + yourHealth);
       yourHealth -= 5;
     } else if (chosenExit.isLocked()) {
       System.out.println("This room is locked... Maybe you need a key 🤔");
