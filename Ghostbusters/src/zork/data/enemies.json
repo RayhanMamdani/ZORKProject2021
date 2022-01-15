@@ -9,8 +9,8 @@
     "id": "Stay Puft",
     "name": "Stay Puft",
     "description": "A large white monster approaches. It's round and fluffy shape resembles a child made of marshamllow. It's hat reads 'Stay Puft.'",
-    "startingroom": "",
-    "difficultylevel": 100,
+    "startingroom": "Attic",
+    "difficultylevel": 300,
     "damage": 50
 
 
@@ -45,6 +45,14 @@
     "startingroom": "",
     "difficultylevel": 75,
     "damage": 5
+},
+{
+    "id": "Zuul the Gatekeeper",
+    "name":"Zuul the Gatekeeper",
+    "description": "A gatekeeper approaches",
+    "startingroom": "Storage Room",
+    "difficultylevel": 100,
+    "damage": 15
 }
 
 

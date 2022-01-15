@@ -39,7 +39,7 @@ public class Game {
       initItems("src\\zork\\data\\items.json");
       initEnemies("src\\zork\\data\\enemies.json");
 
-      currentRoom = roomMap.get("HouseKitchen");
+      currentRoom = roomMap.get("AHBottomLadder");
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -302,9 +302,13 @@ public class Game {
 
   private void unlock(Command command) {
     boolean unlocked = false;
-
+    String keyName = "";
     if (!command.hasSecondWord()) {
       System.out.println("Unlock with what?");
+      return;
+    }else if (command.getSecondWord().equalsIgnoreCase("key")){
+
+      System.out.println("Unlock with what key?");
       return;
     } else {
       String secondWord = command.getSecondWord();
@@ -314,18 +318,19 @@ public class Game {
         System.out.println("You don't have that item in your inventory!");
         return;
       }
-
+   
       for (Exit exit : currentRoom.getExits()) {
         if (exit.getKeyId().equals(currInventory.get(index).getId())) {
           exit.setLocked(false);
           unlocked = true;
+          keyName =currInventory.get(index).getName();
         }
       }
 
     }
     if (unlocked) {
       System.out.println(
-          "You unlocked a room with your " + command.getSecondWord() + "! This item was removed from your inventory.");
+          "You unlocked a room with your " + keyName + "!");
     }
 
   }
