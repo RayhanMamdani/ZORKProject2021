@@ -39,7 +39,7 @@ public class Game {
       initItems("src\\zork\\data\\items.json");
       initEnemies("src\\zork\\data\\enemies.json");
 
-      currentRoom = roomMap.get("Bedroom");
+      currentRoom = roomMap.get("LivingRoom");
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -917,6 +917,22 @@ public class Game {
     currentRoom = save.getCuRoom();
     yourHealth = save.getHealth();
     System.out.println("Game has succesfully loaded");
+    System.out.println();
+    System.out.println();
+    System.out.println(currentRoom.longDescription());
+
+      int numItems = numItems();
+      int i = 0;
+      ArrayList<Item> itemsMaptemp = new ArrayList<Item>();
+      formatList(itemsMaptemp);
+      while (i < numItems) {
+
+        System.out.println(itemRoom(itemsMaptemp).getDescription());
+
+        i++;
+
+      }
+    
 
   }
 
