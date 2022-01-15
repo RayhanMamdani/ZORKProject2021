@@ -88,11 +88,12 @@
     },
     {
       "id": "HouseKitchen",
-      "name": "HouseKitchen ",
+      "name": "HouseKitchen",
       "description": "This is a small kitchen. There are cuboards and a stove in front of you with a microwave, fridge and sink adjacent to it.",
       "exits": [
         {
-          "isLocked": false,
+          "isLocked": true,
+          "keyId": "1",
           "direction": "North",
           "adjacentRoom": "Garage"
         },
@@ -110,7 +111,8 @@
       "description": "This is a garage. Your car is parked by the door. Shelves messy with miscellaneous items line the three other sides.",
       "exits": [
         {
-          "isLocked": false,
+          "isLocked": true,
+          "keyId": "1",
           "direction": "South",
           "adjacentRoom": "HouseKitchen"
         }
@@ -123,7 +125,8 @@
       "description": "This is a kitchen. A fridge sits adjacent to a table and chairs. A microwave lies atop the counter and under the cuboards.",
       "exits": [
         {
-          "isLocked": false,
+          "isLocked": true,
+          "keyId": "2",
           "direction": "West",
           "adjacentRoom": "Reception"
         }
@@ -344,7 +347,8 @@
       "description": "This is the entrance of a house. Various shoes are scattered around. A collapsed shoe rack lies over a small bench.",
       "exits": [
         {
-          "isLocked": false,
+          "isLocked": true,
+          "keyId": "3",
           "direction": "North",
           "adjacentRoom": "Foyer"
         }
