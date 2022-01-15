@@ -630,7 +630,7 @@ public class Game {
     int index = -1;
     for (int i = 0; i < itemsMap.size(); i++) {
 
-      if (itemsMap.get(i).getName().toLowerCase().replaceAll("\\s+", "").indexOf(temp.toLowerCase()) >= 0
+      if (itemsMap.get(i).getName().toLowerCase().replaceAll("\\s+", "").indexOf(temp.toLowerCase().replaceAll("\\s+", "")) >= 0
           && (itemsMap.get(i).startingRoom().equals(currentRoom.getRoomName())
               || (itemsMap.get(i).getStartingItem() != null && parentIsValid(itemsMap.get(i), currentRoom)))) {
 
