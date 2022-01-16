@@ -5,7 +5,7 @@
          "id": "Proton Pack",
          "name": "Proton Pack",
          "description": "This is a Proton pack. Despite all it's damage and use it's never let you down.",
-         "weight": 30,
+         "weight": 20,
          "damage": 50,
          "startingroom": "Reception", 
          "iskey": false,
@@ -75,7 +75,7 @@
             "description": "This is a key to your office. 'I <3 polymorphism' is engraved on the side. ",
             "weight": 1,
             "damage": 0,
-            "startingroom": "Concierge",
+            "startingroom": "Bedroom",
             "iskey": true,
             "isOpenable": false
         },
@@ -118,24 +118,42 @@
             "id": "Cosmic Proton Blaster",
             "name": "Cosmic Proton Blaster",
             "description": "",
-            "weight": 50,
+            "weight": 90,
             "damage": 1000,
             "startingroom": "OfficeBasement", 
             "iskey": false,
             "isOpenable": false
         },
-
-
-
         {
-            "id": "Tunak Tunak Tun Pistol",
-            "name": "Tunak Tunak Tun Pistol",
+            "id": "High-Frequence Ray Phaser",
+            "name": "High-Frequence Ray Phaser",
             "description": "",
-            "weight": 50,
-            "damage": -1000,
-            "startingroom": "BottomStair", 
+            "weight": 45,
+            "damage": 120,
+            "startingroom": "Study", 
+            "iskey": false,
+            "isOpenable": false
+        },
+        {
+            "id": "Blaster of Omega Multitude",
+            "name": "Blaster of Omega Multitude",
+            "description": "",
+            "weight": 80,
+            "damage": 500,
+            "startingroom": "Room One", 
+            "iskey": false,
+            "isOpenable": false
+        },
+        {
+            "id": "Proton Pistol",
+            "name": "Proton Pistol",
+            "description": "",
+            "weight": 5,
+            "damage": 10,
+            "startingroom": "Bedroom", 
             "iskey": false,
             "isOpenable": false
         }
+
     ]
 }
