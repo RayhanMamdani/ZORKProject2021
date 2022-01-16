@@ -10,6 +10,7 @@
          "startingroom": "Reception", 
          "iskey": false,
          "isWeapon": true,
+         "canHeal":false,
          "isOpenable": false
         },
 
@@ -22,6 +23,7 @@
             "startingroom": "Bedroom",
             "iskey": false,
             "isWeapon": false,
+            "canHeal":false,
             "isOpenable": true
         },
 
@@ -36,8 +38,22 @@
             "startingitem": "Closet",
             "iskey": false,
             "isWeapon": true,
+            "canHeal":false,
             "isOpenable": false
         },
+
+        {
+            "id": "Med Pack",
+            "name": "Med Pack",
+            "description": "This is a Med Pack",
+            "weight": 10,
+            "damage": 100,
+            "startingroom": "Bedroom", 
+            "iskey": false,
+            "isWeapon": false,
+            "canHeal":true,
+            "isOpenable": false
+           },
 
         {
             "id": "Scissors",
@@ -48,6 +64,7 @@
             "startingroom": "OfficeKitchen",
             "iskey": false,
             "isWeapon": false,
+            "canHeal":false,
             "isOpenable": false
         },
 
@@ -60,6 +77,7 @@
             "startingroom": "OfficeBasementEast",
             "iskey": false,
             "isWeapon": false,
+            "canHeal":false,
             "isOpenable": false
         },
 
@@ -72,6 +90,7 @@
             "startingroom": "HouseKitchen",
             "iskey": true,
             "isWeapon": false,
+            "canHeal":false,
             "isOpenable": false
         },
 
@@ -84,6 +103,7 @@
             "startingroom": "Concierge",
             "iskey": true,
             "isWeapon": false,
+            "canHeal":false,
             "isOpenable": false
         },
 
@@ -96,6 +116,7 @@
             "startingroom": "Top Office Stairs",
             "iskey": false,
             "isWeapon": false,
+            "canHeal":false,
             "isOpenable": true
         },
 
@@ -110,6 +131,7 @@
             "startingitem": "Backpack",
             "iskey": false,
             "isWeapon": true,
+            "canHeal":false,
             "isOpenable": false
         },
 
@@ -122,6 +144,7 @@
             "startingroom": "OfficeBasement",
             "iskey": true,
             "isWeapon": false,
+            "canHeal":false,
             "isOpenable": false
         },
         {
@@ -133,6 +156,7 @@
             "startingroom": "OfficeBasement", 
             "iskey": false,
             "isWeapon": true,
+            "canHeal":false,
             "isOpenable": false
         }
     ]

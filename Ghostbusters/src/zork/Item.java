@@ -13,6 +13,7 @@ public class Item extends OpenableObject implements Serializable {
   private boolean isOpenable;
   private boolean isWeapon;
   private boolean isKey;
+  private boolean canHeal;
 
   public Item(int weight, String name, boolean isOpenable) {
     this.weight = weight;
@@ -24,7 +25,7 @@ public class Item extends OpenableObject implements Serializable {
 
   }
 
-  public Item(int weight, String id, String name, boolean isOpenable, boolean isKey, boolean isWeapon,
+  public Item(int weight, String id, String name, boolean isOpenable, boolean isKey, boolean isWeapon, boolean canHeal,
       String startingroom, String startingitem, String description, int damage) {
 
     this.id = id;
@@ -35,6 +36,7 @@ public class Item extends OpenableObject implements Serializable {
     this.startingitem = startingitem;
     this.isKey = isKey;
     this.isWeapon = isWeapon;
+    this.canHeal = canHeal;
     this.description = description;
     this.damage = damage;
   }

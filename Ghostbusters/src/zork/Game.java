@@ -116,10 +116,11 @@ public class Game {
       int damage = (int) (long) ((JSONObject) itemsObj).get("damage");
       boolean iskey = (boolean) ((JSONObject) itemsObj).get("iskey");
       boolean isWeapon = (boolean) ((JSONObject) itemsObj).get("isWeapon");
+      boolean canHeal = (boolean) ((JSONObject) itemsObj).get("canHeal");
       boolean isOpenable = (boolean) ((JSONObject) itemsObj).get("isOpenable");
       // Item item = new Item(weight, name, isOpenable)
 
-      Item item = new Item(weight, id, itemName, isOpenable, iskey, isWeapon, startingRoom, startingItem, description,
+      Item item = new Item(weight, id, itemName, isOpenable, iskey, isWeapon,canHeal, startingRoom, startingItem, description,
           damage);
       itemsMap.add(item);
       // roomMap.get("Bedroom");
