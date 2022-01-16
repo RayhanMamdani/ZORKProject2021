@@ -208,9 +208,9 @@
             "isOpenable": false
         },
         {
-            "id": "Healing Poison",
-            "name": "Healing Poison",
-            "description": "This is a Healing Poison. It's toxic properties have a postive effect.",
+            "id": "Healing Potion",
+            "name": "Healing Potion",
+            "description": "This is a Healing Potion.",
             "weight": 8,
             "damage": 40,
             "startingroom": "OfficeKitchen", 
@@ -219,7 +219,6 @@
             "canHeal":true,
             "isOpenable": false
         }
-        
 
     ]
 }

@@ -240,7 +240,7 @@
     {
 
       "id": "MailRoom",
-      "name":"Mail Room",
+      "name":"MailRoom",
       "description": "This is a mail room. Stacks of unorgaized packages are scattered around.",
       "exits": [
         {
