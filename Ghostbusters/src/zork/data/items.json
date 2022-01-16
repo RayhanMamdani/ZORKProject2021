@@ -186,7 +186,7 @@
         {
             "id": "Proton Pistol",
             "name": "Proton Pistol",
-            "description": "This is Proton Piston. It's both small and deadly.",
+            "description": "This is Proton Pistol. It's both small and deadly.",
             "weight": 5,
             "damage": 10,
             "startingroom": "Bedroom", 
