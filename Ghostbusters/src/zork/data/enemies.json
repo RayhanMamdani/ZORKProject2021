@@ -24,9 +24,9 @@
     "id": "Blue Ghost",
     "name":"Blue Ghost",
     "description": "A ghost approaches. It's blue hue highlights strange features.",
-    "startingroom": "Bathroom",
+    "startingroom": "LivingRoom",
     "difficultylevel": 25,
-    "damage": 5
+    "damage": 100
 },
 
 {
@@ -42,7 +42,7 @@
     "id": "Red Ghost",
     "name":"Red Ghost",
     "description": "A ghost approaches. It's red glow seems just as angry as it's monstrous face.",
-    "startingroom": "",
+    "startingroom": "Hotel Bedroom",
     "difficultylevel": 75,
     "damage": 5
 },

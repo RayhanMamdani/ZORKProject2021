@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
-//line 304 might cause errors
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -39,7 +38,7 @@ public class Game {
       initItems("src\\zork\\data\\items.json");
       initEnemies("src\\zork\\data\\enemies.json");
 
-      currentRoom = roomMap.get("Bedroom");
+      currentRoom = roomMap.get("LivingRoom");
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -116,10 +115,13 @@ public class Game {
       int weight = (int) (long) ((JSONObject) itemsObj).get("weight");
       int damage = (int) (long) ((JSONObject) itemsObj).get("damage");
       boolean iskey = (boolean) ((JSONObject) itemsObj).get("iskey");
+      boolean isWeapon = (boolean) ((JSONObject) itemsObj).get("isWeapon");
+      boolean canHeal = (boolean) ((JSONObject) itemsObj).get("canHeal");
       boolean isOpenable = (boolean) ((JSONObject) itemsObj).get("isOpenable");
       // Item item = new Item(weight, name, isOpenable)
 
-      Item item = new Item(weight, id, itemName, isOpenable, iskey, startingRoom, startingItem, description, damage);
+      Item item = new Item(weight, id, itemName, isOpenable, iskey, isWeapon,canHeal, startingRoom, startingItem, description,
+          damage);
       itemsMap.add(item);
       // roomMap.get("Bedroom");
     }
@@ -155,7 +157,6 @@ public class Game {
   public void play() {
     printWelcome();
 
-    boolean finished = false;
     if (currentRoom.hasNpc()) {
       System.out.println();
       System.out.println();
@@ -166,13 +167,17 @@ public class Game {
       Command command;
       try {
         command = parser.getCommand();
-        finished = processCommand(command);
+        processCommand(command);
       } catch (IOException e) {
         e.printStackTrace();
       }
+      if (!(yourHealth > 0)) {
+        isFinished = true;
+        System.out.println("You died. Better luck next time!");
+      }
 
     }
-    System.out.println("Thank you for playing.  Good bye.");
+    System.out.println("Thank you for playing. Goodbye!");
   }
 
   /**
@@ -216,15 +221,15 @@ public class Game {
    * Given a command, process (that is: execute) the command. If this command ends
    * the game, true is returned, otherwise false is returned.
    */
-  private boolean processCommand(Command command) {
+  private void processCommand(Command command) {
     if (command.isUnknown()) {
       System.out.println("I don't know what you mean...");
-      return false;
+      return;
     }
 
     String commandWord = command.getCommandWord();
-    if (hastoFight(command) == false) {
-      return false;
+    if (hastoFight(command) == false && !commandWord.equals("quit")) {
+      return;
     }
 
     if (commandWord.equalsIgnoreCase("help"))
@@ -254,7 +259,12 @@ public class Game {
 
     } else if (commandWord.equalsIgnoreCase("storage")) {
       System.out
-          .println("You are currently carrying " + inventory.getCurrentWeight() + "kg your backpack stores 100 kg.");
+          .println("You are currently using " + inventory.getCurrentWeight() + "% of your backpack's total storage.");
+      ArrayList<Item> currInventory = inventory.getInventory();
+      for (Item item : currInventory) {
+        System.out.println("Your " + item.getName() + " takes up " + item.getWeight() + "%.");
+      }
+
     } else if (commandWord.equalsIgnoreCase("health")) {
       System.out.println("Your health is " + yourHealth);
     } else if (commandWord.equalsIgnoreCase("take")) {
@@ -295,7 +305,7 @@ public class Game {
     } else if (commandWord.equalsIgnoreCase("eat")) {
       System.out.println("Do you really think you should be eating at a time like this?");
     }
-    return false;
+    return;
   }
 
   // implementations of user commands:
@@ -338,7 +348,8 @@ public class Game {
     String commandWord = command.getCommandWord();
 
     for (Enemy temp : EnemiesList) {
-      if (currentRoom.getRoomName().equals(temp.getStartingroom()) && !commandWord.equalsIgnoreCase("fight")) {
+      if (currentRoom.getRoomName().equals(temp.getStartingroom())
+          && !commandWord.equalsIgnoreCase("fight")) {
         System.out.println("You have to fight the " + temp.getName());
         return false;
       }
@@ -353,7 +364,10 @@ public class Game {
     if (!command.hasSecondWord()) {
       System.out.println("Fight With What?");
       System.out.println("You can fight with: ");
-      printArr(inventory.getInventory());
+      for (Item i : inventory.getInventory()) {
+        if (i.isWeapon())
+          System.out.println(i.getName());
+      }
       System.out.print("Your Hands");
       System.out.println();
       return;
@@ -384,22 +398,20 @@ public class Game {
       }
       if (currEnemy.getisDead() == false) {
         yourHealth -= currEnemy.getDamage();
-        if (yourHealth <= 0) {
-          System.out.println("The " + currEnemy.getName() + " delt " + currEnemy.getDamage() + " damage to you. "
-              + "You have died! Game Over!");
-          isFinished = true;
-        } else {
-          System.out.println("The " + currEnemy.getName() + " delt " + currEnemy.getDamage()
-              + " damage to you, you now have " + yourHealth + " health");
-        }
+        System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
+            + " damage to you, you now have " + yourHealth + " health");
       }
+    }
 
-    } else {
+    else {
       ArrayList<Item> currInventory = inventory.getInventory();
       int index = getremoveObjIndex(itemName, currInventory);
       if (index == -1 && !itemName.equalsIgnoreCase("Hands")) {
 
         System.out.println("You don't have that item in your inventory!");
+        return;
+      } else if (!currInventory.get(index).isWeapon()) {
+        System.out.println("That is not a weapon, silly!");
         return;
       }
       Item currWeapon = currInventory.get(index);
@@ -424,16 +436,9 @@ public class Game {
       }
       if (currEnemy.getisDead() == false) {
         yourHealth -= currEnemy.getDamage();
-        if (yourHealth <= 0) {
-          System.out.println("The " + currEnemy.getName() + " delt " + currEnemy.getDamage() + " damage to you. "
-              + "You have died! Game Over!");
-          isFinished = true;
-        } else {
-          System.out.println("The " + currEnemy.getName() + " delt " + currEnemy.getDamage()
-              + " damage to you, you now have " + yourHealth + " health");
-        }
+        System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
+            + " damage to you, you now have " + yourHealth + " health");
       }
-
     }
 
   }
@@ -634,7 +639,8 @@ public class Game {
     int index = -1;
     for (int i = 0; i < itemsMap.size(); i++) {
 
-      if (itemsMap.get(i).getName().toLowerCase().replaceAll("\\s+", "").indexOf(temp.toLowerCase().replaceAll("\\s+", "")) >= 0
+      if (itemsMap.get(i).getName().toLowerCase().replaceAll("\\s+", "")
+          .indexOf(temp.toLowerCase().replaceAll("\\s+", "")) >= 0
           && (itemsMap.get(i).startingRoom().equals(currentRoom.getRoomName())
               || (itemsMap.get(i).getStartingItem() != null && parentIsValid(itemsMap.get(i), currentRoom)))) {
 
@@ -752,8 +758,8 @@ public class Game {
     }
 
     if (chosenExit == null) {
-      System.out.println("You walked into a wall and lost 5 hp! You now have " + yourHealth);
       yourHealth -= 5;
+      System.out.println("You walked into a wall and lost 5 hp! You now have " + yourHealth);
     } else if (chosenExit.isLocked()) {
       System.out.println("This room is locked... Maybe you need a key 🤔");
     } else {
@@ -917,6 +923,22 @@ public class Game {
     currentRoom = save.getCuRoom();
     yourHealth = save.getHealth();
     System.out.println("Game has succesfully loaded");
+    System.out.println();
+    System.out.println();
+    System.out.println(currentRoom.longDescription());
+
+      int numItems = numItems();
+      int i = 0;
+      ArrayList<Item> itemsMaptemp = new ArrayList<Item>();
+      formatList(itemsMaptemp);
+      while (i < numItems) {
+
+        System.out.println(itemRoom(itemsMaptemp).getDescription());
+
+        i++;
+
+      }
+    
 
   }
 
