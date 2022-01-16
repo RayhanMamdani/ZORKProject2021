@@ -16,7 +16,7 @@
     {
       "id": "Bedroom",
       "name": "Bedroom",
-      "description": "This is a large bedroom. An unmade bed and bedside occupies one corner and a closet and dirtly clothes occupy the other.",
+      "description": "This is a large bedroom. An unmade bed and bedside occupies one corner and a closet and dirtly clothes occupy the other. There also seems to be a closet, it looks like it can be opened.",
       "exits": [
         {
           "isLocked": false,
