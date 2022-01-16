@@ -30,7 +30,7 @@ public class SimpleAudioPlayer {
             throws UnsupportedAudioFileException,
             IOException, LineUnavailableException {
 
-        filePath = "src/zork/resources/music.wav";
+        
         // create AudioInputStream object
         audioInputStream = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
 
@@ -46,23 +46,20 @@ public class SimpleAudioPlayer {
     // Work as the user enters his choice
 
     // Method to play the audio
-    public void play() {
+    public void play() throws Exception{
 
-        try {
+        
 
-            SimpleAudioPlayer audioPlayer = new SimpleAudioPlayer();
-
-        }
-
-        catch (Exception ex) {
-            System.out.println("Error with playing sound.");
-            ex.printStackTrace();
-
-        }
-        // start the clip
+        //SimpleAudioPlayer audioPlayer = new SimpleAudioPlayer();
+                    // start the clip
         clip.start();
 
         status = "play";
+
+        
+
+     
+
 
     }
 

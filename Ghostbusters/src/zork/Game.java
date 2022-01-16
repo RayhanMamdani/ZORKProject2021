@@ -174,6 +174,9 @@ public class Game {
       if (!(yourHealth > 0)) {
         isFinished = true;
         System.out.println("You died. Better luck next time!");
+      } else if (EnemiesList.get(0).getisDead()){
+        isFinished = true;
+        System.out.println("You win. You have killed Stay Puft");
       }
 
     }
@@ -232,9 +235,8 @@ public class Game {
       return;
     }
 
-    if (commandWord.equalsIgnoreCase("help"))
-      printHelp();
-    else if (commandWord.equalsIgnoreCase("go"))
+
+    if (commandWord.equalsIgnoreCase("go"))
       goRoom(command);
     else if (commandWord.equalsIgnoreCase("west") || commandWord.equalsIgnoreCase("east")
         || commandWord.equalsIgnoreCase("south") || commandWord.equalsIgnoreCase("north") || commandWord.equals("down")
@@ -485,15 +487,14 @@ public class Game {
     String currRoomName = currentRoom.getRoomName();
     String secondWord = command.getSecondWord().toLowerCase();
     Item itemToOpen = null;
-    for (Item item : itemsMap) { // could make more efficient with a for loop (or using break (but i hate using
-                                 // break))
+    for (Item item : itemsMap) { 
       if (item.startingRoom() != null && item.startingRoom().equals(currRoomName)
           && secondWord.equals((item.getName().toLowerCase()))) {
         itemToOpen = item;
       }
     }
     if (itemToOpen == null) {
-      System.out.println("You cannot open " + secondWord);
+      System.out.println("The " + secondWord + " is not in this room");
       return;
     }
     if (!itemToOpen.isOpenable()) {
@@ -505,20 +506,13 @@ public class Game {
       System.out.println(itemToOpen.getName() + " is open.");
       return;
     }
-    // IMPLEMENT IF THE ITEM IS LOCKED (CHECK IS THEY HAVE THE RIGHT KEY IN THEIR
-    // INVENTORY)
-    // for (Item item : currInventory){
-    // if (item.isKey()){
-
-    // }
-    // }
 
   }
 
   private void dropObj(Command command) {
     ArrayList<Item> currInventory = inventory.getInventory();
     if (!command.hasSecondWord()) {
-      // if there is no second word, we don't know where to drive...
+      // if there is no second word, we don't know where to drive.
       System.out.println("Drop What?");
 
       return;

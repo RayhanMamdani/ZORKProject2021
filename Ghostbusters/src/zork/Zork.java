@@ -11,10 +11,12 @@ public class Zork {
     Game game = new Game();
     
     try {
+      SimpleAudioPlayer.filePath="src/zork/resources/music.wav";
       SimpleAudioPlayer music = new SimpleAudioPlayer();
+      
       music.play();
-    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-      // TODO Auto-generated catch block
+    } catch (Exception e) {
+      System.out.println("Error when playing music");
       e.printStackTrace();
     }
     
