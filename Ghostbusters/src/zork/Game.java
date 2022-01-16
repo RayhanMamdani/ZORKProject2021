@@ -120,7 +120,8 @@ public class Game {
       boolean isOpenable = (boolean) ((JSONObject) itemsObj).get("isOpenable");
       // Item item = new Item(weight, name, isOpenable)
 
-      Item item = new Item(weight, id, itemName, isOpenable, iskey, isWeapon,canHeal, startingRoom, startingItem, description,
+      Item item = new Item(weight, id, itemName, isOpenable, iskey, isWeapon, canHeal, startingRoom, startingItem,
+          description,
           damage);
       itemsMap.add(item);
       // roomMap.get("Bedroom");
@@ -183,11 +184,28 @@ public class Game {
   /**
    * Print out the opening message for the player.
    */
+  /**
+   * Hello! Welcome to Ghostbusters. A new, innovative and totally original
+   * concept!
+   * 
+   * In this game, progress through the map fighting monsters while
+   * finding new characters, weapons and items to help you throughout your
+   * journey.
+   * 
+   * Control your character by typing simple commands into the terminal. If you
+   * ever get stuck,
+   * type 'help' to see a list of commands available to you.
+   * 
+   */
   private void printWelcome() {
     System.out.println();
-    System.out.println("Welcome to Zork!");
-    System.out.println("Zork is a new, incredibly boring adventure game.");
-    System.out.println("Type 'help' if you need help.");
+    System.out.println("Hello! Welcome to Ghostbusters. A new, innovative and totally original concept!");
+    System.out.println();
+    System.out.println("In this game, progress through the map fighting monsters while");
+    System.out.println("finding new characters, weapons and items to help you throughout your journey!");
+    System.out.println();
+    System.out.println("Control your character by typing simple commands into the terminal. If you ever get stuck,");
+    System.out.println("type 'help' to see a list of commands available to you.");
     System.out.println();
     System.out.println(currentRoom.longDescription());
 
@@ -257,10 +275,10 @@ public class Game {
 
       printHelp();
 
-    }else if (commandWord.equalsIgnoreCase("heal")){
+    } else if (commandWord.equalsIgnoreCase("heal")) {
       heal(command);
 
-    }else if (commandWord.equalsIgnoreCase("storage")) {
+    } else if (commandWord.equalsIgnoreCase("storage")) {
       System.out
           .println("You are currently using " + inventory.getCurrentWeight() + "% of your backpack's total storage.");
       ArrayList<Item> currInventory = inventory.getInventory();
@@ -317,30 +335,30 @@ public class Game {
     ArrayList<Item> currInventory = inventory.getInventory();
     if (!command.hasSecondWord()) {
       System.out.println("Heal with what?");
-      if (currInventory.size() == 0){
+      if (currInventory.size() == 0) {
         System.out.println("You have no items in your inventory that you can use to heal with.");
-      }else{
+      } else {
         System.out.println("You can heal with:");
-        for (Item i:currInventory){
-        if(i.canHeal())
-        System.out.println(i.getName());
+        for (Item i : currInventory) {
+          if (i.canHeal())
+            System.out.println(i.getName());
+        }
       }
-    }
       return;
-    }else{
+    } else {
       String secondWord = command.getSecondWord();
-      
+
       int index = getremoveObjIndex(secondWord, currInventory);
       if (index == -1 || !(currInventory.get(index).canHeal())) {
         System.out.println("You cannot use that item!");
         return;
       }
 
-      yourHealth+=currInventory.get(index).getDamage();
-      System.out.println("You have gained "+currInventory.get(index).getDamage()+". Your health is now "+yourHealth);
+      yourHealth += currInventory.get(index).getDamage();
+      System.out
+          .println("You have gained " + currInventory.get(index).getDamage() + ". Your health is now " + yourHealth);
       currInventory.remove(index);
     }
-
 
   }
 
@@ -961,18 +979,17 @@ public class Game {
     System.out.println();
     System.out.println(currentRoom.longDescription());
 
-      int numItems = numItems();
-      int i = 0;
-      ArrayList<Item> itemsMaptemp = new ArrayList<Item>();
-      formatList(itemsMaptemp);
-      while (i < numItems) {
+    int numItems = numItems();
+    int i = 0;
+    ArrayList<Item> itemsMaptemp = new ArrayList<Item>();
+    formatList(itemsMaptemp);
+    while (i < numItems) {
 
-        System.out.println(itemRoom(itemsMaptemp).getDescription());
+      System.out.println(itemRoom(itemsMaptemp).getDescription());
 
-        i++;
+      i++;
 
-      }
-    
+    }
 
   }
 
