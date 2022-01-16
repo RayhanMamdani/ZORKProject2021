@@ -55,6 +55,10 @@ public class Item extends OpenableObject implements Serializable {
     return isWeapon;
   }
 
+  public boolean canHeal(){
+    return canHeal;
+  }
+
   public int getWeight() {
     return weight;
   }

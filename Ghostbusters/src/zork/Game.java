@@ -38,7 +38,7 @@ public class Game {
       initItems("src\\zork\\data\\items.json");
       initEnemies("src\\zork\\data\\enemies.json");
 
-      currentRoom = roomMap.get("LivingRoom");
+      currentRoom = roomMap.get("Bedroom");
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -257,7 +257,10 @@ public class Game {
 
       printHelp();
 
-    } else if (commandWord.equalsIgnoreCase("storage")) {
+    }else if (commandWord.equalsIgnoreCase("heal")){
+      heal(command);
+
+    }else if (commandWord.equalsIgnoreCase("storage")) {
       System.out
           .println("You are currently using " + inventory.getCurrentWeight() + "% of your backpack's total storage.");
       ArrayList<Item> currInventory = inventory.getInventory();
@@ -309,6 +312,37 @@ public class Game {
   }
 
   // implementations of user commands:
+
+  private void heal(Command command) {
+    ArrayList<Item> currInventory = inventory.getInventory();
+    if (!command.hasSecondWord()) {
+      System.out.println("Heal with what?");
+      if (currInventory.size() == 0){
+        System.out.println("You have no items in your inventory that you can use to heal with.");
+      }else{
+        System.out.println("You can heal with:");
+        for (Item i:currInventory){
+        if(i.canHeal())
+        System.out.println(i.getName());
+      }
+    }
+      return;
+    }else{
+      String secondWord = command.getSecondWord();
+      
+      int index = getremoveObjIndex(secondWord, currInventory);
+      if (index == -1 || !(currInventory.get(index).canHeal())) {
+        System.out.println("You cannot use that item!");
+        return;
+      }
+
+      yourHealth+=currInventory.get(index).getDamage();
+      System.out.println("You have gained "+currInventory.get(index).getDamage()+". Your health is now "+yourHealth);
+      currInventory.remove(index);
+    }
+
+
+  }
 
   private void unlock(Command command) {
     boolean unlocked = false;
