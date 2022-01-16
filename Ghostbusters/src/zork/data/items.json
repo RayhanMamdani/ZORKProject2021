@@ -48,7 +48,7 @@
             "description": "This is a Med Pack",
             "weight": 10,
             "damage": 100,
-            "startingroom": "Bedroom", 
+            "startingroom": "Study", 
             "iskey": false,
             "isWeapon": false,
             "canHeal":true,
@@ -100,7 +100,7 @@
             "description": "This is a key to your office. 'I <3 polymorphism' is engraved on the side. ",
             "weight": 1,
             "damage": 0,
-            "startingroom": "Bedroom",
+            "startingroom": "LivingRoom",
             "iskey": true,
             "isWeapon": false,
             "canHeal":false,
@@ -151,8 +151,8 @@
             "id": "Cosmic Proton Blaster",
             "name": "Cosmic Proton Blaster",
             "description": "",
-            "weight": 90,
-            "damage": 1000,
+            "weight": 85,
+            "damage": 80,
             "startingroom": "OfficeBasement", 
             "iskey": false,
             "isWeapon": true,
@@ -160,11 +160,11 @@
             "isOpenable": false
         },
         {
-            "id": "High-Frequence Ray Phaser",
-            "name": "High-Frequence Ray Phaser",
+            "id": "High-Frequency Ray Phaser",
+            "name": "High-Frequency Ray Phaser",
             "description": "",
-            "weight": 45,
-            "damage": 120,
+            "weight": 35,
+            "damage": 45,
             "startingroom": "Study", 
             "iskey": false,
             "isWeapon": true,
@@ -176,7 +176,7 @@
             "name": "Blaster of Omega Multitude",
             "description": "",
             "weight": 80,
-            "damage": 500,
+            "damage": 75,
             "startingroom": "Room One", 
             "iskey": false,
             "isWeapon": true,
@@ -194,7 +194,32 @@
             "isWeapon": true,
             "canHeal":false,
             "isOpenable": false
+        },
+        {
+            "id": "Bandage",
+            "name": "Bandage",
+            "description": "This is a Bandage",
+            "weight": 5,
+            "damage": 30,
+            "startingroom": "MailRoom", 
+            "iskey": false,
+            "isWeapon": false,
+            "canHeal":true,
+            "isOpenable": false
+        },
+        {
+            "id": "Healing Poison",
+            "name": "Healing Poison",
+            "description": "This is a Healing Poison",
+            "weight": 8,
+            "damage": 40,
+            "startingroom": "OfficeKitchen", 
+            "iskey": false,
+            "isWeapon": false,
+            "canHeal":true,
+            "isOpenable": false
         }
+        
 
     ]
 }

@@ -26,7 +26,7 @@
     "description": "A ghost approaches. It's blue hue highlights strange features.",
     "startingroom": "LivingRoom",
     "difficultylevel": 25,
-    "damage": 100
+    "damage": 5
 },
 
 {
@@ -44,7 +44,7 @@
     "description": "A ghost approaches. It's red glow seems just as angry as it's monstrous face.",
     "startingroom": "Hotel Bedroom",
     "difficultylevel": 75,
-    "damage": 5
+    "damage": 25
 },
 {
     "id": "Zuul the Gatekeeper",
