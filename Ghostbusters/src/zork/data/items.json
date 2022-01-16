@@ -150,7 +150,7 @@
         {
             "id": "Cosmic Proton Blaster",
             "name": "Cosmic Proton Blaster",
-            "description": "",
+            "description": "This is a comically large cosmic proton blaster. The word cosmic is emblazed on the sides in a bright neon.",
             "weight": 85,
             "damage": 80,
             "startingroom": "OfficeBasement", 
@@ -162,7 +162,7 @@
         {
             "id": "High-Frequency Ray Phaser",
             "name": "High-Frequency Ray Phaser",
-            "description": "",
+            "description": "This is a High-Frequency Ray Phaser. It's dulled paint suggests heavy usage.",
             "weight": 35,
             "damage": 45,
             "startingroom": "Study", 
@@ -172,9 +172,9 @@
             "isOpenable": false
         },
         {
-            "id": "Blaster of Omega Multitude",
+            "id": "Blaster of Omega Magnitude",
             "name": "Blaster of Omega Multitude",
-            "description": "",
+            "description": "This is the Blaster of Omega Magnitude. It's large body weighs down on your body. 'BOOM' is enscribed all over the weapon in black paint.",
             "weight": 80,
             "damage": 75,
             "startingroom": "Room One", 
@@ -186,7 +186,7 @@
         {
             "id": "Proton Pistol",
             "name": "Proton Pistol",
-            "description": "",
+            "description": "This is Proton Piston. It's both small and deadly.",
             "weight": 5,
             "damage": 10,
             "startingroom": "Bedroom", 
@@ -198,7 +198,7 @@
         {
             "id": "Bandage",
             "name": "Bandage",
-            "description": "This is a Bandage",
+            "description": "This is a Bandage. It's gauze and fabric are more relaible than any modern medicine.",
             "weight": 5,
             "damage": 30,
             "startingroom": "MailRoom", 
@@ -210,7 +210,7 @@
         {
             "id": "Healing Poison",
             "name": "Healing Poison",
-            "description": "This is a Healing Poison",
+            "description": "This is a Healing Poison. It's toxic properties have a postive effect.",
             "weight": 8,
             "damage": 40,
             "startingroom": "OfficeKitchen", 
