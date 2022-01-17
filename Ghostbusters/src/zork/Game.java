@@ -415,7 +415,7 @@ public class Game {
       }
 
       for (Exit exit : currentRoom.getExits()) {
-        if (exit.getKeyId().equals(currInventory.get(index).getId())) {
+        if (exit.getKeyId().equalsIgnoreCase(currInventory.get(index).getId())) {
           exit.setLocked(false);
           unlocked = true;
           keyName = currInventory.get(index).getName();
@@ -425,7 +425,9 @@ public class Game {
     }
     if (unlocked) {
       System.out.println("You unlocked a room with your " + keyName + "!");
-    }
+    }else
+      System.out.println("No room was unlocked.");
+
 
   }
 
@@ -486,7 +488,7 @@ public class Game {
       currEnemy.setDifficultyLevel(enemyHealth);
       System.out.println("You hit the " + currEnemy.getName() + "!");
       if (currEnemy.getDifficultylevel() <= 0) {
-        currEnemy.setisDead();
+        currEnemy.setIsDead(true);
         EnemiesList = EnemiesListtemp;
         System.out.println("You killed the " + currEnemy.getName() + "!");
       } else {
@@ -494,8 +496,13 @@ public class Game {
       }
       if (currEnemy.getisDead() == false) {
         yourHealth -= currEnemy.getDamage();
+        if (yourHealth<0){
+          System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
+            + " damage to you, you now have 0 health");
+        }else{
         System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
             + " damage to you, you now have " + yourHealth + " health");
+        }
       }
     }
 
@@ -524,16 +531,22 @@ public class Game {
       currEnemy.setDifficultyLevel(damage);
       System.out.println("You hit the " + currEnemy.getName() + "!");
       if (currEnemy.getDifficultylevel() <= 0) {
-        currEnemy.setisDead();
+        currEnemy.setIsDead(true);
         System.out.println("You killed the " + currEnemy.getName() + "!");
-        EnemiesList = EnemiesListtemp; // might be an error
+        EnemiesList = EnemiesListtemp; // might be an error. NO IT IS AN ERROR.
       } else {
         System.out.println("It's current health is " + currEnemy.getDifficultylevel());
       }
       if (currEnemy.getisDead() == false) {
         yourHealth -= currEnemy.getDamage();
+        if (yourHealth<0){
+          System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
+          + " damage to you, you now have 0 health");
+
+        }else{
         System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
             + " damage to you, you now have " + yourHealth + " health");
+        }
       }
     }
 
@@ -697,7 +710,7 @@ public class Game {
         Item item = itemsMap.get(i);
 
         if (item.getStartingItem() != null && parentIsValid(item, currentRoom)) { // gets an item that's in a object and the object is open and in the same room. 
-          if (inventory.addItem(item)) { //checks the user can add the item to their inventory
+          if (inventory.addItem(item)) { //adds the item to the users inventory if it can be added. method return true if item is added 
             noOpenableObjects = false;
             inventory.setCurrentWeight(itemsMap.get(i).getWeight()); //adds weight to the users inventory
             System.out.println(item.getName() + " added!");
@@ -710,40 +723,40 @@ public class Game {
 
       }
 
-      int numItems = numItems();
+      int numItems = numItems(); //gets the number of items you can take from itemsMap
       int j = 0;
-      ArrayList<Item> itemsMaptemp = new ArrayList<Item>();
-      formatList(itemsMaptemp);
+      ArrayList<Item> itemsMaptemp = new ArrayList<Item>(); //declares a new list called itemsMaptemp
+      formatList(itemsMaptemp); //adds all items from itemsMap to itemsMaptemp
 
-      while (j < numItems) {
+      while (j < numItems) { 
 
-        Item temp = itemRoom(itemsMaptemp);
-        if (inventory.addItem(temp)) {
-          inventory.setCurrentWeight(temp.getWeight());
+        Item temp = itemRoom(itemsMaptemp); //gets a valid item from itemsMaptemp then removes it
+        if (inventory.addItem(temp)) { //checks the user can add the item to their inventory
+          inventory.setCurrentWeight(temp.getWeight()); //adds weight to the users inventory
           System.out.println(temp.getName() + " " + "added!");
-          itemsMap.remove(getremoveIndex(temp.getName()));
+          itemsMap.remove(getremoveIndex(temp.getName())); //removes the item from the itemsMap
         }
 
         j++;
 
       }
 
-      if (numItems == 0 && noOpenableObjects) {
+      if (numItems == 0 && noOpenableObjects) { //checks there are no item the user can take 
 
         System.out.println("There are no items to take!");
       }
 
-    } else if (command.hasSecondWord()) {
+    } else if (command.hasSecondWord()) { //checks if the user specified an item 
 
       String itemName = command.getSecondWord();
 
-      int index = getremoveIndex(itemName);
+      int index = getremoveIndex(itemName); //gets the index of the item
 
-      if (index != -1 && inventory.addItem(itemsMap.get(index))) {
+      if (index != -1 && inventory.addItem(itemsMap.get(index))) { //checks if the item exists and adds the item to the users inventory if it can be added. method return true if item is added 
         System.out.println("Item added!");
-        inventory.setCurrentWeight(itemsMap.get(index).getWeight());
-        itemsMap.remove(index);
-      } else {
+        inventory.setCurrentWeight(itemsMap.get(index).getWeight()); //adds weight to the users inventory
+        itemsMap.remove(index); //removes the item from the itemsMap
+      } else { //the use cold not add the item to their inventory.
 
         System.out.println("You cannot add that item!");
       }
@@ -752,16 +765,16 @@ public class Game {
   }
 
 /**
- * this method checks weather an items parent (or the object the item is stored in) is in their room an is open.
+ * this method checks weather an items parent (in other words the object the item is stored in) is in their room an is open.
  * @param childItem
  * @param room
- * @return
+ * @return true if parent is valid, false if not.
  */
   private boolean parentIsValid(Item childItem, Room room) {
-    String itemName = childItem.getStartingItem().toLowerCase();
+    String itemName = childItem.getStartingItem().toLowerCase(); //gets the parent name
     for (Item item : itemsMap) {
       if (itemName.equals((item.getName().toLowerCase()))
-          && room.getRoomName().toLowerCase().equals(item.startingRoom().toLowerCase())) {
+          && room.getRoomName().toLowerCase().equals(item.startingRoom().toLowerCase())) { //if the object is in the room, return if the object is open.
         return item.isOpen();
       }
     }
@@ -850,7 +863,7 @@ public class Game {
   /**
    * Thus method checks if a user can teleport you can only drive/teleport from the Garage, Reception, Lobby and Concierge)
    * @param command the command object
-   * @return
+   * @return boolean
    */
   private boolean canTeleport(Command command) {
     String direction = command.getSecondWord();

@@ -126,7 +126,6 @@
       "exits": [
         {
           "isLocked": false,
-          "keyId": "2",
           "direction": "West",
           "adjacentRoom": "Reception"
         }
@@ -143,12 +142,13 @@
       "description": "This is a reception. An empty desk contains a mess of stationaries that have been not been organized in a long time. ",
       "exits": [
         {
-          "isLocked": true,
+          "isLocked": false,
           "direction": "East",
           "adjacentRoom": "OfficeKitchen"
         },
         {
           "isLocked": true,
+          "keyId": "2",
           "direction": "North",
           "adjacentRoom": "OfficeStairUp"
         }
