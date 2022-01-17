@@ -45,7 +45,11 @@ public class SimpleAudioPlayer {
 
     // Work as the user enters his choice
 
-    // Method to play the audio
+   /**
+    * Method that plays the audio
+    * @throws Exception
+    * returns nothing as it is void
+    */
     public void play() throws Exception{
 
         
@@ -63,9 +67,14 @@ public class SimpleAudioPlayer {
 
     }
 
-    // Method to pause the audio
-
-    // Method to reset audio stream
+ 
+/**
+ * Method that resets the audio
+ * @throws UnsupportedAudioFileException
+ * @throws IOException
+ * @throws LineUnavailableException
+ * Doesn't return anything as it is void
+ */
     public void resetAudioStream() throws UnsupportedAudioFileException, IOException,
             LineUnavailableException {
         audioInputStream = AudioSystem.getAudioInputStream(

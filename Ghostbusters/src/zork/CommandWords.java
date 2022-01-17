@@ -32,6 +32,10 @@ public class CommandWords {
     System.out.println();
   }
 
+  /**
+   * Acessor method that gets the array of valid commands
+   * @return // returns the valid commands array
+   */
   public String[] getCommands() {
     return validCommands;
   }
