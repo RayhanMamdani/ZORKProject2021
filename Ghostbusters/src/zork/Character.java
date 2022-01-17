@@ -10,12 +10,13 @@ public class Character implements Serializable {
     private String dialogue;
 
     /**
-     * Constructor that creates a new character object
+     * This is a constructor for a Character Object
      * @param id the character id from the json and it is a string
      * @param name the name from the json and it is a string
      * @param description the description from the json and it is a string
      * @param startingroom the starting room from the json and it is a string
      * @param dialogue the dialogue from the json and it is a string
+     * No return since it is a constructor
      */
     public Character(String id, String name, String description, String startingroom, String dialogue){
         this.id = id;
@@ -28,6 +29,7 @@ public class Character implements Serializable {
 
     /**
      * Empty no argument constructor
+     * No return since it is a constructor
      */
     public Character (){
 
@@ -51,7 +53,7 @@ public class Character implements Serializable {
         isDead = true;
     }
        /**
-     * Acessor Method that changes the isDead variable
+     * Accessor Method that changes the isDead variable
      @return returns the is dead variable
      */
 
@@ -61,7 +63,7 @@ public class Character implements Serializable {
     }
 
          /**
-     * Acessor Method that gets the name variable
+     * Accessor Method that gets the name variable
      @return returns the name variable
      */
 
@@ -70,7 +72,7 @@ public class Character implements Serializable {
     }
 
         /**
-     * Acessor Method that gets the description variable
+     * Accessor Method that gets the description variable
      @return returns the description variable
      */
     public String getDescription(){
@@ -78,7 +80,7 @@ public class Character implements Serializable {
     }
 
         /**
-     * Acessor Method that gets the startingroom variable
+     * Accessor Method that gets the startingroom variable
      @return returns the startingroom variable
      */
     public String getStartingroom(){
@@ -86,7 +88,7 @@ public class Character implements Serializable {
     }
 
         /**
-     * Acessor Method that gets the dialogue variable
+     * Accessor Method that gets the dialogue variable
      @return returns the dialogue variable
      */
     public String getDialogue(){
