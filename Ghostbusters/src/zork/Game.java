@@ -38,7 +38,7 @@ public class Game {
       initItems("src\\zork\\data\\items.json");
       initEnemies("src\\zork\\data\\enemies.json");
 
-      currentRoom = roomMap.get("Attic");
+      currentRoom = roomMap.get("Bedroom");
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -192,6 +192,7 @@ public class Game {
       System.out.println();
       System.out.println();
       System.out.println(currentRoom.getNpc().getDialogue());
+        System.out.println();
     }
 
     while (!isFinished) {
@@ -205,7 +206,7 @@ public class Game {
       if (!(yourHealth > 0)) {
         isFinished = true;
         System.out.println("You died. Better luck next time!");
-      } else if (EnemiesList.get(0).getisDead()){
+      } else if (EnemiesList.size() == 0 || !(EnemiesList.get(0).getName()).equals("Stay Puft")){
         isFinished = true;
         System.out.println("You win. You have killed Stay Puft");
       }
@@ -327,6 +328,14 @@ public class Game {
     } else if (commandWord.equalsIgnoreCase("look")) {
       System.out.println(currentRoom.longDescription());
 
+      
+    if (currentRoom.hasNpc()) {
+      System.out.println();
+      System.out.println();
+      System.out.println(currentRoom.getNpc().getDialogue());
+        System.out.println();
+    }
+
       int numItems = numItems();
       int i = 0;
       ArrayList<Item> itemsMaptemp = new ArrayList<Item>();
@@ -381,10 +390,11 @@ public class Game {
         return;
       }
 
-      yourHealth += currInventory.get(index).getDamage();
-      System.out
-          .println("You have gained " + currInventory.get(index).getDamage() + ". Your health is now " + yourHealth);
-      currInventory.remove(index);
+        yourHealth += currInventory.get(index).getDamage();
+        System.out.println("You have gained " + currInventory.get(index).getDamage() + " health. Your health is now " + yourHealth);
+        inventory.minusCurrentWeight(currInventory.get(index).getWeight());
+         currInventory.remove(index);
+
     }
 
   }
@@ -825,10 +835,12 @@ public class Game {
 
       currentRoom = roomMap.get(format(direction));
 
+      System.out.println();
       System.out.println(currentRoom.longDescription());
 
       if (currentRoom.hasNpc()) {
         System.out.println(currentRoom.getNpc().getDialogue()); // if there is a character print their dialog
+        System.out.println();
       }
 
       int numItems = numItems();
@@ -928,6 +940,7 @@ public class Game {
       System.out.println(currentRoom.longDescription());
       if (currentRoom.hasNpc()) {
         System.out.println(currentRoom.getNpc().getDialogue());
+        System.out.println();
       }
 
       int numItems = numItems();
@@ -1131,6 +1144,12 @@ public class Game {
     System.out.println();
     System.out.println(currentRoom.longDescription());
 
+    if (currentRoom.hasNpc()) {
+      System.out.println();
+      System.out.println();
+      System.out.println(currentRoom.getNpc().getDialogue());
+        System.out.println();
+    }
     int numItems = numItems();
     int i = 0;
     ArrayList<Item> itemsMaptemp = new ArrayList<Item>();
@@ -1142,6 +1161,7 @@ public class Game {
       i++;
 
     }
+
 
   }
 

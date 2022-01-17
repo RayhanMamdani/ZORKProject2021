@@ -17,9 +17,9 @@
 {
     "id": "Louis",
     "name":"Louis",
-    "description": "Thanks for the rescue! You better stay alert though, we've had sightings of Stay Puft by the abandoned house down the road. We'd go with you but we're too beat up after that capture. Good luck!",
+    "description": "Thanks for the rescue! You better stay alert though, we've had sightings of Stay Puft in the abandoned house down the road. We'd go with you but we're too beat up after that capture. Good luck!",
     "startingroom": "Lobby",
-    "dialogue": " Louis: Thanks for the rescue! You better stay alert though, we've had sightings of Stay Puft by the abandoned house down the road. We'd go with you but we're too beat up after that capture. Good luck!"
+    "dialogue": " Louis: Thanks for the rescue! You better stay alert though, we've had sightings of Stay Puft in the abandoned house down the road. We'd go with you but we're too beat up after that capture. Good luck!"
 }
 
 

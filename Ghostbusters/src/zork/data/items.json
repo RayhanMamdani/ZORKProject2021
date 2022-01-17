@@ -150,7 +150,7 @@
         {
             "id": "Cosmic Proton Blaster",
             "name": "Cosmic Proton Blaster",
-            "description": "This is a comically large cosmic proton blaster. The word cosmic is emblazed on the sides in a bright neon.",
+            "description": "This is a cosmic proton blaster. The word cosmic is emblazed on the sides in a bright neon.",
             "weight": 85,
             "damage": 80,
             "startingroom": "OfficeBasement", 
