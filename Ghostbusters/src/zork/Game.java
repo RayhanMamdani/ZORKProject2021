@@ -545,28 +545,29 @@ public class Game {
    * This is a void method so no return type
    */
   private void openItem(Command command) {
-    if (!command.hasSecondWord()) {
+    if (!command.hasSecondWord()) { // checks if the user gives a item to open.
+    
       System.out.println("Open What?");
-      return;
+      return; //exits because the user did not give an item to open
     }
     String currRoomName = currentRoom.getRoomName();
     String secondWord = command.getSecondWord().toLowerCase();
     Item itemToOpen = null;
-    for (Item item : itemsMap) { 
+    for (Item item : itemsMap) { // finds the item to open in itemsMap.
       if (item.startingRoom() != null && item.startingRoom().equals(currRoomName)
           && secondWord.equals((item.getName().toLowerCase()))) {
         itemToOpen = item;
       }
     }
-    if (itemToOpen == null) {
+    if (itemToOpen == null) { //checks if the string they gave match's a valid item in their room.
       System.out.println("The " + secondWord + " is not in this room");
       return;
     }
-    if (!itemToOpen.isOpenable()) {
+    if (!itemToOpen.isOpenable()) { //checks if the item is openable.
       System.out.println(itemToOpen.getName() + " is not openable.");
       return;
     }
-    if (!itemToOpen.isLocked()) {
+    if (!itemToOpen.isLocked()) { // checks if the item is not locked
       itemToOpen.setOpen(true);
       System.out.println(itemToOpen.getName() + " is open.");
       return;
@@ -688,20 +689,20 @@ public class Game {
       System.out.println("Take What?");
 
       return;
-    } else if (command.getSecondWord().equalsIgnoreCase("all")) {
+    } else if (command.getSecondWord().equalsIgnoreCase("all")) { //checks if they want to take everything in the currentRoom
 
       boolean noOpenableObjects = true;
 
       for (int i = 0; i < itemsMap.size(); i++) {
         Item item = itemsMap.get(i);
 
-        if (item.getStartingItem() != null && parentIsValid(item, currentRoom)) {
-          if (inventory.addItem(item)) {
+        if (item.getStartingItem() != null && parentIsValid(item, currentRoom)) { // gets an item that's in a object and the object is open and in the same room. 
+          if (inventory.addItem(item)) { //checks the user can add the item to their inventory
             noOpenableObjects = false;
-            inventory.setCurrentWeight(itemsMap.get(i).getWeight());
+            inventory.setCurrentWeight(itemsMap.get(i).getWeight()); //adds weight to the users inventory
             System.out.println(item.getName() + " added!");
 
-            itemsMap.remove(i); // could add arraylist to support multiple openables
+            itemsMap.remove(i); //removes the item from the itemsMap
 
           }
 
@@ -750,6 +751,12 @@ public class Game {
 
   }
 
+/**
+ * this method checks weather an items parent (or the object the item is stored in) is in their room an is open.
+ * @param childItem
+ * @param room
+ * @return
+ */
   private boolean parentIsValid(Item childItem, Room room) {
     String itemName = childItem.getStartingItem().toLowerCase();
     for (Item item : itemsMap) {
