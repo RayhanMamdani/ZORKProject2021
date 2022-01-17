@@ -38,7 +38,7 @@ public class Game {
       initItems("src\\zork\\data\\items.json");
       initEnemies("src\\zork\\data\\enemies.json");
 
-      currentRoom = roomMap.get("Bedroom");
+      currentRoom = roomMap.get("Attic");
 
     } catch (Exception e) {
       e.printStackTrace();
@@ -113,7 +113,7 @@ public class Game {
   }
 
   /**
- * Inits the Items and adds it into the items array. 
+ * Inits the Items and adds it into the items arrayList. 
  * (since it is void there is no return type.)
  * @param filePath // the file of path the items.json file
  * @throws IOException
@@ -151,7 +151,7 @@ public class Game {
   }
 
    /**
- * Inits the enemies and puts them into an array. 
+ * Inits the enemies and puts them into an arrayList. 
  * (since it is void there is no return type.)
  * @param filePath // the file of path the enemies.json file
  * @throws IOException
@@ -629,10 +629,10 @@ public class Game {
   }
 
   /**
-   * This gets the index of a specified itemName in the current inventory array
+   * This gets the index of a specified itemName in the current inventory arrayList
    * @param itemName // the name of the item we are looking for
    * @param currInventory // the current inventory
-   * @return returns the index of the object or -1 if it cannot be found in the array
+   * @return returns the index of the object or -1 if it cannot be found in the arrayList
    */
   private int getremoveObjIndex(String itemName, ArrayList<Item> currInventory) {
 
@@ -675,7 +675,7 @@ public class Game {
 
   /**
    * This method prints all of the items a user has in their inventory
-   * @param itemsarr // The user's current inventory, the array is an item object array
+   * @param itemsarr // The user's current inventory, the arrayList is an item object arrayList
    */
   private void printItems(ArrayList<Item> itemsarr) {
     for (Item i : itemsarr) {
@@ -782,9 +782,9 @@ public class Game {
   }
 
   /**
-   * This is a method that returns the index of an item name in the items array
-   * @param item // the item name that the user wants to use
-   * @return returns the index of the item in the array, if it is not there it will return -1.
+   * This is a method that returns the index of an item name in the items arrayList
+   * @param item // the item name that the user wants to use it is a string
+   * @return returns the index of the item in the arrayList, if it is not there it will return -1.
    */
   private int getremoveIndex(String item) {
     int index = -1;
@@ -808,6 +808,7 @@ public class Game {
    * This is a method used for teleporting between different locations (ie. driving). It takes in the command object and 
    * changes the current room to the room that the user would like to go to (note you can only drive from the Garage, Reception, Lobby and Concierge)
    * @param command // the command object
+   * void so it doesn't return anything
    */
   private void teleport(Command command) {
     if (!command.hasSecondWord()) {
@@ -862,8 +863,8 @@ public class Game {
 
   /**
    * Thus method checks if a user can teleport you can only drive/teleport from the Garage, Reception, Lobby and Concierge)
-   * @param command the command object
-   * @return boolean
+   * @param command the command object that is used to check the direction that the user stated in the terminal
+   * @return
    */
   private boolean canTeleport(Command command) {
     String direction = command.getSecondWord();
@@ -888,6 +889,7 @@ public class Game {
   /**
    * Try to go to one direction. If there is an exit, enter the new room,
    * otherwise print an error message.
+   @param comand it is the command object that is used to get the commandWord
    */
   private void goRoom(Command command) {
     String commandWord = command.getCommandWord();
@@ -965,8 +967,8 @@ public class Game {
   }
 
    /**
-   * Copies all of the elements in the Enemies array into a temporary array list of enemies
-   * @param itemsMaptemp // the empty array list that will have all of the copied elements at the end
+   * Copies all of the elements in the Enemies arrayList into a temporary array list of enemies
+   * @param itemsMaptemp // the empty array list that will have all of the copied elements at the end, it is an arrayList of enemy objects
    * This is a void method so it won't return anything
    */
 
@@ -978,7 +980,7 @@ public class Game {
 
   /**
    * Removes the item from the room after a user has picked it up
-   * @param itemsMaptemp // the copied arraylist that has all the elements from the itemsmap array
+   * @param itemsMaptemp // the copied arraylist that has all the elements from the itemsmap arrayList, it is an arrayList of item objects
    * @return returns an empty item object if the index is -1 other wise returns the object that it removed.
    */
   private Item itemRoom(ArrayList<Item> itemsMaptemp) {
@@ -1002,7 +1004,7 @@ public class Game {
 
     /**
    * Removes the enemy from the room after a user has killed them
-   * @param itemsMaptemp // the copied arraylist that has all the elements from the enemies array
+   * @param itemsMaptemp // the copied arraylist that has all the elements from the enemies arrayList, it  is an arrayList of enemy objects
    * @return returns an empty item object if the index is -1 other wise returns the object that it removed.
    */
   private Enemy EnemyRoom(ArrayList<Enemy> EnemyListTemp) {
@@ -1069,6 +1071,7 @@ public class Game {
 
   /**
    * This is a method that is used for teleporation, it formats the user's input so that way any input can be accepted
+   @param str the string that we want to format
    * @return // returns the string after it has been formatted
    */
   private String format(String str) {

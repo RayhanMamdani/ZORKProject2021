@@ -9,15 +9,14 @@ public class Character implements Serializable {
     private boolean isDead = false;
     private String dialogue;
 
-
     /**
-     * 
-     * @param id 
-     * @param name
-     * @param description
-     * @param startingroom
-     * @param dialogue
-     * constructs a new Character
+     * This is a constructor for a Character Object
+     * @param id the character id from the json and it is a string
+     * @param name the name from the json and it is a string
+     * @param description the description from the json and it is a string
+     * @param startingroom the starting room from the json and it is a string
+     * @param dialogue the dialogue from the json and it is a string
+     * No return since it is a constructor
      */
     public Character(String id, String name, String description, String startingroom, String dialogue){
         this.id = id;
@@ -27,46 +26,70 @@ public class Character implements Serializable {
         this.dialogue=dialogue;
 
     }
+
     /**
-     * constructs and empty Character
+     * Empty no argument constructor
+     * No return since it is a constructor
      */
     public Character (){
 
         
     }
+
     /**
-     * 
-     * @return String
-     * returns the characters id
+     * Accessor method that gets the id
+     * @return returns the id
      */
     public String getId(){
         return id;
     }
 
-    /**
-     * 
-     * @return Character name
+        /**
+     * Method that changes the isDead variable to true
+     * Void so no return type
      */
+    public void setisDead(){
+
+        isDead = true;
+    }
+       /**
+     * Accessor Method that changes the isDead variable
+     @return returns the is dead variable
+     */
+
+    public boolean getisDead(){
+
+        return isDead;
+    }
+
+         /**
+     * Accessor Method that gets the name variable
+     @return returns the name variable
+     */
+
     public String getName(){
         return name;
     }
-    /**
-     * 
-     * @return Character description
+
+        /**
+     * Accessor Method that gets the description variable
+     @return returns the description variable
      */
     public String getDescription(){
         return description;
     }
-    /**
-     * 
-     * @return Character Starting room
+
+        /**
+     * Accessor Method that gets the startingroom variable
+     @return returns the startingroom variable
      */
     public String getStartingroom(){
         return startingroom;
     }
-    /**
-     * 
-     * @return Character dialogue
+
+        /**
+     * Accessor Method that gets the dialogue variable
+     @return returns the dialogue variable
      */
     public String getDialogue(){
         return dialogue;

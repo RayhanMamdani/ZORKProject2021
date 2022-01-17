@@ -18,13 +18,16 @@ public class Command {
   /**
    * Return the command word (the first word) of this command. If the command was
    * not understood, the result is null.
+   *
+   @return returns the commandWord
    */
   public String getCommandWord() {
     return commandWord;
   }
 
   /**
-   * Return the second word of this command. Returns null if there was no second
+   * Accessor Method
+   @return returns the second word of this command. Returns null if there was no second
    * word.
    */
   public String getSecondWord() {
@@ -32,14 +35,16 @@ public class Command {
   }
 
   /**
-   * Return true if this command was not understood.
+   * Checks if the command was understood
+   @return returns true if this command was not understood.
    */
   public boolean isUnknown() {
     return (commandWord == null);
   }
 
   /**
-   * Return true if the command has a second word.
+   * Checks if the command has a second word
+   @return returns true if the command has a second word.
    */
   public boolean hasSecondWord() {
     return (secondWord != null && !secondWord.equals(""));
