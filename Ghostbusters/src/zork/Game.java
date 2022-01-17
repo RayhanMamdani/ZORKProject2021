@@ -287,7 +287,9 @@ public class Game {
     } else if ((commandWord.equalsIgnoreCase("inventory"))) {
       showInventory();
 
-    } else if (commandWord.equalsIgnoreCase("open")) {
+    } else if (commandWord.equalsIgnoreCase("damage")){
+      getDamage(command);
+    }else if (commandWord.equalsIgnoreCase("open")) {
       openItem(command);
 
     } else if (commandWord.equalsIgnoreCase("fight")) {
@@ -358,6 +360,55 @@ public class Game {
     }
     return;
   }
+
+  private void getDamage(Command command) {
+
+    String itemName = command.getSecondWord();
+    ArrayList<Item> currInventory = inventory.getInventory();
+
+    if (!command.hasSecondWord()){
+      System.out.println("What weapon would you like to check the damage of?");
+      int numisWeapon = 0;
+      for (Item i: currInventory){
+        if (i.isWeapon()){
+          System.out.println(i.getName());
+          numisWeapon++;
+        }
+      }
+        if (numisWeapon == 0){
+          System.out.println("You have no weapons in your inventory");
+        }
+      
+    }else if (command.getSecondWord().equalsIgnoreCase("all")){
+      boolean hasWeapon = false;
+        for (Item i: currInventory){
+        if (i.isWeapon()){
+          System.out.println(i.getName()+" Deals "+i.getDamage()+" Damage");
+           hasWeapon = true;
+        }
+      }
+
+      if (!hasWeapon){
+        System.out.println("You have no weapons in your inventory!");
+        return;
+    }
+    
+    
+  }else{
+    boolean hasWeapon = false;
+    for (Item i: currInventory){
+      if (i.isWeapon() && i.getName().toLowerCase().replaceAll("\\s+", "").indexOf(itemName.toLowerCase()) >= 0){
+        System.out.println(i.getName()+" Deals "+i.getDamage()+" Damage");
+        hasWeapon = true;
+      }
+    }
+    if (!hasWeapon){
+        System.out.println("That is not a weapon, silly!");
+        return;
+      
+    }
+  }
+}
 
   /**
    * This method is for the heal command. It updates the user's health based on the item they want to use for healing
@@ -825,7 +876,7 @@ public class Game {
       // if there is no second word, we don't know where to drive...
       System.out.println("Drive Where?");
 
-      System.out.println("You can drive from the Garage, Reception, Lobby and Concierge");
+      System.out.println("You can drive between the House, Office, Abandoned House and the Hotel.");
 
       return;
     }
@@ -833,7 +884,21 @@ public class Game {
 
     if (canTeleport(command)) {
 
-      currentRoom = roomMap.get(format(direction));
+      String commandWord = command.getSecondWord();
+      if (commandWord.equalsIgnoreCase("House")){
+
+      currentRoom = roomMap.get("Garage");
+      }else if (commandWord.equalsIgnoreCase("Office")){
+        currentRoom = roomMap.get("Reception");
+
+      }else if (commandWord.equalsIgnoreCase("AbandonedHouse")){
+        currentRoom = roomMap.get("Lobby");
+      }else if (commandWord.equalsIgnoreCase("Hotel")){
+        currentRoom = roomMap.get("Concierge");
+      }else{
+        System.out.println("You cannot drive there!");
+        return;
+      }
 
       System.out.println();
       System.out.println(currentRoom.longDescription());
@@ -870,6 +935,7 @@ public class Game {
     } else {
 
       System.out.println("You Cannot Drive Anywhere From Here!");
+      System.out.println("You can drive between the House, Office, Abandoned House and the Hotel.");
     }
   }
 
@@ -884,8 +950,8 @@ public class Game {
         || currentRoom.getRoomName().equalsIgnoreCase("Reception")
         || currentRoom.getRoomName().equalsIgnoreCase("Abandoned House Lobby")
         || currentRoom.getRoomName().equalsIgnoreCase("Concierge"))
-        && (direction.equalsIgnoreCase("Garage") || direction.equalsIgnoreCase("Reception")
-            || direction.equalsIgnoreCase("Lobby") || direction.equalsIgnoreCase("Concierge"));
+        && (direction.equalsIgnoreCase("Office") || direction.equalsIgnoreCase("AbandonedHouse")
+            || direction.equalsIgnoreCase("Hotel") || direction.equalsIgnoreCase("House"));
   }
 
   /**
@@ -1082,16 +1148,7 @@ public class Game {
 
   }
 
-  /**
-   * This is a method that is used for teleporation, it formats the user's input so that way any input can be accepted
-   @param str the string that we want to format
-   * @return // returns the string after it has been formatted
-   */
-  private String format(String str) {
 
-    return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
-
-  }
 
   /**
    * This method saves the game, it saves where you are, how many enemies you've killed, how many items you have picked up etc.
