@@ -51,19 +51,8 @@ public class SimpleAudioPlayer {
     * returns nothing as it is void
     */
     public void play() throws Exception{
-
-        
-
-        //SimpleAudioPlayer audioPlayer = new SimpleAudioPlayer();
-                    // start the clip
-        clip.start();
-
+        clip.start(); //starts a new thread
         status = "play";
-
-        
-
-     
-
 
     }
 
