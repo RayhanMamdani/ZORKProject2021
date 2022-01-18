@@ -275,7 +275,7 @@ public class Game {
     }
 
     String commandWord = command.getCommandWord();
-    if (hastoFight(command) == false && !commandWord.equals("quit")) {
+    if (hastoFight(command) == false) {
       return;
     }
 
@@ -433,12 +433,21 @@ public class Game {
     if (!command.hasSecondWord()) {
       System.out.println("Heal with what?");
       if (currInventory.size() == 0) {
-        System.out.println("You have no items in your inventory that you can use to heal with.");
+        System.out.println("You have no items in your inventory.");
       } else {
-        System.out.println("You can heal with:");
+        int numHeal = 0;
         for (Item i : currInventory) {
           if (i.canHeal())
-            System.out.println(i.getName());
+            numHeal++;
+        }
+        if (numHeal != 0) {
+          System.out.println("You can heal with:");
+          for (Item i : currInventory) {
+            if (i.canHeal())
+              System.out.println(i.getName());
+          }
+        } else {
+          System.out.println("You have no healing items.");
         }
       }
       return;
@@ -456,7 +465,20 @@ public class Game {
           "You have gained " + currInventory.get(index).getDamage() + " health. Your health is now " + yourHealth);
       inventory.minusCurrentWeight(currInventory.get(index).getWeight());
       currInventory.remove(index);
+      ArrayList<Enemy> EnemiesListtemp = new ArrayList<Enemy>();
+      formatListEnemies(EnemiesListtemp);
+      Enemy currEnemy = EnemyRoom(EnemiesListtemp);
+      if (currEnemy.getName() != null) {
+        yourHealth -= currEnemy.getDamage();
+        if (yourHealth < 0) {
+          System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
+              + " damage to you");
 
+        } else {
+          System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
+              + " damage to you, you now have " + yourHealth + " health");
+        }
+      }
     }
 
   }
@@ -511,7 +533,7 @@ public class Game {
     if (unlocked) {
       System.out.println("You unlocked a room with your " + keyName + "!");
     } else
-      System.out.println("You don't have the right key.");
+      System.out.println("That's not the required key.");
 
   }
 
@@ -528,7 +550,7 @@ public class Game {
 
     for (Enemy temp : EnemiesList) {
       if (currentRoom.getRoomName().equals(temp.getStartingroom())
-          && !commandWord.equalsIgnoreCase("fight")) {
+          && !commandWord.equalsIgnoreCase("fight") && !commandWord.equals("quit") && !commandWord.equals("heal")) {
         System.out.println("You have to fight the " + temp.getName());
         return false;
       }
@@ -585,10 +607,10 @@ public class Game {
       if (currEnemy.getisDead() == false) {
         yourHealth -= currEnemy.getDamage();
         if (yourHealth < 0) {
-          System.out.println(currEnemy.getName() + " dealt " + currEnemy.getDamage()
+          System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
               + " damage to you, you now have 0 health");
         } else {
-          System.out.println(currEnemy.getName() + " dealt " + currEnemy.getDamage()
+          System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
               + " damage to you, you now have " + yourHealth + " health");
         }
       }
@@ -628,11 +650,11 @@ public class Game {
       if (currEnemy.getisDead() == false) {
         yourHealth -= currEnemy.getDamage();
         if (yourHealth < 0) {
-          System.out.println(currEnemy.getName() + " dealt " + currEnemy.getDamage()
+          System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
               + " damage to you, you now have 0 health");
 
         } else {
-          System.out.println(currEnemy.getName() + " dealt " + currEnemy.getDamage()
+          System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
               + " damage to you, you now have " + yourHealth + " health");
         }
       }

@@ -7,7 +7,7 @@
          "description": "This is a Proton pack. Despite all it's damage and use it's never let you down.",
          "weight": 20,
          "damage": 50,
-         "startingroom": "Reception", 
+         "startingroom": "OfficeBasement", 
          "iskey": false,
          "isWeapon": true,
          "canHeal":false,
@@ -45,7 +45,7 @@
         {
             "id": "First-Aid Kit",
             "name": "First-Aid Kit",
-            "description": "This is a First-Aid Kit From bandages to medicine, this pack has everything you need",
+            "description": "This is a First-Aid Kit. From bandages to medicine, this pack has everything you need",
             "weight": 10,
             "damage": 100,
             "startingroom": "Study", 
@@ -59,7 +59,7 @@
         {
             "id": "Key1",
             "name": "House Key",
-            "description": "This is your housekey. A keychain with the logo of the hit blockbuster movie 'Spook Chasers' hangs off the end.",
+            "description": "This is your house key. A keychain with the logo of the hit blockbuster movie 'Spook Chasers' hangs off the end.",
             "weight": 1,
             "damage": 100,
             "startingroom": "HouseKitchen",
@@ -99,7 +99,7 @@
 
             "id": "Ghost Trap",
             "name": "Ghost Trap",
-            "description": "This old technology seems to be ancient. But it still does the trick!",
+            "description": "This is a ghost trap. This old technology seems to be ancient. But it still does the trick!",
             "weight": 30,
             "damage": 25,
             "startingroom": "",
@@ -123,12 +123,12 @@
             "isOpenable": false
         },
         {
-            "id": "Cosmic Proton Blaster",
-            "name": "Cosmic Proton Blaster",
-            "description": "This is a cosmic proton blaster. The word cosmic is emblazed on the sides in a bright neon.",
+            "id": "Cosmic Proton Annihilator",
+            "name": "Cosmic Proton Annihilator",
+            "description": "This is a cosmic proton annihilator. The word cosmic is emblazed on the sides in a bright neon.",
             "weight": 85,
             "damage": 80,
-            "startingroom": "OfficeBasement", 
+            "startingroom": "Study", 
             "iskey": false,
             "isWeapon": true,
             "canHeal":false,
@@ -140,7 +140,7 @@
             "description": "This is a High-Frequency Ray Phaser. It's dulled paint suggests heavy usage.",
             "weight": 35,
             "damage": 45,
-            "startingroom": "Study", 
+            "startingroom": "OfficeBasement", 
             "iskey": false,
             "isWeapon": true,
             "canHeal":false,
@@ -151,8 +151,8 @@
             "name": "Blaster of Omega Multitude",
             "description": "This is the Blaster of Omega Magnitude. It's large body weighs down on your body. 'BOOM' is enscribed all over the weapon in black paint.",
             "weight": 80,
-            "damage": 75,
-            "startingroom": "Room One", 
+            "damage": 60,
+            "startingroom": "Hotel Bedroom", 
             "iskey": false,
             "isWeapon": true,
             "canHeal":false,
@@ -185,7 +185,7 @@
         {
             "id": "Healing Potion",
             "name": "Healing Potion",
-            "description": "This is a Healing Potion.",
+            "description": "This is a Healing Potion. You can depend on this trusty item when you are injured.",
             "weight": 8,
             "damage": 40,
             "startingroom": "OfficeKitchen", 
@@ -194,6 +194,5 @@
             "canHeal":true,
             "isOpenable": false
         }
-
     ]
 }

@@ -42,7 +42,7 @@
     "id": "The Red Ghost",
     "name":"The Red Ghost",
     "description": "A ghost approaches. It's red glow seems just as angry as it's monstrous face.",
-    "startingroom": "Hotel Bedroom",
+    "startingroom": "Room One",
     "difficultylevel": 75,
     "damage": 25
 },
@@ -50,7 +50,7 @@
     "id": "Zuul the Gatekeeper",
     "name":"Zuul the Gatekeeper",
     "description": "A gatekeeper approaches, he seems to be guarding something...",
-    "startingroom": "Storage Room",
+    "startingroom": "Study",
     "difficultylevel": 100,
     "damage": 15
 }
