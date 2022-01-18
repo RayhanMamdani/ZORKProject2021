@@ -527,7 +527,7 @@ public class Game {
     if (unlocked) {
       System.out.println("You unlocked a room with your " + keyName + "!");
     } else
-      System.out.println("You don't have the right key.");
+      System.out.println("That's not the required key.");
 
   }
 
