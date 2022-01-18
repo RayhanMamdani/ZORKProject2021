@@ -7,7 +7,7 @@
          "description": "This is a Proton pack. Despite all it's damage and use it's never let you down.",
          "weight": 20,
          "damage": 50,
-         "startingroom": "Reception", 
+         "startingroom": "OfficeBasement", 
          "iskey": false,
          "isWeapon": true,
          "canHeal":false,
@@ -128,7 +128,7 @@
             "description": "This is a cosmic proton blaster. The word cosmic is emblazed on the sides in a bright neon.",
             "weight": 85,
             "damage": 80,
-            "startingroom": "OfficeBasement", 
+            "startingroom": "Study", 
             "iskey": false,
             "isWeapon": true,
             "canHeal":false,
@@ -140,7 +140,7 @@
             "description": "This is a High-Frequency Ray Phaser. It's dulled paint suggests heavy usage.",
             "weight": 35,
             "damage": 45,
-            "startingroom": "Study", 
+            "startingroom": "OfficeBasement", 
             "iskey": false,
             "isWeapon": true,
             "canHeal":false,
@@ -151,8 +151,8 @@
             "name": "Blaster of Omega Multitude",
             "description": "This is the Blaster of Omega Magnitude. It's large body weighs down on your body. 'BOOM' is enscribed all over the weapon in black paint.",
             "weight": 80,
-            "damage": 75,
-            "startingroom": "Room One", 
+            "damage": 60,
+            "startingroom": "Hotel Bedroom", 
             "iskey": false,
             "isWeapon": true,
             "canHeal":false,
@@ -194,6 +194,5 @@
             "canHeal":true,
             "isOpenable": false
         }
-
     ]
 }

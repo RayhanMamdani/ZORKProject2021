@@ -42,7 +42,7 @@
     "id": "Red Ghost",
     "name":"Red Ghost",
     "description": "A ghost approaches. It's red glow seems just as angry as it's monstrous face.",
-    "startingroom": "Hotel Bedroom",
+    "startingroom": "Room One",
     "difficultylevel": 75,
     "damage": 25
 },

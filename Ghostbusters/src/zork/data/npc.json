@@ -10,14 +10,14 @@
     "name": "Winston",
     "description": "Hey thanks for freeing us, I can't believe that we actually got caught. There's still ghosts around so you better find a weapon. Maybe you'll find something in the hotel? I know theres a key to it somewhere around here.",
     "startingroom": "OfficeBasement",
-    "dialogue": "Winston: Hey thanks for freeing us, I can't believe that we actually got caught. There are still ghosts around so you better find a weapon. Maybe you'll find something in the Abandoned House? I know theres a key to it somewhere back in my hotel."
+    "dialogue": "Winston: Hey thanks for freeing me, that darn ghost was keeping me hostage. There are still ghosts around so you better find a weapon. Maybe you'll find one in the Abandoned House? I know theres a key to it somewhere back in my hotel."
 
 },
 
 {
     "id": "Louis",
     "name":"Louis",
-    "description": "Thanks for the rescue! You better stay alert though, we've had sightings of Stay Puft in the abandoned house down the road. We'd go with you but we're too beat up after that capture. Good luck!",
+    "description": "Thanks for saving our city! You better stay alert though, we've had sightings of Stay Puft in this house. You see, I wouldd go with you but I'm too beat up after running away from that ghost. Good luck!",
     "startingroom": "Lobby",
     "dialogue": " Louis: Thanks for the rescue! You better stay alert though, we've had sightings of Stay Puft in this house. We'd go with you but we're too beat up after that capture. Good luck!"
 }

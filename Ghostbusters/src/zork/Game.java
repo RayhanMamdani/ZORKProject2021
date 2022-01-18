@@ -46,13 +46,14 @@ public class Game {
     parser = new Parser();
   }
 
-/**
- * Inits the NPCS and puts the NPCS in their corresponding room
- * (since it is void there is no return type.)
- * @param filePath // the file of path the npcs.json file
- * @throws IOException
- * @throws ParseException
- */
+  /**
+   * Inits the NPCS and puts the NPCS in their corresponding room
+   * (since it is void there is no return type.)
+   * 
+   * @param filePath // the file of path the npcs.json file
+   * @throws IOException
+   * @throws ParseException
+   */
   private void initNpcs(String filePath) throws IOException, ParseException {
     Path path = Path.of(filePath);
     String jsonString = Files.readString(path);
@@ -73,12 +74,13 @@ public class Game {
   }
 
   /**
- * Inits the Rooms and puts the Rooms in their proper place
- * (since it is void there is no return type.)
- * @param filePath // the file of path the rooms.json file
- * @throws IOException
- * @throws ParseException
- */
+   * Inits the Rooms and puts the Rooms in their proper place
+   * (since it is void there is no return type.)
+   * 
+   * @param filePath // the file of path the rooms.json file
+   * @throws IOException
+   * @throws ParseException
+   */
 
   private void initRooms(String fileName) throws Exception {
     Path path = Path.of(fileName);
@@ -113,12 +115,13 @@ public class Game {
   }
 
   /**
- * Inits the Items and adds it into the items arrayList. 
- * (since it is void there is no return type.)
- * @param filePath // the file of path the items.json file
- * @throws IOException
- * @throws ParseException
- */
+   * Inits the Items and adds it into the items arrayList.
+   * (since it is void there is no return type.)
+   * 
+   * @param filePath // the file of path the items.json file
+   * @throws IOException
+   * @throws ParseException
+   */
   private void initItems(String fileName) throws Exception {
     Path path = Path.of(fileName);
     String jsonString = Files.readString(path);
@@ -150,13 +153,14 @@ public class Game {
     }
   }
 
-   /**
- * Inits the enemies and puts them into an arrayList. 
- * (since it is void there is no return type.)
- * @param filePath // the file of path the enemies.json file
- * @throws IOException
- * @throws ParseException
- */
+  /**
+   * Inits the enemies and puts them into an arrayList.
+   * (since it is void there is no return type.)
+   * 
+   * @param filePath // the file of path the enemies.json file
+   * @throws IOException
+   * @throws ParseException
+   */
 
   private void initEnemies(String fileName) throws Exception {
     Path path = Path.of(fileName);
@@ -192,7 +196,7 @@ public class Game {
       System.out.println();
       System.out.println();
       System.out.println(currentRoom.getNpc().getDialogue());
-        System.out.println();
+      System.out.println();
     }
 
     while (!isFinished) {
@@ -206,7 +210,7 @@ public class Game {
       if (!(yourHealth > 0)) {
         isFinished = true;
         System.out.println("You died. Better luck next time!");
-      } else if (EnemiesList.size() == 0 || !(EnemiesList.get(0).getName()).equals("Stay Puft")){
+      } else if (EnemiesList.size() == 0 || !(EnemiesList.get(0).getName()).equals("Stay Puft")) {
         isFinished = true;
         System.out.println("You win. You have killed Stay Puft");
       }
@@ -217,10 +221,11 @@ public class Game {
 
   /**
    * Print out the opening message for the player.
-   * Prints out the current room description, the items that are in the current room and the enemies that are in the current room. 
+   * Prints out the current room description, the items that are in the current
+   * room and the enemies that are in the current room.
    * No return type since it is void
    */
-  
+
   private void printWelcome() {
     System.out.println();
     System.out.println("Hello! Welcome to Ghostbusters. A new, innovative and totally original concept!");
@@ -260,7 +265,8 @@ public class Game {
   }
 
   /**
-   * Given a command, process (that is: execute) the command. It is void so there is no return type
+   * Given a command, process (that is: execute) the command. It is void so there
+   * is no return type
    */
   private void processCommand(Command command) {
     if (command.isUnknown()) {
@@ -269,10 +275,9 @@ public class Game {
     }
 
     String commandWord = command.getCommandWord();
-    if (hastoFight(command) == false && !commandWord.equals("quit")) {
+    if (hastoFight(command) == false) {
       return;
     }
-
 
     if (commandWord.equalsIgnoreCase("go"))
       goRoom(command);
@@ -287,9 +292,9 @@ public class Game {
     } else if ((commandWord.equalsIgnoreCase("inventory"))) {
       showInventory();
 
-    } else if (commandWord.equalsIgnoreCase("damage")){
+    } else if (commandWord.equalsIgnoreCase("damage")) {
       getDamage(command);
-    }else if (commandWord.equalsIgnoreCase("open")) {
+    } else if (commandWord.equalsIgnoreCase("open")) {
       openItem(command);
 
     } else if (commandWord.equalsIgnoreCase("fight")) {
@@ -330,13 +335,12 @@ public class Game {
     } else if (commandWord.equalsIgnoreCase("look")) {
       System.out.println(currentRoom.longDescription());
 
-      
-    if (currentRoom.hasNpc()) {
-      System.out.println();
-      System.out.println();
-      System.out.println(currentRoom.getNpc().getDialogue());
+      if (currentRoom.hasNpc()) {
         System.out.println();
-    }
+        System.out.println();
+        System.out.println(currentRoom.getNpc().getDialogue());
+        System.out.println();
+      }
 
       int numItems = numItems();
       int i = 0;
@@ -366,56 +370,56 @@ public class Game {
     String itemName = command.getSecondWord();
     ArrayList<Item> currInventory = inventory.getInventory();
 
-    if (!command.hasSecondWord()){
+    if (!command.hasSecondWord()) {
       System.out.println("What weapon would you like to check the damage of?");
       int numisWeapon = 0;
-      for (Item i: currInventory){
-        if (i.isWeapon()){
+      for (Item i : currInventory) {
+        if (i.isWeapon()) {
           System.out.println(i.getName());
           numisWeapon++;
         }
       }
-        if (numisWeapon == 0){
-          System.out.println("You have no weapons in your inventory");
-        }
-      
-    }else if (command.getSecondWord().equalsIgnoreCase("all")){
+      if (numisWeapon == 0) {
+        System.out.println("You have no weapons in your inventory");
+      }
+
+    } else if (command.getSecondWord().equalsIgnoreCase("all")) {
       boolean hasWeapon = false;
-        for (Item i: currInventory){
-        if (i.isWeapon()){
-          System.out.println(i.getName()+" Deals "+i.getDamage()+" Damage");
-           hasWeapon = true;
+      for (Item i : currInventory) {
+        if (i.isWeapon()) {
+          System.out.println(i.getName() + " Deals " + i.getDamage() + " Damage");
+          hasWeapon = true;
         }
       }
 
-      if (!hasWeapon){
+      if (!hasWeapon) {
         System.out.println("You have no weapons in your inventory!");
         return;
-    }
-    
-    
-  }else{
-    boolean hasWeapon = false;
-    for (Item i: currInventory){
-      if (i.isWeapon() && i.getName().toLowerCase().replaceAll("\\s+", "").indexOf(itemName.toLowerCase()) >= 0){
-        System.out.println(i.getName()+" Deals "+i.getDamage()+" Damage");
-        hasWeapon = true;
       }
-    }
-    if (!hasWeapon){
+
+    } else {
+      boolean hasWeapon = false;
+      for (Item i : currInventory) {
+        if (i.isWeapon() && i.getName().toLowerCase().replaceAll("\\s+", "").indexOf(itemName.toLowerCase()) >= 0) {
+          System.out.println(i.getName() + " Deals " + i.getDamage() + " Damage");
+          hasWeapon = true;
+        }
+      }
+      if (!hasWeapon) {
         System.out.println("That is not a weapon, silly!");
         return;
-      
+
+      }
     }
   }
-}
 
   /**
-   * This method is for the heal command. It updates the user's health based on the item they want to use for healing
+   * This method is for the heal command. It updates the user's health based on
+   * the item they want to use for healing
    * 
    * @param command the command object
    * 
-   * This is void so it doesn't return anything.
+   *                This is void so it doesn't return anything.
    */
 
   private void heal(Command command) {
@@ -423,12 +427,21 @@ public class Game {
     if (!command.hasSecondWord()) {
       System.out.println("Heal with what?");
       if (currInventory.size() == 0) {
-        System.out.println("You have no items in your inventory that you can use to heal with.");
+        System.out.println("You have no items in your inventory.");
       } else {
-        System.out.println("You can heal with:");
+        int numHeal = 0;
         for (Item i : currInventory) {
           if (i.canHeal())
-            System.out.println(i.getName());
+            numHeal++;
+        }
+        if (numHeal != 0) {
+          System.out.println("You can heal with:");
+          for (Item i : currInventory) {
+            if (i.canHeal())
+              System.out.println(i.getName());
+          }
+        } else {
+          System.out.println("You have no healing items.");
         }
       }
       return;
@@ -441,20 +454,37 @@ public class Game {
         return;
       }
 
-        yourHealth += currInventory.get(index).getDamage();
-        System.out.println("You have gained " + currInventory.get(index).getDamage() + " health. Your health is now " + yourHealth);
-        inventory.minusCurrentWeight(currInventory.get(index).getWeight());
-         currInventory.remove(index);
+      yourHealth += currInventory.get(index).getDamage();
+      System.out.println(
+          "You have gained " + currInventory.get(index).getDamage() + " health. Your health is now " + yourHealth);
+      inventory.minusCurrentWeight(currInventory.get(index).getWeight());
+      currInventory.remove(index);
+      ArrayList<Enemy> EnemiesListtemp = new ArrayList<Enemy>();
+      formatListEnemies(EnemiesListtemp);
+      Enemy currEnemy = EnemyRoom(EnemiesListtemp);
+      if (currEnemy.getName() != null) {
+        yourHealth -= currEnemy.getDamage();
+        if (yourHealth < 0) {
+          System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
+              + " damage to you");
 
+        } else {
+          System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
+              + " damage to you, you now have " + yourHealth + " health");
+        }
+      }
     }
 
   }
 
- /**
-  * This method is for the unlock command. It unlocks locked doors if a user has the correct key and if they state which key they would like to unlock the door with
-  * @param command // the command object
-  * it is void so there is no return type
-  */
+  /**
+   * This method is for the unlock command. It unlocks locked doors if a user has
+   * the correct key and if they state which key they would like to unlock the
+   * door with
+   * 
+   * @param command // the command object
+   *                it is void so there is no return type
+   */
 
   private void unlock(Command command) {
     boolean unlocked = false;
@@ -486,14 +516,15 @@ public class Game {
     }
     if (unlocked) {
       System.out.println("You unlocked a room with your " + keyName + "!");
-    }else
+    } else
       System.out.println("No room was unlocked.");
-
 
   }
 
   /**
-   * This is a method to check if the user can use commands (they won't be able to if they haven't defeated the enemy in that room)
+   * This is a method to check if the user can use commands (they won't be able to
+   * if they haven't defeated the enemy in that room)
+   * 
    * @param command the command object
    * @return returns false if they can't use any commands otherwise returns true
    */
@@ -503,7 +534,7 @@ public class Game {
 
     for (Enemy temp : EnemiesList) {
       if (currentRoom.getRoomName().equals(temp.getStartingroom())
-          && !commandWord.equalsIgnoreCase("fight")) {
+          && !commandWord.equalsIgnoreCase("fight") && !commandWord.equals("quit") && !commandWord.equals("heal")) {
         System.out.println("You have to fight the " + temp.getName());
         return false;
       }
@@ -513,9 +544,11 @@ public class Game {
   }
 
   /**
-   * This method is for the fight command. It runs the fight sequence for both the enemies and the players.
+   * This method is for the fight command. It runs the fight sequence for both the
+   * enemies and the players.
+   * 
    * @param command // the command object
-   * it is void so no return type
+   *                it is void so no return type
    */
   private void fight(Command command) {
     String itemName = command.getSecondWord();
@@ -557,12 +590,12 @@ public class Game {
       }
       if (currEnemy.getisDead() == false) {
         yourHealth -= currEnemy.getDamage();
-        if (yourHealth<0){
+        if (yourHealth < 0) {
           System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
-            + " damage to you, you now have 0 health");
-        }else{
-        System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
-            + " damage to you, you now have " + yourHealth + " health");
+              + " damage to you, you now have 0 health");
+        } else {
+          System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
+              + " damage to you, you now have " + yourHealth + " health");
         }
       }
     }
@@ -600,13 +633,13 @@ public class Game {
       }
       if (currEnemy.getisDead() == false) {
         yourHealth -= currEnemy.getDamage();
-        if (yourHealth<0){
+        if (yourHealth < 0) {
           System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
-          + " damage to you, you now have 0 health");
+              + " damage to you, you now have 0 health");
 
-        }else{
-        System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
-            + " damage to you, you now have " + yourHealth + " health");
+        } else {
+          System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
+              + " damage to you, you now have " + yourHealth + " health");
         }
       }
     }
@@ -614,15 +647,17 @@ public class Game {
   }
 
   /**
-   * This is the open item method. It makes sure that the user can open an item and they can take the object inside of it.
+   * This is the open item method. It makes sure that the user can open an item
+   * and they can take the object inside of it.
+   * 
    * @param command // the command object
-   * This is a void method so no return type
+   *                This is a void method so no return type
    */
   private void openItem(Command command) {
     if (!command.hasSecondWord()) { // checks if the user gives a item to open.
-    
+
       System.out.println("Open What?");
-      return; //exits because the user did not give an item to open
+      return; // exits because the user did not give an item to open
     }
     String currRoomName = currentRoom.getRoomName();
     String secondWord = command.getSecondWord().toLowerCase();
@@ -633,11 +668,11 @@ public class Game {
         itemToOpen = item;
       }
     }
-    if (itemToOpen == null) { //checks if the string they gave match's a valid item in their room.
+    if (itemToOpen == null) { // checks if the string they gave match's a valid item in their room.
       System.out.println("The " + secondWord + " is not in this room");
       return;
     }
-    if (!itemToOpen.isOpenable()) { //checks if the item is openable.
+    if (!itemToOpen.isOpenable()) { // checks if the item is openable.
       System.out.println(itemToOpen.getName() + " is not openable.");
       return;
     }
@@ -649,10 +684,13 @@ public class Game {
 
   }
 
-   /**
-   * This is the drop item method. It takes the item that the user wants to drop and it puts in in the current room. It also gets rid of that weight from their inventory
+  /**
+   * This is the drop item method. It takes the item that the user wants to drop
+   * and it puts in in the current room. It also gets rid of that weight from
+   * their inventory
+   * 
    * @param command // the command object
-   * This is a void method so no return type
+   *                This is a void method so no return type
    */
 
   private void dropObj(Command command) {
@@ -690,10 +728,13 @@ public class Game {
   }
 
   /**
-   * This gets the index of a specified itemName in the current inventory arrayList
-   * @param itemName // the name of the item we are looking for
+   * This gets the index of a specified itemName in the current inventory
+   * arrayList
+   * 
+   * @param itemName      // the name of the item we are looking for
    * @param currInventory // the current inventory
-   * @return returns the index of the object or -1 if it cannot be found in the arrayList
+   * @return returns the index of the object or -1 if it cannot be found in the
+   *         arrayList
    */
   private int getremoveObjIndex(String itemName, ArrayList<Item> currInventory) {
 
@@ -709,8 +750,9 @@ public class Game {
   /**
    * The method removeallItems removes all the items in the user's inventory
    * It also makes sure to subtract it from the user's current weight
-   * @param currInventory the current inventory array list 
-   * No return type since it is void
+   * 
+   * @param currInventory the current inventory array list
+   *                      No return type since it is void
    */
   private void removeallItems(ArrayList<Item> currInventory) {
     for (int i = currInventory.size() - 1; i >= 0; i--) {
@@ -733,10 +775,11 @@ public class Game {
     printItems(inventory.getInventory());
   }
 
-
   /**
    * This method prints all of the items a user has in their inventory
-   * @param itemsarr // The user's current inventory, the arrayList is an item object arrayList
+   * 
+   * @param itemsarr // The user's current inventory, the arrayList is an item
+   *                 object arrayList
    */
   private void printItems(ArrayList<Item> itemsarr) {
     for (Item i : itemsarr) {
@@ -751,9 +794,11 @@ public class Game {
   }
 
   /**
-   * This method is for the take command, it allows user's to take items in a given room
+   * This method is for the take command, it allows user's to take items in a
+   * given room
+   * 
    * @param command // the command object
-   * It is void so it doesn't return anything
+   *                It is void so it doesn't return anything
    */
 
   private void takeObj(Command command) {
@@ -763,20 +808,24 @@ public class Game {
       System.out.println("Take What?");
 
       return;
-    } else if (command.getSecondWord().equalsIgnoreCase("all")) { //checks if they want to take everything in the currentRoom
+    } else if (command.getSecondWord().equalsIgnoreCase("all")) { // checks if they want to take everything in the
+                                                                  // currentRoom
 
       boolean noOpenableObjects = true;
 
       for (int i = 0; i < itemsMap.size(); i++) {
         Item item = itemsMap.get(i);
 
-        if (item.getStartingItem() != null && parentIsValid(item, currentRoom)) { // gets an item that's in a object and the object is open and in the same room. 
-          if (inventory.addItem(item)) { //adds the item to the users inventory if it can be added. method return true if item is added 
+        if (item.getStartingItem() != null && parentIsValid(item, currentRoom)) { // gets an item that's in a object and
+                                                                                  // the object is open and in the same
+                                                                                  // room.
+          if (inventory.addItem(item)) { // adds the item to the users inventory if it can be added. method return true
+                                         // if item is added
             noOpenableObjects = false;
-            inventory.setCurrentWeight(itemsMap.get(i).getWeight()); //adds weight to the users inventory
+            inventory.setCurrentWeight(itemsMap.get(i).getWeight()); // adds weight to the users inventory
             System.out.println(item.getName() + " added!");
 
-            itemsMap.remove(i); //removes the item from the itemsMap
+            itemsMap.remove(i); // removes the item from the itemsMap
 
           }
 
@@ -784,40 +833,42 @@ public class Game {
 
       }
 
-      int numItems = numItems(); //gets the number of items you can take from itemsMap
+      int numItems = numItems(); // gets the number of items you can take from itemsMap
       int j = 0;
-      ArrayList<Item> itemsMaptemp = new ArrayList<Item>(); //declares a new list called itemsMaptemp
-      formatList(itemsMaptemp); //adds all items from itemsMap to itemsMaptemp
+      ArrayList<Item> itemsMaptemp = new ArrayList<Item>(); // declares a new list called itemsMaptemp
+      formatList(itemsMaptemp); // adds all items from itemsMap to itemsMaptemp
 
-      while (j < numItems) { 
+      while (j < numItems) {
 
-        Item temp = itemRoom(itemsMaptemp); //gets a valid item from itemsMaptemp then removes it
-        if (inventory.addItem(temp)) { //checks the user can add the item to their inventory
-          inventory.setCurrentWeight(temp.getWeight()); //adds weight to the users inventory
+        Item temp = itemRoom(itemsMaptemp); // gets a valid item from itemsMaptemp then removes it
+        if (inventory.addItem(temp)) { // checks the user can add the item to their inventory
+          inventory.setCurrentWeight(temp.getWeight()); // adds weight to the users inventory
           System.out.println(temp.getName() + " " + "added!");
-          itemsMap.remove(getremoveIndex(temp.getName())); //removes the item from the itemsMap
+          itemsMap.remove(getremoveIndex(temp.getName())); // removes the item from the itemsMap
         }
 
         j++;
 
       }
 
-      if (numItems == 0 && noOpenableObjects) { //checks there are no item the user can take 
+      if (numItems == 0 && noOpenableObjects) { // checks there are no item the user can take
 
         System.out.println("There are no items to take!");
       }
 
-    } else if (command.hasSecondWord()) { //checks if the user specified an item 
+    } else if (command.hasSecondWord()) { // checks if the user specified an item
 
       String itemName = command.getSecondWord();
 
-      int index = getremoveIndex(itemName); //gets the index of the item
+      int index = getremoveIndex(itemName); // gets the index of the item
 
-      if (index != -1 && inventory.addItem(itemsMap.get(index))) { //checks if the item exists and adds the item to the users inventory if it can be added. method return true if item is added 
+      if (index != -1 && inventory.addItem(itemsMap.get(index))) { // checks if the item exists and adds the item to the
+                                                                   // users inventory if it can be added. method return
+                                                                   // true if item is added
         System.out.println("Item added!");
-        inventory.setCurrentWeight(itemsMap.get(index).getWeight()); //adds weight to the users inventory
-        itemsMap.remove(index); //removes the item from the itemsMap
-      } else { //the use cold not add the item to their inventory.
+        inventory.setCurrentWeight(itemsMap.get(index).getWeight()); // adds weight to the users inventory
+        itemsMap.remove(index); // removes the item from the itemsMap
+      } else { // the use cold not add the item to their inventory.
 
         System.out.println("You cannot add that item!");
       }
@@ -825,17 +876,21 @@ public class Game {
 
   }
 
-/**
- * this method checks weather an items parent (in other words the object the item is stored in) is in their room an is open.
- * @param childItem
- * @param room
- * @return true if parent is valid, false if not.
- */
+  /**
+   * this method checks weather an items parent (in other words the object the
+   * item is stored in) is in their room an is open.
+   * 
+   * @param childItem
+   * @param room
+   * @return true if parent is valid, false if not.
+   */
   private boolean parentIsValid(Item childItem, Room room) {
-    String itemName = childItem.getStartingItem().toLowerCase(); //gets the parent name
+    String itemName = childItem.getStartingItem().toLowerCase(); // gets the parent name
     for (Item item : itemsMap) {
       if (itemName.equals((item.getName().toLowerCase()))
-          && room.getRoomName().toLowerCase().equals(item.startingRoom().toLowerCase())) { //if the object is in the room, return if the object is open.
+          && room.getRoomName().toLowerCase().equals(item.startingRoom().toLowerCase())) { // if the object is in the
+                                                                                           // room, return if the object
+                                                                                           // is open.
         return item.isOpen();
       }
     }
@@ -843,9 +898,12 @@ public class Game {
   }
 
   /**
-   * This is a method that returns the index of an item name in the items arrayList
+   * This is a method that returns the index of an item name in the items
+   * arrayList
+   * 
    * @param item // the item name that the user wants to use it is a string
-   * @return returns the index of the item in the arrayList, if it is not there it will return -1.
+   * @return returns the index of the item in the arrayList, if it is not there it
+   *         will return -1.
    */
   private int getremoveIndex(String item) {
     int index = -1;
@@ -866,10 +924,13 @@ public class Game {
   }
 
   /**
-   * This is a method used for teleporting between different locations (ie. driving). It takes in the command object and 
-   * changes the current room to the room that the user would like to go to (note you can only drive from the Garage, Reception, Lobby and Concierge)
+   * This is a method used for teleporting between different locations (ie.
+   * driving). It takes in the command object and
+   * changes the current room to the room that the user would like to go to (note
+   * you can only drive from the Garage, Reception, Lobby and Concierge)
+   * 
    * @param command // the command object
-   * void so it doesn't return anything
+   *                void so it doesn't return anything
    */
   private void teleport(Command command) {
     if (!command.hasSecondWord()) {
@@ -885,17 +946,17 @@ public class Game {
     if (canTeleport(command)) {
 
       String commandWord = command.getSecondWord();
-      if (commandWord.equalsIgnoreCase("House")){
+      if (commandWord.equalsIgnoreCase("House")) {
 
-      currentRoom = roomMap.get("Garage");
-      }else if (commandWord.equalsIgnoreCase("Office")){
+        currentRoom = roomMap.get("Garage");
+      } else if (commandWord.equalsIgnoreCase("Office")) {
         currentRoom = roomMap.get("Reception");
 
-      }else if (commandWord.equalsIgnoreCase("AbandonedHouse")){
+      } else if (commandWord.equalsIgnoreCase("AbandonedHouse")) {
         currentRoom = roomMap.get("Lobby");
-      }else if (commandWord.equalsIgnoreCase("Hotel")){
+      } else if (commandWord.equalsIgnoreCase("Hotel")) {
         currentRoom = roomMap.get("Concierge");
-      }else{
+      } else {
         System.out.println("You cannot drive there!");
         return;
       }
@@ -940,8 +1001,11 @@ public class Game {
   }
 
   /**
-   * Thus method checks if a user can teleport you can only drive/teleport from the Garage, Reception, Lobby and Concierge)
-   * @param command the command object that is used to check the direction that the user stated in the terminal
+   * Thus method checks if a user can teleport you can only drive/teleport from
+   * the Garage, Reception, Lobby and Concierge)
+   * 
+   * @param command the command object that is used to check the direction that
+   *                the user stated in the terminal
    * @return
    */
   private boolean canTeleport(Command command) {
@@ -967,7 +1031,8 @@ public class Game {
   /**
    * Try to go to one direction. If there is an exit, enter the new room,
    * otherwise print an error message.
-   @param comand it is the command object that is used to get the commandWord
+   * 
+   * @param comand it is the command object that is used to get the commandWord
    */
   private void goRoom(Command command) {
     String commandWord = command.getCommandWord();
@@ -1035,9 +1100,12 @@ public class Game {
   }
 
   /**
-   * Copies all of the elements in the itemsMap into a temporary array list of items
-   * @param itemsMaptemp // the empty array list that will have all of the copied elements at the end
-   * This is a void method so it won't return anything
+   * Copies all of the elements in the itemsMap into a temporary array list of
+   * items
+   * 
+   * @param itemsMaptemp // the empty array list that will have all of the copied
+   *                     elements at the end
+   *                     This is a void method so it won't return anything
    */
   private void formatList(ArrayList<Item> itemsMaptemp) {
     for (Item i : itemsMap) {
@@ -1045,10 +1113,13 @@ public class Game {
     }
   }
 
-   /**
-   * Copies all of the elements in the Enemies arrayList into a temporary array list of enemies
-   * @param itemsMaptemp // the empty array list that will have all of the copied elements at the end, it is an arrayList of enemy objects
-   * This is a void method so it won't return anything
+  /**
+   * Copies all of the elements in the Enemies arrayList into a temporary array
+   * list of enemies
+   * 
+   * @param itemsMaptemp // the empty array list that will have all of the copied
+   *                     elements at the end, it is an arrayList of enemy objects
+   *                     This is a void method so it won't return anything
    */
 
   private void formatListEnemies(ArrayList<Enemy> EnemiesListtemp) {
@@ -1059,8 +1130,12 @@ public class Game {
 
   /**
    * Removes the item from the room after a user has picked it up
-   * @param itemsMaptemp // the copied arraylist that has all the elements from the itemsmap arrayList, it is an arrayList of item objects
-   * @return returns an empty item object if the index is -1 other wise returns the object that it removed.
+   * 
+   * @param itemsMaptemp // the copied arraylist that has all the elements from
+   *                     the itemsmap arrayList, it is an arrayList of item
+   *                     objects
+   * @return returns an empty item object if the index is -1 other wise returns
+   *         the object that it removed.
    */
   private Item itemRoom(ArrayList<Item> itemsMaptemp) {
     int counter = 0;
@@ -1081,10 +1156,14 @@ public class Game {
 
   }
 
-    /**
+  /**
    * Removes the enemy from the room after a user has killed them
-   * @param itemsMaptemp // the copied arraylist that has all the elements from the enemies arrayList, it  is an arrayList of enemy objects
-   * @return returns an empty item object if the index is -1 other wise returns the object that it removed.
+   * 
+   * @param itemsMaptemp // the copied arraylist that has all the elements from
+   *                     the enemies arrayList, it is an arrayList of enemy
+   *                     objects
+   * @return returns an empty item object if the index is -1 other wise returns
+   *         the object that it removed.
    */
   private Enemy EnemyRoom(ArrayList<Enemy> EnemyListTemp) {
     int counter = 0;
@@ -1107,6 +1186,7 @@ public class Game {
 
   /**
    * This is a method that is used to see how many items there are in a given room
+   * 
    * @return // returns the number of items in the given room
    */
   private int numItems() {
@@ -1127,7 +1207,9 @@ public class Game {
   }
 
   /**
-   * This is a method that is used to see how many enemies there are in a given room
+   * This is a method that is used to see how many enemies there are in a given
+   * room
+   * 
    * @return // returns the number of enemies in a given room
    */
 
@@ -1139,7 +1221,6 @@ public class Game {
       if (EnemiesList.get(i).getStartingroom() != null
           && EnemiesList.get(i).getStartingroom().equals(currentRoom.getRoomName())) {
 
-      
         counter++;
       }
     }
@@ -1148,10 +1229,9 @@ public class Game {
 
   }
 
-
-
   /**
-   * This method saves the game, it saves where you are, how many enemies you've killed, how many items you have picked up etc.
+   * This method saves the game, it saves where you are, how many enemies you've
+   * killed, how many items you have picked up etc.
    * Since it is void it doesn't return anything
    */
   public void save() {
@@ -1169,7 +1249,7 @@ public class Game {
     }
   }
 
-    /**
+  /**
    * This method loads the data of the last save.
    * Since it is void it doesn't return anything
    */
@@ -1205,7 +1285,7 @@ public class Game {
       System.out.println();
       System.out.println();
       System.out.println(currentRoom.getNpc().getDialogue());
-        System.out.println();
+      System.out.println();
     }
     int numItems = numItems();
     int i = 0;
@@ -1218,7 +1298,6 @@ public class Game {
       i++;
 
     }
-
 
   }
 
