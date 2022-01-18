@@ -10,7 +10,7 @@ public class Inventory implements Serializable {
 
   /**
    * 
-   * @param maxWeight
+   * @param maxWeight the maximum weight the user can hold as an int
    * creates a new Inventory
    */
   public Inventory(int maxWeight) {
@@ -35,7 +35,7 @@ public class Inventory implements Serializable {
   }
   /**
    * 
-   * @param w
+   * @param w the amount of weight to be added as an int
    * adds the current weight of the inventory with the int param w
    */
   public void setCurrentWeight(int w){
@@ -45,7 +45,7 @@ public class Inventory implements Serializable {
 
   /**
    * 
-   * @param w
+   * @param w the amount of weight to subtract as an int
    * subtracts the int param w from the current weight of the inventory 
    */  
   public void minusCurrentWeight(int w){
@@ -55,7 +55,7 @@ public class Inventory implements Serializable {
 
   /**
    * 
-   * @param item
+   * @param item the Item to add
    * @return if the item was added to Items returns true. if not returns false
    */
   public boolean addItem(Item item) {
