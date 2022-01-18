@@ -67,8 +67,8 @@ public class Inventory implements Serializable {
     }
   }
   /**
-   * 
-   * @return inventory
+   * Accessor method that gets the items arrayList
+   * @return returns the items arrayList
    * 
    */
   public ArrayList<Item> getInventory(){
