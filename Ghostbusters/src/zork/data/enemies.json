@@ -21,8 +21,8 @@
 },
 
 {
-    "id": "Blue Ghost",
-    "name":"Blue Ghost",
+    "id": "The Blue Ghost",
+    "name":"The Blue Ghost",
     "description": "A ghost approaches. It's blue hue highlights strange features.",
     "startingroom": "LivingRoom",
     "difficultylevel": 25,
@@ -30,8 +30,8 @@
 },
 
 {
-    "id": "Green Ghost",
-    "name":"Green Ghost",
+    "id": "The Green Ghost",
+    "name":"The Green Ghost",
     "description": "A ghost approaches. It's green skin stands out brightly from the dull room.",
     "startingroom": "Bottom Office Stairs",
     "difficultylevel": 50,
@@ -39,8 +39,8 @@
 },
 
 {
-    "id": "Red Ghost",
-    "name":"Red Ghost",
+    "id": "The Red Ghost",
+    "name":"The Red Ghost",
     "description": "A ghost approaches. It's red glow seems just as angry as it's monstrous face.",
     "startingroom": "Hotel Bedroom",
     "difficultylevel": 75,

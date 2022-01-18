@@ -551,17 +551,17 @@ public class Game {
       if (currEnemy.getDifficultylevel() <= 0) {
         currEnemy.setIsDead(true);
         EnemiesList = EnemiesListtemp;
-        System.out.println("You killed the " + currEnemy.getName() + "!");
+        System.out.println("You killed " + currEnemy.getName() + "!");
       } else {
         System.out.println("It's current health is " + currEnemy.getDifficultylevel());
       }
       if (currEnemy.getisDead() == false) {
         yourHealth -= currEnemy.getDamage();
         if (yourHealth<0){
-          System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
+          System.out.println(currEnemy.getName() + " dealt " + currEnemy.getDamage()
             + " damage to you, you now have 0 health");
         }else{
-        System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
+        System.out.println(currEnemy.getName() + " dealt " + currEnemy.getDamage()
             + " damage to you, you now have " + yourHealth + " health");
         }
       }
@@ -590,10 +590,10 @@ public class Game {
       }
       int damage = currEnemy.getDifficultylevel() - currWeapon.getDamage(); // change the amount of health the enemy has
       currEnemy.setDifficultyLevel(damage);
-      System.out.println("You hit the " + currEnemy.getName() + "!");
+      System.out.println("You hit " + currEnemy.getName() + "!");
       if (currEnemy.getDifficultylevel() <= 0) {
         currEnemy.setIsDead(true);
-        System.out.println("You killed the " + currEnemy.getName() + "!");
+        System.out.println("You killed " + currEnemy.getName() + "!");
         EnemiesList = EnemiesListtemp; // might be an error. NO IT IS AN ERROR.
       } else {
         System.out.println("It's current health is " + currEnemy.getDifficultylevel());
@@ -601,11 +601,11 @@ public class Game {
       if (currEnemy.getisDead() == false) {
         yourHealth -= currEnemy.getDamage();
         if (yourHealth<0){
-          System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
+          System.out.println(currEnemy.getName() + " dealt " + currEnemy.getDamage()
           + " damage to you, you now have 0 health");
 
         }else{
-        System.out.println("The " + currEnemy.getName() + " dealt " + currEnemy.getDamage()
+        System.out.println(currEnemy.getName() + " dealt " + currEnemy.getDamage()
             + " damage to you, you now have " + yourHealth + " health");
         }
       }
