@@ -1,14 +1,16 @@
 package zork;
 import java.io.Serializable;
 public class Command {
-  private String commandWord;
-  private String secondWord;
+  private String commandWord; 
+  private String secondWord; 
 
     
   /**
+   * @param firstWord the first word in the users command as a string
+   * @param secondWord the words following the first word in the users command as a string
    * Create a command object. First and second word must be supplied, but either
    * one (or both) can be null. The command word should be null to indicate that
-   * this was a command that is not recognised by this game.
+   * this was a command that is not recognized by this game.
    */
   public Command(String firstWord, String secondWord) {
     commandWord = firstWord;

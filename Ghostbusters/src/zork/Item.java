@@ -35,17 +35,17 @@ public class Item extends OpenableObject implements Serializable {
   }
   /**
    * 
-   * @param weight
-   * @param id
-   * @param name
-   * @param isOpenable
-   * @param isKey
-   * @param isWeapon
-   * @param canHeal
-   * @param startingroom
-   * @param startingitem
-   * @param description
-   * @param damage
+   * @param weight the items weight as an int
+   * @param id the id of the Item as a string
+   * @param name the items name as a string 
+   * @param isOpenable if the item is openable as a boolean
+   * @param isKey if the item is a key as a boolean
+   * @param isWeapon if the item is a weapon as a boolean
+   * @param canHeal if the item can heal as a boolean
+   * @param startingroom the items starting room as a string
+   * @param startingitem the items starting item as a string
+   * @param description the items description as a string
+   * @param damage the amount of damage the item does as an int
    * creates a new Item
    */
   public Item(int weight, String id, String name, boolean isOpenable, boolean isKey, boolean isWeapon, boolean canHeal,
@@ -63,12 +63,6 @@ public class Item extends OpenableObject implements Serializable {
     this.description = description;
     this.damage = damage;
   }
- 
-  // public void open() {
-  //   if (!isOpenable)
-  //     System.out.println("The " + name + " cannot be used as a key.");
-
-  // } i dont think we need this
 
 /**
  * 
@@ -108,7 +102,7 @@ public class Item extends OpenableObject implements Serializable {
   }
   /**
    * 
-   * @param weight
+   * @param weight the new weight of the item as an int
    * sets the items weight
    */
   public void setWeight(int weight) {
@@ -116,7 +110,7 @@ public class Item extends OpenableObject implements Serializable {
   }
   /**
    * 
-   * @param str
+   * @param str the starting room of the item as a string
    * sets the items starting room
    */
   public void setStartingRoom(String str) {
@@ -132,7 +126,7 @@ public class Item extends OpenableObject implements Serializable {
   }
   /**
    * 
-   * @param name
+   * @param name the items name as a string
    * sets the items name
    */
   public void setName(String name) {
@@ -155,7 +149,7 @@ public class Item extends OpenableObject implements Serializable {
   }
   /**
    * 
-   * @param isOpenable
+   * @param isOpenable as a boolean
    * sets weather or not the item is openable
    */
   public void setOpenable(boolean isOpenable) {

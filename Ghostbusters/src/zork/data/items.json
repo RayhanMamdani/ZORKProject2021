@@ -45,7 +45,7 @@
         {
             "id": "First-Aid Kit",
             "name": "First-Aid Kit",
-            "description": "From bandages to medicine, this pack has everything you need",
+            "description": "This is a First-Aid Kit From bandages to medicine, this pack has everything you need",
             "weight": 10,
             "damage": 100,
             "startingroom": "Study", 

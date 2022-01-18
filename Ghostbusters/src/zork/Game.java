@@ -488,6 +488,7 @@ public class Game {
 
   private void unlock(Command command) {
     boolean unlocked = false;
+    boolean noRoomLocked = true;
     String keyName = "";
     if (!command.hasSecondWord()) {
       System.out.println("Unlock with what?");
@@ -506,18 +507,27 @@ public class Game {
       }
 
       for (Exit exit : currentRoom.getExits()) {
-        if (exit.getKeyId().equalsIgnoreCase(currInventory.get(index).getId())) {
-          exit.setLocked(false);
-          unlocked = true;
-          keyName = currInventory.get(index).getName();
+        if (exit.isLocked()) {
+          noRoomLocked = false;
+          if (exit.getKeyId().equalsIgnoreCase(currInventory.get(index).getId())) {
+            exit.setLocked(false);
+            unlocked = true;
+            keyName = currInventory.get(index).getName();
+
+          }
+
         }
       }
 
     }
+    if (noRoomLocked) {
+      System.out.println("Room is already unlocked");
+      return;
+    }
     if (unlocked) {
       System.out.println("You unlocked a room with your " + keyName + "!");
     } else
-      System.out.println("No room was unlocked.");
+      System.out.println("You don't have the right key.");
 
   }
 
@@ -584,7 +594,7 @@ public class Game {
       if (currEnemy.getDifficultylevel() <= 0) {
         currEnemy.setIsDead(true);
         EnemiesList = EnemiesListtemp;
-        System.out.println("You killed the " + currEnemy.getName() + "!");
+        System.out.println("You killed " + currEnemy.getName() + "!");
       } else {
         System.out.println("It's current health is " + currEnemy.getDifficultylevel());
       }
@@ -623,10 +633,10 @@ public class Game {
       }
       int damage = currEnemy.getDifficultylevel() - currWeapon.getDamage(); // change the amount of health the enemy has
       currEnemy.setDifficultyLevel(damage);
-      System.out.println("You hit the " + currEnemy.getName() + "!");
+      System.out.println("You hit " + currEnemy.getName() + "!");
       if (currEnemy.getDifficultylevel() <= 0) {
         currEnemy.setIsDead(true);
-        System.out.println("You killed the " + currEnemy.getName() + "!");
+        System.out.println("You killed " + currEnemy.getName() + "!");
         EnemiesList = EnemiesListtemp; // might be an error. NO IT IS AN ERROR.
       } else {
         System.out.println("It's current health is " + currEnemy.getDifficultylevel());
@@ -942,6 +952,10 @@ public class Game {
       return;
     }
     String direction = command.getSecondWord();
+    if (!canTeleport(command)) {
+      System.out.println("You cannot drive from here idot.");
+      return;
+    }
 
     if (canTeleport(command)) {
 
@@ -995,7 +1009,7 @@ public class Game {
 
     } else {
 
-      System.out.println("You Cannot Drive Anywhere From Here!");
+      System.out.println("You Cannot Drive There!");
       System.out.println("You can drive between the House, Office, Abandoned House and the Hotel.");
     }
   }

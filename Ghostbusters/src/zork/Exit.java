@@ -10,10 +10,10 @@ public class Exit extends OpenableObject {
 
 /**
  * 
- * @param direction
- * @param adjacentRoom
- * @param isLocked
- * @param keyId
+ * @param direction the direction of the exit as a string
+ * @param adjacentRoom the room id corresponding with the direction as a string
+ * @param isLocked weather or not the room is locked as a boolean
+ * @param keyId the id of the key for this exit as a string
  * creates a new Exit and calls the parent class OpenableObject
  */
   public Exit(String direction, String adjacentRoom, boolean isLocked, String keyId) {
@@ -24,11 +24,11 @@ public class Exit extends OpenableObject {
 
 /**
  * 
- * @param direction
- * @param adjacentRoom
- * @param isLocked
- * @param keyId
- * @param isOpen
+ * @param direction the direction of the exit as a string
+ * @param adjacentRoom the room id corresponding with the direction as a string
+ * @param isLocked weather or not the room is locked as a boolean
+ * @param keyId the id of the key for this exit as a string
+ * @param isOpen weather or not the exit is open as a boolean
  * creates a new Exit and calls the parent class OpenableObject
  */
   public Exit(String direction, String adjacentRoom, boolean isLocked, String keyId, Boolean isOpen) {
@@ -39,8 +39,8 @@ public class Exit extends OpenableObject {
 
   /**
    * 
-   * @param direction
-   * @param adjacentRoom
+  * @param direction the direction of the exit as a string
+  * @param adjacentRoom the room id corresponding with the direction as a string
    * creates a new Exit
    */
   public Exit(String direction, String adjacentRoom) {
@@ -58,7 +58,7 @@ public class Exit extends OpenableObject {
 
   /**
    * 
-   * @param direction
+   * @param direction the direction of the exit as a string
    * sets the Exits direction
    */
   public void setDirection(String direction) {
@@ -74,7 +74,7 @@ public class Exit extends OpenableObject {
   }
   /**
    * 
-   * @param adjacentRoom
+   * @param adjacentRoom the room id corresponding with the direction as a string
    * sets the Exits direction adjacent room
    */
   public void setAdjacentRoom(String adjacentRoom) {
