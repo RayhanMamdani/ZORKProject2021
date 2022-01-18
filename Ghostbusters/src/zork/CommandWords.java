@@ -9,6 +9,7 @@ public class CommandWords {
       "unlock","heal"};
 
   /**
+   * @param aString a potential command word as a string
    * Check whether a given String is a valid command word. Return true if it is,
    * false if it isn't.
    **/
