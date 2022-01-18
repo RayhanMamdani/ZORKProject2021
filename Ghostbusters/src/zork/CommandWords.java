@@ -6,7 +6,7 @@ public class CommandWords {
   // a constant array that holds all valid command words
   private static final String validCommands[] = { "north", "east", "south", "west", "quit", "look", "take", "open",
       "drop", "down", "go", "drive", "inventory", "fight", "load", "save", "help", "health", "storage", "up", "sing",
-      "unlock","heal"};
+      "unlock","heal","damage"};
 
   /**
    * @param aString a potential command word as a string

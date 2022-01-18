@@ -43,9 +43,9 @@
         },
 
         {
-            "id": "Med Pack",
-            "name": "Med Pack",
-            "description": "This is a Med Pack",
+            "id": "First-Aid Kit",
+            "name": "First-Aid Kit",
+            "description": "From bandages to medicine, this pack has everything you need",
             "weight": 10,
             "damage": 100,
             "startingroom": "Study", 
@@ -55,31 +55,6 @@
             "isOpenable": false
            },
 
-        {
-            "id": "Scissors",
-            "name": "Scissors",
-            "description": "This is a pair of scissors. What else did you expect?",
-            "weight": 5,
-            "damage": 10,
-            "startingroom": "OfficeKitchen",
-            "iskey": false,
-            "isWeapon": false,
-            "canHeal":false,
-            "isOpenable": false
-        },
-
-        {
-            "id": "Rope",
-            "name": "Rope",
-            "description": "This is a coarse bundle of rope. It's length is immeseruable and seems to go on for infinity.",
-            "weight": 5,
-            "damage": 30,
-            "startingroom": "OfficeBasementEast",
-            "iskey": false,
-            "isWeapon": false,
-            "canHeal":false,
-            "isOpenable": false
-        },
 
         {
             "id": "Key1",
@@ -124,7 +99,7 @@
 
             "id": "Ghost Trap",
             "name": "Ghost Trap",
-            "description": "This is an old vacuum. It's loud and clunky, you should really buy a new one.",
+            "description": "This old technology seems to be ancient. But it still does the trick!",
             "weight": 30,
             "damage": 25,
             "startingroom": "",
@@ -141,7 +116,7 @@
             "description": "This is an Abandoned House Key. It seems much old and has rust on the edges.",
             "weight": 1,
             "damage": 0,
-            "startingroom": "OfficeBasement",
+            "startingroom": "Hotel Bedroom",
             "iskey": true,
             "isWeapon": false,
             "canHeal":false,
@@ -150,7 +125,7 @@
         {
             "id": "Cosmic Proton Blaster",
             "name": "Cosmic Proton Blaster",
-            "description": "This is a comically large cosmic proton blaster. The word cosmic is emblazed on the sides in a bright neon.",
+            "description": "This is a cosmic proton blaster. The word cosmic is emblazed on the sides in a bright neon.",
             "weight": 85,
             "damage": 80,
             "startingroom": "OfficeBasement", 

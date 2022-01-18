@@ -8,13 +8,22 @@ import java.io.Serializable;
 public class Parser {
   private CommandWords commands; // holds all valid command words
   private Scanner in;
-  private String commandIgnore = "to,the,those,these,a,an,with,on,through,in,your,yours,his,her,hers,our,ours,their";
+  private String commandIgnore = "to,the,those,these,a,an,with,on,through,in,your,yours,his,her,hers,our,ours,their,of";
 
+  /**
+   * Creates a new scanner to read what the user types in the terminal
+   * Creates a new commandWords object
+   */
   public Parser() {
     commands = new CommandWords();
     in = new Scanner(System.in);
   }
-
+/**
+ * Bulk of the parser which holds what the user types and breaks it up into its first word and the remaining words
+ * Filters out any words from the commandIgnore string
+ * @return returns the command object which stores 2 strings
+ * @throws java.io.IOException
+ */
   public Command getCommand() throws java.io.IOException {
     String inputLine = "";
 
@@ -48,6 +57,10 @@ public class Parser {
     
   }
 
+  /**
+   * Method to show the commands, it's useful for the help command
+   * It is void so it doesn't return anything
+   */
   public void showCommands() {
     commands.showAll();
   }
