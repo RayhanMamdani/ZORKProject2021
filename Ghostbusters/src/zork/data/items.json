@@ -99,7 +99,7 @@
 
             "id": "Ghost Trap",
             "name": "Ghost Trap",
-            "description": "This old technology seems to be ancient. But it still does the trick!",
+            "description": "This is a ghost trap. This old technology seems to be ancient. But it still does the trick!",
             "weight": 30,
             "damage": 25,
             "startingroom": "",
