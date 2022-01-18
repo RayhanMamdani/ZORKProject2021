@@ -959,7 +959,7 @@ public class Game {
     }
     String direction = command.getSecondWord();
     if (!canTeleport(command)) {
-      System.out.println("You cannot drive from here idot.");
+      System.out.println("You cannot drive there.");
       return;
     }
 
