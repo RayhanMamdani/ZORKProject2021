@@ -16,6 +16,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+
 public class Game {
 
   private static final String SAVE_FILE = "src\\zork\\data\\data1.ser";
@@ -244,6 +245,7 @@ public class Game {
       i++;
 
     }
+    
 
     int numEnemies = numEnemies();
     int j = 0;
@@ -348,6 +350,12 @@ public class Game {
 
         i++;
 
+      }
+      for (Item item: itemsMap){
+        if(item.getStartingItem() != null && parentIsValid(item, currentRoom)){
+          System.out.println(item.getDescription());
+        }
+        
       }
 
     } else if (commandWord.equalsIgnoreCase("quit")) {
@@ -1044,6 +1052,12 @@ public class Game {
 
         j++;
 
+      }
+      for (Item item: itemsMap){
+        if(item.getStartingItem() != null && parentIsValid(item, currentRoom)){
+          System.out.println(item.getDescription());
+        }
+        
       }
     }
   }
