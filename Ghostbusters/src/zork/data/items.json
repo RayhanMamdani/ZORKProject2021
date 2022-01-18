@@ -123,9 +123,9 @@
             "isOpenable": false
         },
         {
-            "id": "Cosmic Proton Blaster",
-            "name": "Cosmic Proton Blaster",
-            "description": "This is a cosmic proton blaster. The word cosmic is emblazed on the sides in a bright neon.",
+            "id": "Cosmic Proton Annihilator",
+            "name": "Cosmic Proton Annihilator",
+            "description": "This is a cosmic proton annihilator. The word cosmic is emblazed on the sides in a bright neon.",
             "weight": 85,
             "damage": 80,
             "startingroom": "Study", 
